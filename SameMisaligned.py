@@ -1,21 +1,17 @@
 import random
+import os
 
 from psychopy import core, event
 from Window import window
 from MainAssets import MainAssets
-from Target_Men_Align import Target_Men_Align
-from Probe_Men_Align import Probe_Men_Align
-from Target_Women_Align import Target_Women_Align
-from Probe_Women_Align import Probe_Women_Align
+from Target_Men_Misalign import Target_Men_Misalign
+from Probe_Men_Misalign import Probe_Men_Misalign
+from Target_Women_Misalign import Target_Women_Misalign
+from Probe_Women_Misalign import Probe_Women_Misalign
 
 image = MainAssets()
 fixationPoint = image.fixationPoint
 questionMark = image.questionMark
-
-targetMenAlign = Target_Men_Align()
-probeMenAlign = Probe_Men_Align()
-targetWomenAlign = Target_Women_Align()
-probeWomenAlign = Probe_Women_Align()
 
 window = window()
 win = window.win
@@ -23,8 +19,8 @@ win = window.win
 event.globalKeys.clear()
 event.globalKeys.add(key='q', func=os._exit, func_args=[1], func_kwargs=None)
 
-class SameAligned(object):
-    def SameAligned(self):
+class SameMisaligned(object):
+    def SameMisaligned(self):
         for i in range(1, 6):
             #Men
             fixationPoint.draw()
@@ -38,18 +34,18 @@ class SameAligned(object):
             targetRand = random.randint(0, 4)
             # print('target is ' + str(targetRand))
 
-            targetMenAlign.target_men_align_images[targetRand].draw()
+            Target_Men_Misalign().target_men_misalign_images[targetRand].draw()
             win.flip()
             core.wait(0.2)
 
-            targetMenAlign.target_men_align_images[targetRand].autoDraw = False
+            Target_Men_Misalign().target_men_misalign_images[targetRand].autoDraw = False
             win.flip()
             core.wait(0.4)
 
             probeRand = random.randint(0, 24)
             # print('probe is ' + str(probeRand))
 
-            probeMenAlign.probe_men_align_images[probeRand].draw()
+            Probe_Women_Misalign().probe_women_misalign_images[probeRand].draw()
             win.flip()
             timer = core.CountdownTimer(2)
 
@@ -67,7 +63,7 @@ class SameAligned(object):
                         print('late')
                         flag = False
 
-            probeMenAlign.probe_men_align_images[probeRand].autoDraw = False
+            Probe_Men_Misalign().probe_men_misalign_images[probeRand].autoDraw = False
             win.flip()
 
             # Women
@@ -80,15 +76,15 @@ class SameAligned(object):
             core.wait(0.15)
 
 
-            targetWomenAlign.target_women_align_images[targetRand].draw()
+            Target_Women_Misalign().target_women_misalign_images[targetRand].draw()
             win.flip()
             core.wait(0.2)
 
-            targetWomenAlign.target_women_align_images[targetRand].autoDraw = False
+            Target_Women_Misalign().target_women_misalign_images[targetRand].autoDraw = False
             win.flip()
             core.wait(0.4)
 
-            probeWomenAlign.probe_women_align_images[probeRand].draw()
+            Probe_Women_Misalign().probe_women_misalign_images[probeRand].draw()
             win.flip()
             timer = core.CountdownTimer(2)
 
@@ -106,6 +102,6 @@ class SameAligned(object):
                         print('late')
                         flag = False
 
-            probeWomenAlign.probe_women_align_images[probeRand].autoDraw = False
+            Probe_Women_Misalign().probe_women_misalign_images[probeRand].autoDraw = False
             win.flip()
 

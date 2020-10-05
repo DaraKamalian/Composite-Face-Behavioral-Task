@@ -6,6 +6,8 @@ from Window import window
 window = window()
 win = window.win
 
+
+
 class Target_Women_Align(object):
     locations = glob.glob('Images/target-face-align/target-women-align/*.*')
     target_women_align_images = []
