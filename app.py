@@ -1,7 +1,8 @@
-from CongruentSameAligned import Congruent_Same_Aligned
+from CongruentAligned import Congruent_Aligned
+from CongruentMisaligned import Congruent_Misaligned
 from Window import window
 
 win = window().win
 
 name = 'Dara'
-Congruent_Same_Aligned.CongruentSameAligned(name=name)
+Congruent_Misaligned.CongruentDifferentMisaligned(name=name)
