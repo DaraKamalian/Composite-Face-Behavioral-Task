@@ -37,11 +37,10 @@ class Congruent_Same_Aligned(object):
                 temp = location[-11:-6]
                 for i in range(0, 19):
                     if temp == Men_Align().men_align_images[i].image:
-                        Men_Align().men_align_images[i].draw()
-                        win.flip()
-                        print('here')
                         break
 
+            Men_Align().men_align_images[i].draw()
+            win.flip()
 
             flag = True
             while flag:
