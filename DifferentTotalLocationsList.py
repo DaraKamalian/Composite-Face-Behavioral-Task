@@ -1,5 +1,5 @@
 class DifferentTotalLocationsList(object):
-    def DifferentTotalLocationsList(self, list, string):
+    def DifferentTotalLocationsList(list, string):
 
         leftIndex = string[-11:-9]
         rightIndex = string[-8:-6]
