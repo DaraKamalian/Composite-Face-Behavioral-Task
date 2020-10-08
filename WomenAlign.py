@@ -13,4 +13,4 @@ class Women_Align(object):
     for location in locations:
         women_align_locations.append(location)
         women_align_images.append(visual.ImageStim(win, image=location, pos=[0, 0], units='pix',
-                                                        size=[226.768, 272.12]))
+                                                    size=[226.768, 272.12]))

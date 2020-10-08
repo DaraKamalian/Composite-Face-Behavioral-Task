@@ -13,4 +13,4 @@ class Men_Misalign(object):
     for location in locations:
         men_misalign_locations.append(location)
         men_misalign_images.append(visual.ImageStim(win, image=location, pos=[0, 0], units='pix',
-                                                        size=[226.768, 272.12]))
+                                                    size=[226.768, 272.12]))

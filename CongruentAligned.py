@@ -18,319 +18,334 @@ fixationPoint = image.fixationPoint
 questionMark = image.questionMark
 win = window.win
 
-# Men Congruent Same
 class Congruent_Aligned(object):
 
-    def CongruentSameAligned(self):
-        for i in range(1, 11):
-            fixationPoint.draw()
-            win.flip()
-            core.wait(0.2)
+    def CongruentSameAlignedMale(name):
 
-            fixationPoint.autoDraw = False
-            win.flip()
-            core.wait(0.15)
+        fixationPoint.draw()
+        win.flip()
+        core.wait(0.2)
 
+        fixationPoint.autoDraw = False
+        win.flip()
+        core.wait(0.15)
+        print('con-same-al-m')
 
+        rand1 = random.randint(0, 19)
+        men_align_images[rand1].draw()
+        print(men_align_images[rand1].image)
+        win.flip()
+        core.wait(0.2)
 
-            # 0 -> different, 1 -> same
+        men_align_images[rand1].autoDraw = False
+        win.flip()
+        core.wait(0.4)
 
-            # if same_rand == 1 and same_counter == 5:
-            #     same_rand = 0
-            # if same_rand == 0 and different_counter == 5:
-            #     same_rand = 1
+        men_align_images[rand1].draw()
+        print(men_align_images[rand1].image)
+        win.flip()
 
-            gender_random = random.randint(0, 100) % 2
-            # 0 -> female, 1 -> male
+        flag = True
+        while flag:
+            keys = event.getKeys(keyList=['a', 'l'])
+            for key in keys:
+                if key == 'a':
+                    # print('correct')
+                    flag = False
+                else:
+                    # print('wrong')
+                    flag = False
 
-            if gender_random == 1:
-                print('same')
+    def CongruentSameAlignedFemale(name):
+        fixationPoint.draw()
+        win.flip()
+        core.wait(0.2)
 
-                rand1 = random.randint(0, 19)
-                men_align_images[rand1].draw()
-                print(men_align_images[rand1].image)
+        fixationPoint.autoDraw = False
+        win.flip()
+        core.wait(0.15)
+        print('con-same-al-f')
+        rand1 = random.randint(0, 19)
+        women_align_images[rand1].draw()
+        print(women_align_images[rand1].image)
+        win.flip()
+        core.wait(0.2)
+
+        women_align_images[rand1].autoDraw = False
+        win.flip()
+        core.wait(0.4)
+
+        women_align_images[rand1].draw()
+        print(women_align_images[rand1].image)
+        win.flip()
+
+        flag = True
+        while flag:
+            keys = event.getKeys(keyList=['a', 'l'])
+            for key in keys:
+                if key == 'a':
+                    # write to table
+                    # print('correct')
+                    flag = False
+                else:
+                    # write to table
+                    flag = False
+
+    def CongruentDifferentAlignedMale(name):
+        fixationPoint.draw()
+        win.flip()
+        core.wait(0.2)
+
+        fixationPoint.autoDraw = False
+        win.flip()
+        core.wait(0.15)
+
+        print('con-dif-al-m')
+        rand1 = random.randint(0, 19)
+        men_align_images[rand1].draw()
+        print(men_align_images[rand1].image)
+        win.flip()
+        core.wait(0.2)
+
+        men_align_images[rand1].autoDraw = False
+        win.flip()
+        core.wait(0.4)
+
+        newLocations = differentLocationsList.DifferentTotalLocationsList(
+            men_align_locations, men_align_images[rand1].image)
+
+        newLocRand = random.randint(0, len(newLocations) - 1)
+
+        for item in men_align_images:
+            if item.image == newLocations[newLocRand]:
+                item.draw()
                 win.flip()
-                core.wait(0.2)
+                print(item.image)
+                break
 
-                men_align_images[rand1].autoDraw = False
+        flag = True
+        while flag:
+            keys = event.getKeys(keyList=['a', 'l'])
+            for key in keys:
+                if key == 'a':
+                    # write to table
+                    # print('a')
+                    flag = False
+                else:
+                    # write to table
+                    # print('l')
+                    flag = False
+
+    def CongruentDifferentAlignedFemale(name):
+        fixationPoint.draw()
+        win.flip()
+        core.wait(0.2)
+
+        fixationPoint.autoDraw = False
+        win.flip()
+        core.wait(0.15)
+        print('con-dif-al-f')
+        rand1 = random.randint(0, 19)
+        women_align_images[rand1].draw()
+        print(women_align_images[rand1].image)
+        win.flip()
+        core.wait(0.2)
+
+        women_align_images[rand1].autoDraw = False
+        win.flip()
+        core.wait(0.4)
+
+        newLocations = differentLocationsList.DifferentTotalLocationsList(
+            women_align_locations, women_align_images[rand1].image)
+
+        newLocRand = random.randint(0, len(newLocations) - 1)
+
+        for item in women_align_images:
+            if item.image == newLocations[newLocRand]:
+                item.draw()
                 win.flip()
-                core.wait(0.4)
+                print(item.image)
+                break
 
-                men_align_images[rand1].draw()
-                print(men_align_images[rand1].image)
-                win.flip()
-
-                flag = True
-                while flag:
-                    keys = event.getKeys(keyList=['a', 'l'])
-                    for key in keys:
-                        if key == 'a':
-                            # print('correct')
-                            flag = False
-                        else:
-                            # print('wrong')
-                            flag = False
-
-            if gender_random == 0:
-                print('same')
-
-                rand1 = random.randint(0, 19)
-                women_align_images[rand1].draw()
-                print(women_align_images[rand1].image)
-                win.flip()
-                core.wait(0.2)
-
-                women_align_images[rand1].autoDraw = False
-                win.flip()
-                core.wait(0.4)
-
-                women_align_images[rand1].draw()
-                print(women_align_images[rand1].image)
-                win.flip()
-
-                flag = True
-                while flag:
-                    keys = event.getKeys(keyList=['a', 'l'])
-                    for key in keys:
-                        if key == 'a':
-                            #write to table
-                            # print('correct')
-                            flag = False
-                        else:
-                            #write to table
-                            flag = False
-
-            # if same_rand == 0 and gender_random == 0:
-            #     print('different')
-            #     different_counter += 1
-            #
-            #     rand1 = random.randint(0, 19)
-            #     women_align_images[rand1].draw()
-            #     print(women_align_images[rand1].image)
-            #     win.flip()
-            #     core.wait(0.2)
-            #
-            #     women_align_images[rand1].autoDraw = False
-            #     win.flip()
-            #     core.wait(0.4)
-            #
-            #     newLocations = differentLocationsList.DifferentTotalLocationsList(
-            #         women_align_locations, women_align_images[rand1].image)
-            #
-            #     newLocRand = random.randint(0, len(newLocations) - 1)
-            #
-            #     for item in women_align_images:
-            #         if item.image == newLocations[newLocRand]:
-            #             item.draw()
-            #             win.flip()
-            #             print(item.image)
-            #             break
-            #
-            #
-            #     flag = True
-            #     while flag:
-            #         keys = event.getKeys(keyList=['a', 'l'])
-            #         for key in keys:
-            #             if key == 'a':
-            #                 #write to table
-            #                 # print('a')
-            #                 flag = False
-            #             else:
-            #                 #write to table
-            #                 # print('l')
-            #                 flag = False
-            #
-            # if same_rand == 0 and gender_random == 1:
-            #     print('different')
-            #     different_counter += 1
-            #     rand1 = random.randint(0, 19)
-            #     men_align_images[rand1].draw()
-            #     print(men_align_images[rand1].image)
-            #     win.flip()
-            #     core.wait(0.2)
-            #
-            #     men_align_images[rand1].autoDraw = False
-            #     win.flip()
-            #     core.wait(0.4)
-            #
-            #     newLocations = differentLocationsList.DifferentTotalLocationsList(
-            #         men_align_locations, men_align_images[rand1].image)
-            #
-            #     newLocRand = random.randint(0, len(newLocations) - 1)
-            #
-            #     for item in men_align_images:
-            #         if item.image == newLocations[newLocRand]:
-            #             item.draw()
-            #             win.flip()
-            #             print(item.image)
-            #             break
-            #
-            #     flag = True
-            #     while flag:
-            #         keys = event.getKeys(keyList=['a', 'l'])
-            #         for key in keys:
-            #             if key == 'a':
-            #                 # write to table
-            #                 # print('a')
-            #                 flag = False
-            #             else:
-            #                 # write to table
-            #                 # print('l')
-            #                 flag = False
-
-    def CongruentDifferentAlign(self):
-        for i in range(1, 11):
-            fixationPoint.draw()
-            win.flip()
-            core.wait(0.2)
-
-            fixationPoint.autoDraw = False
-            win.flip()
-            core.wait(0.15)
-
-            same_rand = random.randint(0, 100) % 2
-
-            # 0 -> different, 1 -> same
-
-            # if same_rand == 1 and same_counter == 5:
-            #     same_rand = 0
-            # if same_rand == 0 and different_counter == 5:
-            #     same_rand = 1
-
-            gender_random = random.randint(0, 100) % 2
-            # 0 -> female, 1 -> male
-
-            # if gender_random == 1:
-            #     print('same')
-            #
-            #     rand1 = random.randint(0, 19)
-            #     men_align_images[rand1].draw()
-            #     print(men_align_images[rand1].image)
-            #     win.flip()
-            #     core.wait(0.2)
-            #
-            #     men_align_images[rand1].autoDraw = False
-            #     win.flip()
-            #     core.wait(0.4)
-            #
-            #     men_align_images[rand1].draw()
-            #     print(men_align_images[rand1].image)
-            #     win.flip()
-            #
-            #     flag = True
-            #     while flag:
-            #         keys = event.getKeys(keyList=['a', 'l'])
-            #         for key in keys:
-            #             if key == 'a':
-            #                 # print('correct')
-            #                 flag = False
-            #             else:
-            #                 # print('wrong')
-            #                 flag = False
-            #
-            # if gender_random == 0:
-            #     print('same')
-            #
-            #     rand1 = random.randint(0, 19)
-            #     women_align_images[rand1].draw()
-            #     print(women_align_images[rand1].image)
-            #     win.flip()
-            #     core.wait(0.2)
-            #
-            #     women_align_images[rand1].autoDraw = False
-            #     win.flip()
-            #     core.wait(0.4)
-            #
-            #     women_align_images[rand1].draw()
-            #     print(women_align_images[rand1].image)
-            #     win.flip()
-            #
-            #     flag = True
-            #     while flag:
-            #         keys = event.getKeys(keyList=['a', 'l'])
-            #         for key in keys:
-            #             if key == 'a':
-            #                 #write to table
-            #                 # print('correct')
-            #                 flag = False
-            #             else:
-            #                 #write to table
-            #                 flag = False
-
-            if gender_random == 0:
-
-                rand1 = random.randint(0, 19)
-                women_align_images[rand1].draw()
-                print(women_align_images[rand1].image)
-                win.flip()
-                core.wait(0.2)
-
-                women_align_images[rand1].autoDraw = False
-                win.flip()
-                core.wait(0.4)
-
-                newLocations = differentLocationsList.DifferentTotalLocationsList(
-                    women_align_locations, women_align_images[rand1].image)
-
-                newLocRand = random.randint(0, len(newLocations) - 1)
-
-                for item in women_align_images:
-                    if item.image == newLocations[newLocRand]:
-                        item.draw()
-                        win.flip()
-                        print(item.image)
-                        break
+        flag = True
+        while flag:
+            keys = event.getKeys(keyList=['a', 'l'])
+            for key in keys:
+                if key == 'a':
+                    # write to table
+                    # print('a')
+                    flag = False
+                else:
+                    # write to table
+                    # print('l')
+                    flag = False
 
 
-                flag = True
-                while flag:
-                    keys = event.getKeys(keyList=['a', 'l'])
-                    for key in keys:
-                        if key == 'a':
-                            #write to table
-                            # print('a')
-                            flag = False
-                        else:
-                            #write to table
-                            # print('l')
-                            flag = False
 
-            if gender_random == 1:
+    # def CongruentSameAligned(name):
+    #
+    #     fixationPoint.draw()
+    #     win.flip()
+    #     core.wait(0.2)
+    #
+    #     fixationPoint.autoDraw = False
+    #     win.flip()
+    #     core.wait(0.15)
+    #
+    #     gender_random = random.randint(0, 100) % 2
+    #     # 0 -> female, 1 -> male
+    #     m_counter = 0
+    #     f_counter = 0
+    #
+    #     if gender_random == 0 and f_counter == 5:
+    #         gender_random = 1
+    #     if gender_random == 1 and m_counter == 5:
+    #         gender_random = 0
+    #
+    #     if gender_random == 1:
+    #         print('con-same-al-m')
+    #         m_counter += 1
+    #         rand1 = random.randint(0, 19)
+    #         men_align_images[rand1].draw()
+    #         print(men_align_images[rand1].image)
+    #         win.flip()
+    #         core.wait(0.2)
+    #
+    #         men_align_images[rand1].autoDraw = False
+    #         win.flip()
+    #         core.wait(0.4)
+    #
+    #         men_align_images[rand1].draw()
+    #         print(men_align_images[rand1].image)
+    #         win.flip()
+    #
+    #         flag = True
+    #         while flag:
+    #             keys = event.getKeys(keyList=['a', 'l'])
+    #             for key in keys:
+    #                 if key == 'a':
+    #                     # print('correct')
+    #                     flag = False
+    #                 else:
+    #                     # print('wrong')
+    #                     flag = False
+    #
+    #     if gender_random == 0:
+    #         print('con-same-al-f')
+    #         f_counter += 1
+    #         rand1 = random.randint(0, 19)
+    #         women_align_images[rand1].draw()
+    #         print(women_align_images[rand1].image)
+    #         win.flip()
+    #         core.wait(0.2)
+    #
+    #         women_align_images[rand1].autoDraw = False
+    #         win.flip()
+    #         core.wait(0.4)
+    #
+    #         women_align_images[rand1].draw()
+    #         print(women_align_images[rand1].image)
+    #         win.flip()
+    #
+    #         flag = True
+    #         while flag:
+    #             keys = event.getKeys(keyList=['a', 'l'])
+    #             for key in keys:
+    #                 if key == 'a':
+    #                     #write to table
+    #                     # print('correct')
+    #                     flag = False
+    #                 else:
+    #                     #write to table
+    #                     flag = False
 
-                rand1 = random.randint(0, 19)
-                men_align_images[rand1].draw()
-                print(men_align_images[rand1].image)
-                win.flip()
-                core.wait(0.2)
 
-                men_align_images[rand1].autoDraw = False
-                win.flip()
-                core.wait(0.4)
-
-                newLocations = differentLocationsList.DifferentTotalLocationsList(
-                    men_align_locations, men_align_images[rand1].image)
-
-                newLocRand = random.randint(0, len(newLocations) - 1)
-
-                for item in men_align_images:
-                    if item.image == newLocations[newLocRand]:
-                        item.draw()
-                        win.flip()
-                        print(item.image)
-                        break
-
-                flag = True
-                while flag:
-                    keys = event.getKeys(keyList=['a', 'l'])
-                    for key in keys:
-                        if key == 'a':
-                            # write to table
-                            # print('a')
-                            flag = False
-                        else:
-                            # write to table
-                            # print('l')
-                            flag = False
+    # def CongruentDifferentAlign(name):
+    #
+    #     fixationPoint.draw()
+    #     win.flip()
+    #     core.wait(0.2)
+    #
+    #     fixationPoint.autoDraw = False
+    #     win.flip()
+    #     core.wait(0.15)
+    #
+    #     gender_random = random.randint(0, 100) % 2
+    #
+    #     if gender_random == 0:
+    #         print('con-dif-al-f')
+    #         rand1 = random.randint(0, 19)
+    #         women_align_images[rand1].draw()
+    #         print(women_align_images[rand1].image)
+    #         win.flip()
+    #         core.wait(0.2)
+    #
+    #         women_align_images[rand1].autoDraw = False
+    #         win.flip()
+    #         core.wait(0.4)
+    #
+    #         newLocations = differentLocationsList.DifferentTotalLocationsList(
+    #             women_align_locations, women_align_images[rand1].image)
+    #
+    #         newLocRand = random.randint(0, len(newLocations) - 1)
+    #
+    #         for item in women_align_images:
+    #             if item.image == newLocations[newLocRand]:
+    #                 item.draw()
+    #                 win.flip()
+    #                 print(item.image)
+    #                 break
+    #
+    #
+    #         flag = True
+    #         while flag:
+    #             keys = event.getKeys(keyList=['a', 'l'])
+    #             for key in keys:
+    #                 if key == 'a':
+    #                     #write to table
+    #                     # print('a')
+    #                     flag = False
+    #                 else:
+    #                     #write to table
+    #                     # print('l')
+    #                     flag = False
+    #
+    #     if gender_random == 1:
+    #         print('con-dif-al-m')
+    #         rand1 = random.randint(0, 19)
+    #         men_align_images[rand1].draw()
+    #         print(men_align_images[rand1].image)
+    #         win.flip()
+    #         core.wait(0.2)
+    #
+    #         men_align_images[rand1].autoDraw = False
+    #         win.flip()
+    #         core.wait(0.4)
+    #
+    #         newLocations = differentLocationsList.DifferentTotalLocationsList(
+    #             men_align_locations, men_align_images[rand1].image)
+    #
+    #         newLocRand = random.randint(0, len(newLocations) - 1)
+    #
+    #         for item in men_align_images:
+    #             if item.image == newLocations[newLocRand]:
+    #                 item.draw()
+    #                 win.flip()
+    #                 print(item.image)
+    #                 break
+    #
+    #         flag = True
+    #         while flag:
+    #             keys = event.getKeys(keyList=['a', 'l'])
+    #             for key in keys:
+    #                 if key == 'a':
+    #                     # write to table
+    #                     # print('a')
+    #                     flag = False
+    #                 else:
+    #                     # write to table
+    #                     # print('l')
+    #                     flag = False
 
 
 

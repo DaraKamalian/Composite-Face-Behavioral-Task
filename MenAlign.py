@@ -13,5 +13,5 @@ class Men_Align(object):
     for location in locations:
         men_align_locations.append(location)
         men_align_images.append(visual.ImageStim(win, image=location, pos=[0, 0], units='pix',
-                                                        size=[226.768, 272.12]))
+                                                 size=[226.768, 272.12]))
 
