@@ -6,7 +6,8 @@ from MainAssets import MainAssets
 
 from MenMisalign import Men_Misalign
 from WomenMisalign import Women_Misalign
-
+from MenAlign import Men_Align
+from WomenAlign import Women_Align
 
 image = MainAssets()
 
@@ -17,15 +18,18 @@ women_misalign_images = Women_Misalign().women_misalign_images
 women_misalign_locations = Women_Misalign().women_misalign_locations
 men_misalign_images = Men_Misalign().men_misalign_images
 men_misalign_locations = Men_Misalign().men_misalign_locations
+men_align_images = Men_Align().men_align_images
+men_align_locations = Men_Align().men_align_locations
+women_align_images = Women_Align().women_align_images
+women_align_locations = Women_Align().women_align_locations
 
 fixationPoint = image.fixationPoint
 questionMark = image.questionMark
 win = window.win
 
 
-class Incongruent_MisAligned(object):
-
-    def IncongruentSameMisaligned(name):
+class Incongruent_Misaligned(object):
+    def IncongruentSameMisalignedMale(name):
         fixationPoint.draw()
         win.flip()
         core.wait(0.2)
@@ -34,84 +38,42 @@ class Incongruent_MisAligned(object):
         win.flip()
         core.wait(0.15)
 
-        gender_random = random.randint(0, 100) % 2
-        # 0 -> female, 1 -> male
+        print('inc-same-mis-m')
 
+        rand1 = random.randint(0, 19)
+        men_align_images[rand1].draw()
+        print(men_align_images[rand1].image)
+        win.flip()
+        core.wait(0.2)
 
-        if gender_random == 1:
-            print('inc-same-mis-m')
+        men_align_images[rand1].autoDraw = False
+        win.flip()
+        core.wait(0.4)
 
-            rand1 = random.randint(0, 19)
-            men_misalign_images[rand1].draw()
-            print(men_misalign_images[rand1].image)
-            win.flip()
-            core.wait(0.2)
+        newLocations = SameUpperLocationsList.SameUpperLocationsList(
+            men_misalign_locations, men_align_images[rand1].image)
 
-            men_misalign_images[rand1].autoDraw = False
-            win.flip()
-            core.wait(0.4)
+        newLocRand = random.randint(0, len(newLocations) - 1)
 
-            newLocations = SameUpperLocationsList.SameUpperLocationsList(
-                men_misalign_locations, men_misalign_images[rand1].image)
+        for item in men_misalign_images:
+            if item.image == newLocations[newLocRand]:
+                item.draw()
+                win.flip()
+                print(item.image)
+                break
 
-            newLocRand = random.randint(0, len(newLocations) - 1)
+        flag = True
+        while flag:
+            keys = event.getKeys(keyList=['a', 'l'])
+            for key in keys:
+                if key == 'a':
+                    # print('correct')
+                    flag = False
+                else:
+                    # print('wrong')
+                    flag = False
 
-            for item in men_misalign_images:
-                if item.image == newLocations[newLocRand]:
-                    item.draw()
-                    win.flip()
-                    print(item.image)
-                    break
-
-            flag = True
-            while flag:
-                keys = event.getKeys(keyList=['a', 'l'])
-                for key in keys:
-                    if key == 'a':
-                        # print('correct')
-                        flag = False
-                    else:
-                        # print('wrong')
-                        flag = False
-
-        if gender_random == 0:
-            print('inc-same-mis-f')
-
-            rand1 = random.randint(0, 19)
-            women_misalign_images[rand1].draw()
-            print(women_misalign_images[rand1].image)
-            win.flip()
-            core.wait(0.2)
-
-            women_misalign_images[rand1].autoDraw = False
-            win.flip()
-            core.wait(0.4)
-
-            newLocations = SameUpperLocationsList.SameUpperLocationsList(
-                women_misalign_locations, women_misalign_images[rand1].image)
-
-            newLocRand = random.randint(0, len(newLocations) - 1)
-
-            for item in women_misalign_images:
-                if item.image == newLocations[newLocRand]:
-                    item.draw()
-                    win.flip()
-                    print(item.image)
-                    break
-
-            flag = True
-            while flag:
-                keys = event.getKeys(keyList=['a', 'l'])
-                for key in keys:
-                    if key == 'a':
-                        # write to table
-                        # print('correct')
-                        flag = False
-                    else:
-                        # write to table
-                        flag = False
-
-    def IncongrunetDifferentMisaligned(name):
+    def IncongruentSameMisalignedFemale(name):
         fixationPoint.draw()
         win.flip()
         core.wait(0.2)
@@ -120,78 +82,130 @@ class Incongruent_MisAligned(object):
         win.flip()
         core.wait(0.15)
 
-        gender_random = random.randint(0, 100) % 2
-        # 0 -> female, 1 -> male
-        if gender_random == 1:
-            print('inc-dif-mis-m')
+        print('inc-same-mis-f')
 
-            rand1 = random.randint(0, 19)
-            men_misalign_images[rand1].draw()
-            print(men_misalign_images[rand1].image)
-            win.flip()
-            core.wait(0.2)
+        rand1 = random.randint(0, 19)
+        women_align_images[rand1].draw()
+        print(women_align_images[rand1].image)
+        win.flip()
+        core.wait(0.2)
 
-            men_misalign_images[rand1].autoDraw = False
-            win.flip()
-            core.wait(0.4)
+        women_align_images[rand1].autoDraw = False
+        win.flip()
+        core.wait(0.4)
 
-            newLocations = SameLowerLocationsList.SameLowerLocationsList(
-                men_misalign_locations, men_misalign_images[rand1].image)
+        newLocations = SameUpperLocationsList.SameUpperLocationsList(
+            women_misalign_locations, women_align_images[rand1].image)
 
-            newLocRand = random.randint(0, len(newLocations) - 1)
+        newLocRand = random.randint(0, len(newLocations) - 1)
 
-            for item in men_misalign_images:
-                if item.image == newLocations[newLocRand]:
-                    item.draw()
-                    win.flip()
-                    print(item.image)
-                    break
+        for item in women_misalign_images:
+            if item.image == newLocations[newLocRand]:
+                item.draw()
+                win.flip()
+                print(item.image)
+                break
 
-            flag = True
-            while flag:
-                keys = event.getKeys(keyList=['a', 'l'])
-                for key in keys:
-                    if key == 'a':
-                        # print('correct')
-                        flag = False
-                    else:
-                        # print('wrong')
-                        flag = False
+        flag = True
+        while flag:
+            keys = event.getKeys(keyList=['a', 'l'])
+            for key in keys:
+                if key == 'a':
+                    # write to table
+                    # print('correct')
+                    flag = False
+                else:
+                    # write to table
+                    flag = False
 
-        if gender_random == 0:
-            print('inc-dif-mis-f')
+    def IncongruentDifferentMisalignedMale(name):
+        fixationPoint.draw()
+        win.flip()
+        core.wait(0.2)
 
-            rand1 = random.randint(0, 19)
-            women_misalign_images[rand1].draw()
-            print(women_misalign_images[rand1].image)
-            win.flip()
-            core.wait(0.2)
+        fixationPoint.autoDraw = False
+        win.flip()
+        core.wait(0.15)
 
-            women_misalign_images[rand1].autoDraw = False
-            win.flip()
-            core.wait(0.4)
+        print('inc-dif-mis-m')
 
-            newLocations = SameLowerLocationsList.SameLowerLocationsList(
-                women_misalign_locations, women_misalign_images[rand1].image)
+        rand1 = random.randint(0, 19)
+        men_align_images[rand1].draw()
+        print(men_align_images[rand1].image)
+        win.flip()
+        core.wait(0.2)
 
-            newLocRand = random.randint(0, len(newLocations) - 1)
+        men_align_images[rand1].autoDraw = False
+        win.flip()
+        core.wait(0.4)
 
-            for item in women_misalign_images:
-                if item.image == newLocations[newLocRand]:
-                    item.draw()
-                    win.flip()
-                    print(item.image)
-                    break
+        newLocations = SameLowerLocationsList.SameLowerLocationsList(
+            men_misalign_locations, men_align_images[rand1].image)
 
-            flag = True
-            while flag:
-                keys = event.getKeys(keyList=['a', 'l'])
-                for key in keys:
-                    if key == 'a':
-                        # write to table
-                        # print('correct')
-                        flag = False
-                    else:
-                        # write to table
-                        flag = False
+        newLocRand = random.randint(0, len(newLocations) - 1)
+
+        for item in men_misalign_images:
+            if item.image == newLocations[newLocRand]:
+                item.draw()
+                win.flip()
+                print(item.image)
+                break
+
+        flag = True
+        while flag:
+            keys = event.getKeys(keyList=['a', 'l'])
+            for key in keys:
+                if key == 'a':
+                    # print('correct')
+                    flag = False
+                else:
+                    # print('wrong')
+                    flag = False
+
+    def IncongruentDifferentMisalignedFemale(name):
+        fixationPoint.draw()
+        win.flip()
+        core.wait(0.2)
+
+        fixationPoint.autoDraw = False
+        win.flip()
+        core.wait(0.15)
+
+        print('inc-dif-mis-f')
+
+        rand1 = random.randint(0, 19)
+        women_align_images[rand1].draw()
+        print(women_align_images[rand1].image)
+        win.flip()
+        core.wait(0.2)
+
+        women_align_images[rand1].autoDraw = False
+        win.flip()
+        core.wait(0.4)
+
+        newLocations = SameLowerLocationsList.SameLowerLocationsList(
+            women_misalign_locations, women_align_images[rand1].image)
+
+        newLocRand = random.randint(0, len(newLocations) - 1)
+
+        for item in women_misalign_images:
+            if item.image == newLocations[newLocRand]:
+                item.draw()
+                win.flip()
+                print(item.image)
+                break
+
+        flag = True
+        while flag:
+            keys = event.getKeys(keyList=['a', 'l'])
+            for key in keys:
+                if key == 'a':
+                    # write to table
+                    # print('correct')
+                    flag = False
+                else:
+                    # write to table
+                    flag = False
+
+
 

@@ -1,5 +1,5 @@
 class SameLowerLocationsList(object):
-    def SameLowerLocationsList(self, list, string):
+    def SameLowerLocationsList(list, string):
         leftIndex = string[-11:-9]
 
         for item in list:

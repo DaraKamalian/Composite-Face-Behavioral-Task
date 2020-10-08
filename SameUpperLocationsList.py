@@ -1,5 +1,5 @@
 class SameUpperLocationsList(object):
-    def SameUpperLocationsList(self, list, string):
+    def SameUpperLocationsList(list, string):
 
         rightIndex = string[-8:-6]
 
