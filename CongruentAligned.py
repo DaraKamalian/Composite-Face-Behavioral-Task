@@ -19,6 +19,7 @@ questionMark = image.questionMark
 win = window.win
 
 class Congruent_Aligned(object):
+
     def CongruentSameAlignedMale(name):
 
         fixationPoint.draw()

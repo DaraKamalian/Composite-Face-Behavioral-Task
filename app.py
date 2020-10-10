@@ -11,12 +11,10 @@ import random
 
 win = window().win
 
-myMon = monitors.Monitor('sony500', distance=114)
 
 # subjectInfo = dialoguebox().showDialogBox()
 
-# mainrandom = random.randind(0, 100) % 4
-mainrandom = 0
+# mainrandom = random.randint(0, 3)
 
 event.globalKeys.clear()
 event.globalKeys.add(key='q', func=os._exit, func_args=[1], func_kwargs=None)
@@ -24,162 +22,193 @@ event.globalKeys.add(key='q', func=os._exit, func_args=[1], func_kwargs=None)
 m_counter = 0
 f_counter = 0
 
-# Congruent Aligned
-if mainrandom == 0:
+typeOneDone = False
+typeTwoDone = False
+typeThreeDone = False
+typeFourDone = False
 
-    same_counter = 0
-    diff_counter = 0
+while True:
+    mainrandom = random.randint(1, 4)
+    print('main random: ' + str(mainrandom))
 
-    for i in range(1, 11):
-        gender_random = random.randint(0, 100) % 2
-        # 0 -> female, 1 -> male
-        samerandom = random.randint(0, 100) % 2
-        if samerandom == 0 and diff_counter == 5:
-            samerandom = 1
-        if samerandom == 1 and same_counter == 5:
-            samerandom = 0
+    if mainrandom == 1 and typeOneDone:
+        mainrandom = 2
+    if mainrandom == 2 and typeTwoDone:
+        mainrandom = 3
+    if mainrandom == 3 and typeThreeDone:
+        mainrandom = 4
+    if mainrandom == 4 and typeFourDone:
+        if not typeOneDone:
+            mainrandom = 1
+        elif not typeTwoDone:
+            mainrandom = 2
+        elif not typeThreeDone:
+            mainrandom = 3
+        else:
+            break
 
-        if gender_random == 0 and f_counter == 5:
-            gender_random = 1
-        if gender_random == 1 and m_counter == 5:
-            gender_random = 0
 
-        if samerandom == 1 and gender_random == 1:
-            same_counter += 1
-            m_counter += 1
-            Congruent_Aligned().CongruentSameAlignedMale()
 
-        if samerandom == 1 and gender_random == 0:
-            same_counter += 1
-            f_counter += 1
-            Congruent_Aligned().CongruentSameAlignedFemale()
+    # Congruent Aligned
+    if mainrandom == 1:
 
-        if samerandom == 0 and gender_random == 1:
-            diff_counter += 1
-            m_counter += 1
-            Congruent_Aligned().CongruentDifferentAlignedMale()
+        same_counter = 0
+        diff_counter = 0
 
-        if samerandom == 0 and gender_random == 0:
-            diff_counter += 1
-            f_counter += 1
-            Congruent_Aligned().CongruentDifferentAlignedFemale()
+        for i in range(1, 11):
+            gender_random = random.randint(0, 100) % 2
+            # 0 -> female, 1 -> male
+            samerandom = random.randint(0, 100) % 2
+            if samerandom == 0 and diff_counter == 5:
+                samerandom = 1
+            if samerandom == 1 and same_counter == 5:
+                samerandom = 0
 
-# Congruent Misaligned
-if mainrandom == 1:
-    same_counter = 0
-    diff_counter = 0
+            if gender_random == 0 and f_counter == 5:
+                gender_random = 1
+            if gender_random == 1 and m_counter == 5:
+                gender_random = 0
 
-    for i in range(1, 11):
-        gender_random = random.randint(0, 100) % 2
-        # 0 -> female, 1 -> male
-        samerandom = random.randint(0, 100) % 2
-        if samerandom == 0 and diff_counter == 5:
-            samerandom = 1
-        if samerandom == 1 and same_counter == 5:
-            samerandom = 0
+            if samerandom == 1 and gender_random == 1:
+                same_counter += 1
+                m_counter += 1
+                Congruent_Aligned().CongruentSameAlignedMale()
 
-        if gender_random == 0 and f_counter == 5:
-            gender_random = 1
-        if gender_random == 1 and m_counter == 5:
-            gender_random = 0
+            if samerandom == 1 and gender_random == 0:
+                same_counter += 1
+                f_counter += 1
+                Congruent_Aligned().CongruentSameAlignedFemale()
 
-        if samerandom == 1 and gender_random == 1:
-            same_counter += 1
-            m_counter += 1
-            Congruent_Misaligned().CongruentSameMisalignedMale()
+            if samerandom == 0 and gender_random == 1:
+                diff_counter += 1
+                m_counter += 1
+                Congruent_Aligned().CongruentDifferentAlignedMale()
 
-        if samerandom == 1 and gender_random == 0:
-            same_counter += 1
-            f_counter += 1
-            Congruent_Misaligned().CongruentSameMisalignedFemale()
+            if samerandom == 0 and gender_random == 0:
+                diff_counter += 1
+                f_counter += 1
+                Congruent_Aligned().CongruentDifferentAlignedFemale()
+        typeOneDone = True
 
-        if samerandom == 0 and gender_random == 1:
-            diff_counter += 1
-            m_counter += 1
-            Congruent_Misaligned().CongruentDifferentMisalignedMale()
+    # Congruent Misaligned
+    if mainrandom == 2:
+        same_counter = 0
+        diff_counter = 0
 
-        if samerandom == 0 and gender_random == 0:
-            diff_counter += 1
-            f_counter += 1
-            Congruent_Misaligned().CongruentDifferentMisalignedFemale()
+        for i in range(1, 11):
+            gender_random = random.randint(0, 100) % 2
+            # 0 -> female, 1 -> male
+            samerandom = random.randint(0, 100) % 2
+            if samerandom == 0 and diff_counter == 5:
+                samerandom = 1
+            if samerandom == 1 and same_counter == 5:
+                samerandom = 0
 
-# Incongruent Aligned
-if mainrandom == 2:
-    same_counter = 0
-    diff_counter = 0
+            if gender_random == 0 and f_counter == 5:
+                gender_random = 1
+            if gender_random == 1 and m_counter == 5:
+                gender_random = 0
 
-    for i in range(1, 11):
-        gender_random = random.randint(0, 100) % 2
-        # 0 -> female, 1 -> male
-        samerandom = random.randint(0, 100) % 2
-        if samerandom == 0 and diff_counter == 5:
-            samerandom = 1
-        if samerandom == 1 and same_counter == 5:
-            samerandom = 0
+            if samerandom == 1 and gender_random == 1:
+                same_counter += 1
+                m_counter += 1
+                Congruent_Misaligned().CongruentSameMisalignedMale()
 
-        if gender_random == 0 and f_counter == 5:
-            gender_random = 1
-        if gender_random == 1 and m_counter == 5:
-            gender_random = 0
+            if samerandom == 1 and gender_random == 0:
+                same_counter += 1
+                f_counter += 1
+                Congruent_Misaligned().CongruentSameMisalignedFemale()
 
-        if samerandom == 1 and gender_random == 1:
-            same_counter += 1
-            m_counter += 1
-            Incongruent_Aligned().IncongruentSameAlignedMale()
+            if samerandom == 0 and gender_random == 1:
+                diff_counter += 1
+                m_counter += 1
+                Congruent_Misaligned().CongruentDifferentMisalignedMale()
 
-        if samerandom == 1 and gender_random == 0:
-            same_counter += 1
-            f_counter += 1
-            Incongruent_Aligned().IncongruentSameAlignedFemale()
+            if samerandom == 0 and gender_random == 0:
+                diff_counter += 1
+                f_counter += 1
+                Congruent_Misaligned().CongruentDifferentMisalignedFemale()
+        typeTwoDone = True
 
-        if samerandom == 0 and gender_random == 1:
-            diff_counter += 1
-            m_counter += 1
-            Incongruent_Aligned().IncongruentDifferentAlignedMale()
+    # Incongruent Aligned
+    if mainrandom == 3:
+        same_counter = 0
+        diff_counter = 0
 
-        if samerandom == 0 and gender_random == 0:
-            diff_counter += 1
-            f_counter += 1
-            Incongruent_Aligned().IncongruentDifferentAlignedFemale()
+        for i in range(1, 11):
+            gender_random = random.randint(0, 100) % 2
+            # 0 -> female, 1 -> male
+            samerandom = random.randint(0, 100) % 2
+            if samerandom == 0 and diff_counter == 5:
+                samerandom = 1
+            if samerandom == 1 and same_counter == 5:
+                samerandom = 0
 
-#Incongruent Misaligned
-if mainrandom == 3:
-    same_counter = 0
-    diff_counter = 0
+            if gender_random == 0 and f_counter == 5:
+                gender_random = 1
+            if gender_random == 1 and m_counter == 5:
+                gender_random = 0
 
-    for i in range(1, 11):
-        gender_random = random.randint(0, 100) % 2
-        # 0 -> female, 1 -> male
-        samerandom = random.randint(0, 100) % 2
-        if samerandom == 0 and diff_counter == 5:
-            samerandom = 1
-        if samerandom == 1 and same_counter == 5:
-            samerandom = 0
+            if samerandom == 1 and gender_random == 1:
+                same_counter += 1
+                m_counter += 1
+                Incongruent_Aligned().IncongruentSameAlignedMale()
 
-        if gender_random == 0 and f_counter == 5:
-            gender_random = 1
-        if gender_random == 1 and m_counter == 5:
-            gender_random = 0
+            if samerandom == 1 and gender_random == 0:
+                same_counter += 1
+                f_counter += 1
+                Incongruent_Aligned().IncongruentSameAlignedFemale()
 
-        if samerandom == 1 and gender_random == 1:
-            same_counter += 1
-            m_counter += 1
-            Incongruent_Misaligned().IncongruentSameMisalignedMale()
+            if samerandom == 0 and gender_random == 1:
+                diff_counter += 1
+                m_counter += 1
+                Incongruent_Aligned().IncongruentDifferentAlignedMale()
 
-        if samerandom == 1 and gender_random == 0:
-            same_counter += 1
-            f_counter += 1
-            Incongruent_Misaligned().IncongruentSameMisalignedFemale()
+            if samerandom == 0 and gender_random == 0:
+                diff_counter += 1
+                f_counter += 1
+                Incongruent_Aligned().IncongruentDifferentAlignedFemale()
+        typeThreeDone = True
 
-        if samerandom == 0 and gender_random == 1:
-            diff_counter += 1
-            m_counter += 1
-            Incongruent_Misaligned().IncongruentDifferentMisalignedMale()
+    #Incongruent Misaligned
+    if mainrandom == 4:
+        same_counter = 0
+        diff_counter = 0
 
-        if samerandom == 0 and gender_random == 0:
-            diff_counter += 1
-            f_counter += 1
-            Incongruent_Misaligned().IncongruentDifferentMisalignedFemale()
+        for i in range(1, 11):
+            gender_random = random.randint(0, 100) % 2
+            # 0 -> female, 1 -> male
+            samerandom = random.randint(0, 100) % 2
+            if samerandom == 0 and diff_counter == 5:
+                samerandom = 1
+            if samerandom == 1 and same_counter == 5:
+                samerandom = 0
+
+            if gender_random == 0 and f_counter == 5:
+                gender_random = 1
+            if gender_random == 1 and m_counter == 5:
+                gender_random = 0
+
+            if samerandom == 1 and gender_random == 1:
+                same_counter += 1
+                m_counter += 1
+                Incongruent_Misaligned().IncongruentSameMisalignedMale()
+
+            if samerandom == 1 and gender_random == 0:
+                same_counter += 1
+                f_counter += 1
+                Incongruent_Misaligned().IncongruentSameMisalignedFemale()
+
+            if samerandom == 0 and gender_random == 1:
+                diff_counter += 1
+                m_counter += 1
+                Incongruent_Misaligned().IncongruentDifferentMisalignedMale()
+
+            if samerandom == 0 and gender_random == 0:
+                diff_counter += 1
+                f_counter += 1
+                Incongruent_Misaligned().IncongruentDifferentMisalignedFemale()
+        typeFourDone = True
 
 
 
