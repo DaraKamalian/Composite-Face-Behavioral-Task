@@ -19,7 +19,6 @@ questionMark = image.questionMark
 win = window.win
 
 class Congruent_Aligned(object):
-
     def CongruentSameAlignedMale(name):
 
         fixationPoint.draw()
@@ -111,7 +110,7 @@ class Congruent_Aligned(object):
         win.flip()
         core.wait(0.4)
 
-        newLocations = differentLocationsList.DifferentTotalLocationsList(
+        newLocations = differentLocationsList.different_total_locations_list(
             men_align_locations, men_align_images[rand1].image)
 
         newLocRand = random.randint(0, len(newLocations) - 1)
@@ -155,7 +154,7 @@ class Congruent_Aligned(object):
         win.flip()
         core.wait(0.4)
 
-        newLocations = differentLocationsList.DifferentTotalLocationsList(
+        newLocations = differentLocationsList.different_total_locations_list(
             women_align_locations, women_align_images[rand1].image)
 
         newLocRand = random.randint(0, len(newLocations) - 1)

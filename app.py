@@ -2,20 +2,27 @@ from CongruentAligned import Congruent_Aligned
 from CongruentMisaligned import Congruent_Misaligned
 from IncongruentAligned import Incongruent_Aligned
 from IncongruentMisaligned import Incongruent_Misaligned
+from psychopy import event, monitors
+from DialogueBox import dialoguebox
+import os
 
 from Window import window
 import random
 
 win = window().win
 
+myMon = monitors.Monitor('sony500', distance=114)
+
+# subjectInfo = dialoguebox().showDialogBox()
+
 # mainrandom = random.randind(0, 100) % 4
-mainrandom = 3
+mainrandom = 0
 
-
+event.globalKeys.clear()
+event.globalKeys.add(key='q', func=os._exit, func_args=[1], func_kwargs=None)
 
 m_counter = 0
 f_counter = 0
-
 
 # Congruent Aligned
 if mainrandom == 0:
