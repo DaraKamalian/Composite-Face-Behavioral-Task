@@ -1,15 +1,18 @@
 class DifferentTotalLocationsList(object):
-    def different_total_locations_list(self, list, string):
+    def different_total_locations_list(self, mylist, string):
 
         leftIndex = string[-11:-9]
         rightIndex = string[-8:-6]
+        list = []
 
-        for item in list:
+        for item in mylist:
             if item[-11:-9] == leftIndex:
-                list.remove(item)
+                list.append(item)
 
-        for item in list:
             if item[-8:-6] == rightIndex:
-                list.remove(item)
+                list.append(item)
 
-        return list
+        for member in list:
+            if member in mylist:
+                mylist.remove(member)
+        return mylist

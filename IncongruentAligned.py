@@ -39,8 +39,8 @@ class Incongruent_Aligned(object):
         men_align_images[rand1].autoDraw = False
         win.flip()
         core.wait(0.4)
-
-        newLocations = SameUpperLocationsList.SameUpperLocationsList(
+        obj = SameUpperLocationsList()
+        newLocations = SameUpperLocationsList.SameUpperLocationsList(obj,
             men_align_locations, men_align_images[rand1].image)
 
         newLocRand = random.randint(0, len(newLocations) - 1)
@@ -84,7 +84,8 @@ class Incongruent_Aligned(object):
         win.flip()
         core.wait(0.4)
 
-        newLocations = SameUpperLocationsList.SameUpperLocationsList(
+        obj = SameUpperLocationsList()
+        newLocations = SameUpperLocationsList.SameUpperLocationsList(obj,
             women_align_locations, women_align_images[rand1].image)
 
         newLocRand = random.randint(0, len(newLocations) - 1)
@@ -129,7 +130,8 @@ class Incongruent_Aligned(object):
         win.flip()
         core.wait(0.4)
 
-        newLocations = SameLowerLocationsList.SameLowerLocationsList(
+        obj = SameLowerLocationsList()
+        newLocations = SameLowerLocationsList.SameLowerLocationsList(obj,
             men_align_locations, men_align_images[rand1].image)
 
         newLocRand = random.randint(0, len(newLocations) - 1)
@@ -173,7 +175,8 @@ class Incongruent_Aligned(object):
         win.flip()
         core.wait(0.4)
 
-        newLocations = SameLowerLocationsList.SameLowerLocationsList(
+        obj = SameLowerLocationsList()
+        newLocations = SameLowerLocationsList.SameLowerLocationsList(obj,
             women_align_locations, women_align_images[rand1].image)
 
         newLocRand = random.randint(0, len(newLocations) - 1)

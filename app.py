@@ -38,6 +38,7 @@ while True:
     if mainrandom == 3 and typeThreeDone:
         mainrandom = 4
     if mainrandom == 4 and typeFourDone:
+
         if not typeOneDone:
             mainrandom = 1
         elif not typeTwoDone:
@@ -54,6 +55,9 @@ while True:
 
         same_counter = 0
         diff_counter = 0
+
+        m_counter = 0
+        f_counter = 0
 
         for i in range(1, 11):
             gender_random = random.randint(0, 100) % 2
@@ -95,6 +99,9 @@ while True:
         same_counter = 0
         diff_counter = 0
 
+        m_counter = 0
+        f_counter = 0
+
         for i in range(1, 11):
             gender_random = random.randint(0, 100) % 2
             # 0 -> female, 1 -> male
@@ -135,6 +142,9 @@ while True:
         same_counter = 0
         diff_counter = 0
 
+        m_counter = 0
+        f_counter = 0
+
         for i in range(1, 11):
             gender_random = random.randint(0, 100) % 2
             # 0 -> female, 1 -> male
@@ -174,6 +184,9 @@ while True:
     if mainrandom == 4:
         same_counter = 0
         diff_counter = 0
+
+        m_counter = 0
+        f_counter = 0
 
         for i in range(1, 11):
             gender_random = random.randint(0, 100) % 2

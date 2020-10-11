@@ -165,6 +165,7 @@ class Congruent_Misaligned(object):
 
         newLocations = differentLocationsList.different_total_locations_list(
             women_misalign_locations, women_align_images[rand1].image)
+        print('newlocs length is:' + str(len(newLocations)))
 
         newLocRand = random.randint(0, len(newLocations) - 1)
 
