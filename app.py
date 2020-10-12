@@ -2,6 +2,7 @@ from CongruentAligned import Congruent_Aligned
 from CongruentMisaligned import Congruent_Misaligned
 from IncongruentAligned import Incongruent_Aligned
 from IncongruentMisaligned import Incongruent_Misaligned
+from PracticeTrials import PracticeTrials
 from psychopy import event, monitors
 from DialogueBox import dialoguebox
 import os
@@ -10,11 +11,6 @@ from Window import window
 import random
 
 win = window().win
-
-
-# subjectInfo = dialoguebox().showDialogBox()
-
-# mainrandom = random.randint(0, 3)
 
 event.globalKeys.clear()
 event.globalKeys.add(key='q', func=os._exit, func_args=[1], func_kwargs=None)
@@ -27,8 +23,12 @@ typeTwoDone = False
 typeThreeDone = False
 typeFourDone = False
 
+PracticeTrials().Practice_Trials()
+
+
 while True:
     mainrandom = random.randint(1, 4)
+    # mainrandom = 1
     print('main random: ' + str(mainrandom))
 
     if mainrandom == 1 and typeOneDone:
@@ -49,7 +49,6 @@ while True:
             break
 
 
-
     # Congruent Aligned
     if mainrandom == 1:
 
@@ -60,9 +59,11 @@ while True:
         f_counter = 0
 
         for i in range(1, 11):
-            gender_random = random.randint(0, 100) % 2
+            gender_random = 0
+            # gender_random = random.randint(0, 100) % 2
             # 0 -> female, 1 -> male
-            samerandom = random.randint(0, 100) % 2
+            # samerandom = random.randint(0, 100) % 2
+            samerandom = 0
             if samerandom == 0 and diff_counter == 5:
                 samerandom = 1
             if samerandom == 1 and same_counter == 5:
@@ -76,22 +77,22 @@ while True:
             if samerandom == 1 and gender_random == 1:
                 same_counter += 1
                 m_counter += 1
-                Congruent_Aligned().CongruentSameAlignedMale()
+                Congruent_Aligned().CongruentSameAlignedMale(practice=0)
 
             if samerandom == 1 and gender_random == 0:
                 same_counter += 1
                 f_counter += 1
-                Congruent_Aligned().CongruentSameAlignedFemale()
+                Congruent_Aligned().CongruentSameAlignedFemale(practice=0)
 
             if samerandom == 0 and gender_random == 1:
                 diff_counter += 1
                 m_counter += 1
-                Congruent_Aligned().CongruentDifferentAlignedMale()
+                Congruent_Aligned().CongruentDifferentAlignedMale(practice=0)
 
             if samerandom == 0 and gender_random == 0:
                 diff_counter += 1
                 f_counter += 1
-                Congruent_Aligned().CongruentDifferentAlignedFemale()
+                Congruent_Aligned().CongruentDifferentAlignedFemale(practice=0)
         typeOneDone = True
 
     # Congruent Misaligned
@@ -119,22 +120,22 @@ while True:
             if samerandom == 1 and gender_random == 1:
                 same_counter += 1
                 m_counter += 1
-                Congruent_Misaligned().CongruentSameMisalignedMale()
+                Congruent_Misaligned().CongruentSameMisalignedMale(practice=0)
 
             if samerandom == 1 and gender_random == 0:
                 same_counter += 1
                 f_counter += 1
-                Congruent_Misaligned().CongruentSameMisalignedFemale()
+                Congruent_Misaligned().CongruentSameMisalignedFemale(practice=0)
 
             if samerandom == 0 and gender_random == 1:
                 diff_counter += 1
                 m_counter += 1
-                Congruent_Misaligned().CongruentDifferentMisalignedMale()
+                Congruent_Misaligned().CongruentDifferentMisalignedMale(practice=0)
 
             if samerandom == 0 and gender_random == 0:
                 diff_counter += 1
                 f_counter += 1
-                Congruent_Misaligned().CongruentDifferentMisalignedFemale()
+                Congruent_Misaligned().CongruentDifferentMisalignedFemale(practice=0)
         typeTwoDone = True
 
     # Incongruent Aligned
@@ -162,22 +163,22 @@ while True:
             if samerandom == 1 and gender_random == 1:
                 same_counter += 1
                 m_counter += 1
-                Incongruent_Aligned().IncongruentSameAlignedMale()
+                Incongruent_Aligned().IncongruentSameAlignedMale(practice=0)
 
             if samerandom == 1 and gender_random == 0:
                 same_counter += 1
                 f_counter += 1
-                Incongruent_Aligned().IncongruentSameAlignedFemale()
+                Incongruent_Aligned().IncongruentSameAlignedFemale(practice=0)
 
             if samerandom == 0 and gender_random == 1:
                 diff_counter += 1
                 m_counter += 1
-                Incongruent_Aligned().IncongruentDifferentAlignedMale()
+                Incongruent_Aligned().IncongruentDifferentAlignedMale(practice=0)
 
             if samerandom == 0 and gender_random == 0:
                 diff_counter += 1
                 f_counter += 1
-                Incongruent_Aligned().IncongruentDifferentAlignedFemale()
+                Incongruent_Aligned().IncongruentDifferentAlignedFemale(practice=0)
         typeThreeDone = True
 
     #Incongruent Misaligned
@@ -205,22 +206,22 @@ while True:
             if samerandom == 1 and gender_random == 1:
                 same_counter += 1
                 m_counter += 1
-                Incongruent_Misaligned().IncongruentSameMisalignedMale()
+                Incongruent_Misaligned().IncongruentSameMisalignedMale(practice=0)
 
             if samerandom == 1 and gender_random == 0:
                 same_counter += 1
                 f_counter += 1
-                Incongruent_Misaligned().IncongruentSameMisalignedFemale()
+                Incongruent_Misaligned().IncongruentSameMisalignedFemale(practice=0)
 
             if samerandom == 0 and gender_random == 1:
                 diff_counter += 1
                 m_counter += 1
-                Incongruent_Misaligned().IncongruentDifferentMisalignedMale()
+                Incongruent_Misaligned().IncongruentDifferentMisalignedMale(practice=0)
 
             if samerandom == 0 and gender_random == 0:
                 diff_counter += 1
                 f_counter += 1
-                Incongruent_Misaligned().IncongruentDifferentMisalignedFemale()
+                Incongruent_Misaligned().IncongruentDifferentMisalignedFemale(practice=0)
         typeFourDone = True
 
 

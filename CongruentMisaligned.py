@@ -13,7 +13,9 @@ from DifferentTotalLocationsList import DifferentTotalLocationsList
 from DialogueBox import dialoguebox
 
 image = MainAssets()
-# subjectInfoList = dialoguebox.showDialogBox()
+correct = image.correct
+wrong = image.wrong
+
 differentLocationsList = DifferentTotalLocationsList()
 
 women_misalign_images = Women_Misalign().women_misalign_images
@@ -30,7 +32,7 @@ questionMark = image.questionMark
 win = window.win
 
 class Congruent_Misaligned(object):
-    def CongruentSameMisalignedMale(name):
+    def CongruentSameMisalignedMale(self, practice):
         fixationPoint.draw()
         win.flip()
         core.wait(0.2)
@@ -65,19 +67,28 @@ class Congruent_Misaligned(object):
             keys = event.getKeys(keyList=['a', 'l'])
             if keys:
                 for key in keys:
-
                     if key == 'a':
-                        # print('correct')
+                        if practice:
+                            correct.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            print('correct')
                         flag = False
 
                     elif key == 'l':
-                        # print('wrong')
+                        if practice:
+                            wrong.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            print('wrong')
                         flag = False
             elif countdown.getTime() <= 0:
                 #   print late
                 flag = False
 
-    def CongruentSameMisalignedFemale(name):
+    def CongruentSameMisalignedFemale(self, practice):
         fixationPoint.draw()
         win.flip()
         core.wait(0.2)
@@ -114,17 +125,27 @@ class Congruent_Misaligned(object):
             if keys:
                 for key in keys:
                     if key == 'a':
-                        # write to table
-                        # print('correct')
+                        if practice:
+                            correct.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            print('correct')
                         flag = False
+
                     elif key == 'l':
-                        # write to table
+                        if practice:
+                            wrong.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            print('wrong')
                         flag = False
             elif countdown.getTime() <= 0:
                 #print late
                 flag = False
 
-    def CongruentDifferentMisalignedMale(name):
+    def CongruentDifferentMisalignedMale(name, practice):
         print('con-diff-mis-m')
         fixationPoint.draw()
         win.flip()
@@ -170,18 +191,30 @@ class Congruent_Misaligned(object):
             if keys:
                 for key in keys:
                     if key == 'a':
-                        # write to table
-                        # print('a')
+                        if practice:
+                            wrong.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            print('a')
+                            # write to table
+                            # print('a')
                         flag = False
                     elif key == 'l':
-                        # write to table
-                        # print('l')
+                        if practice:
+                            correct.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            print('l')
+                            # write to table
+                            # print('l')
                         flag = False
             elif countdown.getTime() <= 0:
                 #late
                 flag = False
 
-    def CongruentDifferentMisalignedFemale(name):
+    def CongruentDifferentMisalignedFemale(self, practice):
         print('con-dif-mis-f')
         fixationPoint.draw()
         win.flip()
@@ -227,12 +260,24 @@ class Congruent_Misaligned(object):
             if keys:
                 for key in keys:
                     if key == 'a':
-                        # write to table
-                        # print('a')
+                        if practice:
+                            wrong.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            print('a')
+                            # write to table
+                            # print('a')
                         flag = False
                     elif key == 'l':
-                        # write to table
-                        # print('l')
+                        if practice:
+                            correct.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            print('l')
+                            # write to table
+                            # print('l')
                         flag = False
             elif countdown.getTime() <= 0:
                 #late

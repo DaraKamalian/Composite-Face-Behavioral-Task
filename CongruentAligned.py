@@ -9,6 +9,8 @@ from WomenAlign import Women_Align
 from DifferentTotalLocationsList import DifferentTotalLocationsList
 
 image = MainAssets()
+correct = image.correct
+wrong = image.wrong
 differentLocationsList = DifferentTotalLocationsList()
 women_align_images = Women_Align().women_align_images
 women_align_locations = Women_Align().women_align_locations
@@ -20,7 +22,7 @@ win = window.win
 
 class Congruent_Aligned(object):
 
-    def CongruentSameAlignedMale(name):
+    def CongruentSameAlignedMale(self, practice):
 
         fixationPoint.draw()
         win.flip()
@@ -58,17 +60,28 @@ class Congruent_Aligned(object):
             if keys:
                 for key in keys:
                     if key == 'a':
-                        # print('correct')
+                        if practice:
+                            correct.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            print('a')
+                            # print('correct')
                         flag = False
                     elif key == 'l':
-                        # print('wrong')
+                        if practice:
+                            wrong.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            print('l')
+                            # print('wrong')
                         flag = False
             elif countdown.getTime() <= 0:
                 #late
                 flag = False
 
-
-    def CongruentSameAlignedFemale(name):
+    def CongruentSameAlignedFemale(self, practice):
         fixationPoint.draw()
         win.flip()
         core.wait(0.2)
@@ -104,18 +117,29 @@ class Congruent_Aligned(object):
             if keys:
                 for key in keys:
                     if key == 'a':
-                        # write to table
-                        # print('correct')
+                        if practice:
+                            correct.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            print('a')
+                            # write to table
+                            # print('correct')
                         flag = False
                     elif key == 'l':
-                        # write to table
+                        if practice:
+                            wrong.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            print('l')
+                            # write to table
                         flag = False
             elif countdown.getTime() <= 0:
                 #late
                 flag = False
 
-
-    def CongruentDifferentAlignedMale(name):
+    def CongruentDifferentAlignedMale(self, practice):
         fixationPoint.draw()
         win.flip()
         core.wait(0.2)
@@ -160,18 +184,31 @@ class Congruent_Aligned(object):
             if keys:
                 for key in keys:
                     if key == 'a':
-                        # write to table
-                        # print('a')
+                        if practice:
+                            wrong.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            print('a')
+                            # write to table
+                            # print('a')
                         flag = False
                     elif key == 'l':
-                        # write to table
-                        # print('l')
+                        if practice:
+                            correct.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            print('l')
+                            # write to table
+                            # print('l')
                         flag = False
             elif countdown.getTime() <= 0:
                 #late
                 flag = False
 
-    def CongruentDifferentAlignedFemale(name):
+    def CongruentDifferentAlignedFemale(self, practice):
+
         fixationPoint.draw()
         win.flip()
         core.wait(0.2)
@@ -179,7 +216,8 @@ class Congruent_Aligned(object):
         fixationPoint.autoDraw = False
         win.flip()
         core.wait(0.15)
-        print('con-dif-al-f')
+
+        print('con-dif-al-m')
         rand1 = random.randint(0, 19)
         women_align_images[rand1].draw()
         print(women_align_images[rand1].image)
@@ -194,7 +232,6 @@ class Congruent_Aligned(object):
             women_align_locations, women_align_images[rand1].image)
 
         newLocRand = random.randint(0, len(newLocations) - 1)
-
         list = []
         for item in women_align_images:
             if item.image == newLocations[newLocRand]:
@@ -204,10 +241,9 @@ class Congruent_Aligned(object):
                 print(item.image)
                 break
         core.wait(0.5)
-
         list[0].autoDraw = False
         questionMark.draw()
-        core.wait(1.5)
+        win.flip()
 
         countdown = core.CountdownTimer(1.5)
 
@@ -217,17 +253,31 @@ class Congruent_Aligned(object):
             if keys:
                 for key in keys:
                     if key == 'a':
-                        # write to table
-                        # print('a')
+                        if practice:
+                            correct.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            print('a')
+                            # write to table
+                            # print('a')
                         flag = False
-
                     elif key == 'l':
-                        # write to table
-                        # print('l')
+                        if practice:
+                            wrong.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            print('l')
+                            # write to table
+                            # print('l')
                         flag = False
             elif countdown.getTime() <= 0:
                 #late
                 flag = False
+
+
+
 
 
 

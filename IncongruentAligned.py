@@ -10,6 +10,8 @@ from SameUpperLocationsList import SameUpperLocationsList
 from SameLowerLocationsList import SameLowerLocationsList
 
 image = MainAssets()
+correct = image.correct
+wrong = image.wrong
 women_align_images = Women_Align().women_align_images
 women_align_locations = Women_Align().women_align_locations
 men_align_images = Men_Align().men_align_images
@@ -19,7 +21,7 @@ questionMark = image.questionMark
 win = window.win
 
 class Incongruent_Aligned(object):
-    def IncongruentSameAlignedMale(name):
+    def IncongruentSameAlignedMale(self, practice):
         fixationPoint.draw()
         win.flip()
         core.wait(0.2)
@@ -66,16 +68,29 @@ class Incongruent_Aligned(object):
             if keys:
                 for key in keys:
                     if key == 'a':
-                        # print('correct')
+                        if practice:
+                            correct.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            print('a')
+                            # write to table
+                            # print('correct')
                         flag = False
                     elif key == 'l':
-                        # print('wrong')
+                        if practice:
+                            wrong.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            print('l')
+                            # write to table
                         flag = False
             elif countdown.getTime() <= 0:
                 #late
                 flag = False
 
-    def IncongruentSameAlignedFemale(name):
+    def IncongruentSameAlignedFemale(self, practice):
         fixationPoint.draw()
         win.flip()
         core.wait(0.2)
@@ -122,17 +137,29 @@ class Incongruent_Aligned(object):
             if keys:
                 for key in keys:
                     if key == 'a':
-                        # write to table
-                        # print('correct')
+                        if practice:
+                            correct.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            print('a')
+                            # write to table
+                            # print('correct')
                         flag = False
                     elif key == 'l':
-                        # write to table
+                        if practice:
+                            wrong.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            print('l')
+                            # write to table
                         flag = False
             elif countdown.getTime() <= 0:
                 #late
                 flag = False
 
-    def IncongruentDifferentAlignedMale(name):
+    def IncongruentDifferentAlignedMale(self, practice):
         fixationPoint.draw()
         win.flip()
         core.wait(0.2)
@@ -179,16 +206,30 @@ class Incongruent_Aligned(object):
             if keys:
                 for key in keys:
                     if key == 'a':
-                        # print('correct')
+                        if practice:
+                            wrong.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            print('a')
+                            # write to table
+                            # print('a')
                         flag = False
                     elif key == 'l':
-                        # print('wrong')
+                        if practice:
+                            correct.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            print('l')
+                            # write to table
+                            # print('l')
                         flag = False
             elif countdown.getTime() <= 0:
                 #late
                 flag = False
 
-    def IncongruentDifferentAlignedFemale(name):
+    def IncongruentDifferentAlignedFemale(self, practice):
         fixationPoint.draw()
         win.flip()
         core.wait(0.2)
@@ -234,11 +275,24 @@ class Incongruent_Aligned(object):
             if keys:
                 for key in keys:
                     if key == 'a':
-                        # write to table
-                        # print('correct')
+                        if practice:
+                            wrong.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            print('a')
+                            # write to table
+                            # print('a')
                         flag = False
                     elif key == 'l':
-                        # write to table
+                        if practice:
+                            correct.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            print('l')
+                            # write to table
+                            # print('l')
                         flag = False
             elif countdown.getTime() <= 0:
                 #late
