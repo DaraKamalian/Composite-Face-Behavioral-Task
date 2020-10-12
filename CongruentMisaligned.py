@@ -1,4 +1,5 @@
 import random
+import xlsxwriter
 
 from psychopy import core, event
 from Window import window
@@ -9,8 +10,10 @@ from WomenMisalign import Women_Misalign
 from MenAlign import Men_Align
 from WomenAlign import Women_Align
 from DifferentTotalLocationsList import DifferentTotalLocationsList
+from DialogueBox import dialoguebox
 
 image = MainAssets()
+# subjectInfoList = dialoguebox.showDialogBox()
 differentLocationsList = DifferentTotalLocationsList()
 
 women_misalign_images = Women_Misalign().women_misalign_images
@@ -27,7 +30,6 @@ questionMark = image.questionMark
 win = window.win
 
 class Congruent_Misaligned(object):
-
     def CongruentSameMisalignedMale(name):
         fixationPoint.draw()
         win.flip()
@@ -40,7 +42,7 @@ class Congruent_Misaligned(object):
 
         rand1 = random.randint(0, 19)
         men_align_images[rand1].draw()
-        print(men_misalign_images[rand1].image)
+        print(men_align_images[rand1].image)
         win.flip()
         core.wait(0.2)
 
