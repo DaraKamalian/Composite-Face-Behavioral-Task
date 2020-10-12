@@ -45,23 +45,35 @@ class Incongruent_Aligned(object):
 
         newLocRand = random.randint(0, len(newLocations) - 1)
 
+        list = []
         for item in men_align_images:
             if item.image == newLocations[newLocRand]:
                 item.draw()
                 win.flip()
+                list.append(item)
                 print(item.image)
                 break
+        core.wait(0.5)
+        list[0].autoDraw = False
+        questionMark.draw()
+        win.flip()
+
+        countdown = core.CountdownTimer(1.5)
 
         flag = True
         while flag:
             keys = event.getKeys(keyList=['a', 'l'])
-            for key in keys:
-                if key == 'a':
-                    # print('correct')
-                    flag = False
-                else:
-                    # print('wrong')
-                    flag = False
+            if keys:
+                for key in keys:
+                    if key == 'a':
+                        # print('correct')
+                        flag = False
+                    elif key == 'l':
+                        # print('wrong')
+                        flag = False
+            elif countdown.getTime() <= 0:
+                #late
+                flag = False
 
     def IncongruentSameAlignedFemale(name):
         fixationPoint.draw()
@@ -89,25 +101,36 @@ class Incongruent_Aligned(object):
             women_align_locations, women_align_images[rand1].image)
 
         newLocRand = random.randint(0, len(newLocations) - 1)
-
+        list = []
         for item in women_align_images:
             if item.image == newLocations[newLocRand]:
                 item.draw()
                 win.flip()
+                list.append(item)
                 print(item.image)
                 break
+        core.wait(0.5)
+        list[0].autoDraw = False
+        questionMark.draw()
+        win.flip()
+
+        countdown = core.CountdownTimer(1.5)
 
         flag = True
         while flag:
             keys = event.getKeys(keyList=['a', 'l'])
-            for key in keys:
-                if key == 'a':
-                    # write to table
-                    # print('correct')
-                    flag = False
-                else:
-                    # write to table
-                    flag = False
+            if keys:
+                for key in keys:
+                    if key == 'a':
+                        # write to table
+                        # print('correct')
+                        flag = False
+                    elif key == 'l':
+                        # write to table
+                        flag = False
+            elif countdown.getTime() <= 0:
+                #late
+                flag = False
 
     def IncongruentDifferentAlignedMale(name):
         fixationPoint.draw()
@@ -135,24 +158,35 @@ class Incongruent_Aligned(object):
             men_align_locations, men_align_images[rand1].image)
 
         newLocRand = random.randint(0, len(newLocations) - 1)
-
+        list = []
         for item in men_align_images:
             if item.image == newLocations[newLocRand]:
                 item.draw()
                 win.flip()
+                list.append(item)
                 print(item.image)
                 break
+        core.wait(0.5)
+        list[0].autoDraw = False
+        questionMark.draw()
+        win.flip()
+
+        countdown = core.CountdownTimer(1.5)
 
         flag = True
         while flag:
             keys = event.getKeys(keyList=['a', 'l'])
-            for key in keys:
-                if key == 'a':
-                    # print('correct')
-                    flag = False
-                else:
-                    # print('wrong')
-                    flag = False
+            if keys:
+                for key in keys:
+                    if key == 'a':
+                        # print('correct')
+                        flag = False
+                    elif key == 'l':
+                        # print('wrong')
+                        flag = False
+            elif countdown.getTime() <= 0:
+                #late
+                flag = False
 
     def IncongruentDifferentAlignedFemale(name):
         fixationPoint.draw()
@@ -181,23 +215,33 @@ class Incongruent_Aligned(object):
 
         newLocRand = random.randint(0, len(newLocations) - 1)
 
+        list = []
         for item in women_align_images:
             if item.image == newLocations[newLocRand]:
                 item.draw()
                 win.flip()
+                list.append(item)
                 print(item.image)
                 break
-
+        core.wait(0.5)
+        list[0].autoDraw = False
+        questionMark.draw()
+        win.flip()
+        countdown = core.CountdownTimer(1.5)
         flag = True
         while flag:
             keys = event.getKeys(keyList=['a', 'l'])
-            for key in keys:
-                if key == 'a':
-                    # write to table
-                    # print('correct')
-                    flag = False
-                else:
-                    # write to table
-                    flag = False
+            if keys:
+                for key in keys:
+                    if key == 'a':
+                        # write to table
+                        # print('correct')
+                        flag = False
+                    elif key == 'l':
+                        # write to table
+                        flag = False
+            elif countdown.getTime() <= 0:
+                #late
+                flag = False
 
 

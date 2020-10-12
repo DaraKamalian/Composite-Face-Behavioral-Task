@@ -53,17 +53,29 @@ class Congruent_Misaligned(object):
         men_misalign_images[rand1].draw()
         print(men_misalign_images[rand1].image)
         win.flip()
+        core.wait(0.5)
+
+        men_misalign_images[rand1].autoDraw = False
+        questionMark.draw()
+        win.flip()
+        countdown = core.CountdownTimer(1.5)
 
         flag = True
         while flag:
             keys = event.getKeys(keyList=['a', 'l'])
-            for key in keys:
-                if key == 'a':
-                    # print('correct')
-                    flag = False
-                else:
-                    # print('wrong')
-                    flag = False
+            if keys:
+                for key in keys:
+
+                    if key == 'a':
+                        # print('correct')
+                        flag = False
+
+                    elif key == 'l':
+                        # print('wrong')
+                        flag = False
+            elif countdown.getTime() <= 0:
+                #   print late
+                flag = False
 
     def CongruentSameMisalignedFemale(name):
         fixationPoint.draw()
@@ -88,18 +100,29 @@ class Congruent_Misaligned(object):
         women_misalign_images[rand1].draw()
         print(women_misalign_images[rand1].image)
         win.flip()
+        core.wait(0.5)
+
+        women_misalign_images[rand1].autoDraw = False
+        questionMark.draw()
+        win.flip()
+        countdown = core.CountdownTimer(1.5)
+
 
         flag = True
         while flag:
             keys = event.getKeys(keyList=['a', 'l'])
-            for key in keys:
-                if key == 'a':
-                    # write to table
-                    # print('correct')
-                    flag = False
-                else:
-                    # write to table
-                    flag = False
+            if keys:
+                for key in keys:
+                    if key == 'a':
+                        # write to table
+                        # print('correct')
+                        flag = False
+                    elif key == 'l':
+                        # write to table
+                        flag = False
+            elif countdown.getTime() <= 0:
+                #print late
+                flag = False
 
     def CongruentDifferentMisalignedMale(name):
         print('con-diff-mis-m')
@@ -126,25 +149,37 @@ class Congruent_Misaligned(object):
 
         newLocRand = random.randint(0, len(newLocations) - 1)
 
+        list = []
         for item in men_misalign_images:
             if item.image == newLocations[newLocRand]:
                 item.draw()
                 win.flip()
+                list.append(item)
                 print(item.image)
                 break
+        core.wait(0.5)
+
+        list[0].autoDraw = False
+        questionMark.draw()
+        win.flip()
+        countdown = core.CountdownTimer(1.5)
 
         flag = True
         while flag:
             keys = event.getKeys(keyList=['a', 'l'])
-            for key in keys:
-                if key == 'a':
-                    # write to table
-                    # print('a')
-                    flag = False
-                else:
-                    # write to table
-                    # print('l')
-                    flag = False
+            if keys:
+                for key in keys:
+                    if key == 'a':
+                        # write to table
+                        # print('a')
+                        flag = False
+                    elif key == 'l':
+                        # write to table
+                        # print('l')
+                        flag = False
+            elif countdown.getTime() <= 0:
+                #late
+                flag = False
 
     def CongruentDifferentMisalignedFemale(name):
         print('con-dif-mis-f')
@@ -167,29 +202,41 @@ class Congruent_Misaligned(object):
 
         newLocations = differentLocationsList.different_total_locations_list(
             women_misalign_locations, women_align_images[rand1].image)
-        print('newlocs length is:' + str(len(newLocations)))
+
 
         newLocRand = random.randint(0, len(newLocations) - 1)
 
+        list = []
         for item in women_misalign_images:
             if item.image == newLocations[newLocRand]:
                 item.draw()
                 win.flip()
+                list.append(item)
                 print(item.image)
                 break
+        core.wait(0.5)
+
+        list[0].autoDraw = False
+        questionMark.draw()
+        win.flip()
+        countdown = core.CountdownTimer(1.5)
 
         flag = True
         while flag:
             keys = event.getKeys(keyList=['a', 'l'])
-            for key in keys:
-                if key == 'a':
-                    # write to table
-                    # print('a')
-                    flag = False
-                else:
-                    # write to table
-                    # print('l')
-                    flag = False
+            if keys:
+                for key in keys:
+                    if key == 'a':
+                        # write to table
+                        # print('a')
+                        flag = False
+                    elif key == 'l':
+                        # write to table
+                        # print('l')
+                        flag = False
+            elif countdown.getTime() <= 0:
+                #late
+                flag = False
 
 
 
