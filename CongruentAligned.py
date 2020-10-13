@@ -254,7 +254,7 @@ class Congruent_Aligned(object):
                 for key in keys:
                     if key == 'a':
                         if practice:
-                            correct.draw()
+                            wrong.draw()
                             win.flip()
                             core.wait(2)
                         else:
@@ -264,7 +264,7 @@ class Congruent_Aligned(object):
                         flag = False
                     elif key == 'l':
                         if practice:
-                            wrong.draw()
+                            correct.draw()
                             win.flip()
                             core.wait(2)
                         else:

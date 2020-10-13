@@ -193,7 +193,7 @@ class Incongruent_Misaligned(object):
         newLocations = SameLowerLocationsList.SameLowerLocationsList(obj,
             men_misalign_locations, men_align_images[rand1].image)
 
-        newLocRand = random.randint(0, len(newLocations) - 1)
+        newLocRand = random.randint(0, (len(newLocations) - 1))
 
         list = []
         for item in men_misalign_images:
