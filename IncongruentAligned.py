@@ -6,6 +6,8 @@ from MainAssets import MainAssets
 
 from MenAlign import Men_Align
 from WomenAlign import Women_Align
+from MenMisalign import Men_Misalign
+from WomenMisalign import Women_Misalign
 from SameUpperLocationsList import SameUpperLocationsList
 from SameLowerLocationsList import SameLowerLocationsList
 
@@ -16,6 +18,11 @@ women_align_images = Women_Align().women_align_images
 women_align_locations = Women_Align().women_align_locations
 men_align_images = Men_Align().men_align_images
 men_align_locations = Men_Align().men_align_locations
+women_misalign_images = Women_Misalign().women_misalign_images
+women_misalign_locations = Women_Misalign().women_misalign_locations
+men_misalign_images = Men_Misalign().men_misalign_images
+men_misalign_locations = Men_Misalign().men_misalign_locations
+
 fixationPoint = image.fixationPoint
 questionMark = image.questionMark
 win = window.win
@@ -45,7 +52,7 @@ class Incongruent_Aligned(object):
         newLocations = SameUpperLocationsList.SameUpperLocationsList(obj,
             men_align_locations, men_align_images[rand1].image)
 
-        newLocRand = random.randint(0, len(newLocations) - 1)
+        newLocRand = random.randint(0, (len(newLocations) - 1))
 
         list = []
         for item in men_align_images:
@@ -115,7 +122,7 @@ class Incongruent_Aligned(object):
         newLocations = SameUpperLocationsList.SameUpperLocationsList(obj,
             women_align_locations, women_align_images[rand1].image)
 
-        newLocRand = random.randint(0, len(newLocations) - 1)
+        newLocRand = random.randint(0, (len(newLocations) - 1))
         list = []
         for item in women_align_images:
             if item.image == newLocations[newLocRand]:
@@ -184,7 +191,7 @@ class Incongruent_Aligned(object):
         newLocations = SameLowerLocationsList.SameLowerLocationsList(obj,
             men_align_locations, men_align_images[rand1].image)
 
-        newLocRand = random.randint(0, len(newLocations) - 1)
+        newLocRand = random.randint(0, (len(newLocations) - 1))
         list = []
         for item in men_align_images:
             if item.image == newLocations[newLocRand]:
@@ -254,7 +261,7 @@ class Incongruent_Aligned(object):
         newLocations = SameLowerLocationsList.SameLowerLocationsList(obj,
             women_align_locations, women_align_images[rand1].image)
 
-        newLocRand = random.randint(0, len(newLocations) - 1)
+        newLocRand = random.randint(0, (len(newLocations) - 1))
 
         list = []
         for item in women_align_images:

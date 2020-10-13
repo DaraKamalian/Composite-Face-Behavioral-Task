@@ -3,7 +3,8 @@ from CongruentMisaligned import Congruent_Misaligned
 from IncongruentAligned import Incongruent_Aligned
 from IncongruentMisaligned import Incongruent_Misaligned
 from PracticeTrials import PracticeTrials
-from psychopy import event, monitors
+from MainAssets import MainAssets
+from psychopy import event
 from DialogueBox import dialoguebox
 import os
 
@@ -11,6 +12,10 @@ from Window import window
 import random
 
 win = window().win
+images = MainAssets()
+firstInstruction = images.firstInstructionImage
+secondInstruction = images.secondInstructionImage
+practiceInstruction = images.practiceSecondInstructionImage
 
 event.globalKeys.clear()
 event.globalKeys.add(key='q', func=os._exit, func_args=[1], func_kwargs=None)
@@ -23,8 +28,39 @@ typeTwoDone = False
 typeThreeDone = False
 typeFourDone = False
 
+firstInstruction.draw()
+win.flip()
+flag = True
+while flag:
+    keys = event.getKeys(keyList=['m'])
+    for key in keys:
+        if key[0] == 'm':
+            firstInstruction.autoDraw = False
+            practiceInstruction.draw()
+            win.flip()
+            flag = False
+
+flag = True
+while flag:
+    keys = event.getKeys(keyList=['m'])
+    for key in keys:
+        if key[0] == 'm':
+            practiceInstruction.autoDraw = False
+            win.flip()
+            flag = False
+
 PracticeTrials().Practice_Trials()
 
+secondInstruction.draw()
+win.flip()
+flag = True
+while flag:
+    keys = event.getKeys(keyList=['m'])
+    for key in keys:
+        if key[0] == 'm':
+            secondInstruction.autoDraw = False
+            win.flip()
+            flag = False
 
 while True:
     mainrandom = random.randint(1, 4)
