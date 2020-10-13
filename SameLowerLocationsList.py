@@ -7,6 +7,7 @@ class SameLowerLocationsList(object):
         for item in mylist:
             if item[-8:-6] == rightIndex:
                 list.append(item)
+        for item in mylist:
             if item[-8:-6] == rightIndex and item[-11:-9] == leftIndex:
                 list.remove(item)
         return list

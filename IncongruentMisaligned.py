@@ -53,6 +53,7 @@ class Incongruent_Misaligned(object):
         core.wait(0.4)
 
         obj = SameUpperLocationsList()
+
         newLocations = SameUpperLocationsList.SameUpperLocationsList(obj,
             men_misalign_locations, men_align_images[rand1].image)
         # print('newlocs length is:' + str(len(newLocations)))
@@ -285,6 +286,7 @@ class Incongruent_Misaligned(object):
                 for key in keys:
                     if key == 'a':
                         if practice:
+                            print('wrong')
                             wrong.draw()
                             win.flip()
                             core.wait(2)
@@ -294,6 +296,7 @@ class Incongruent_Misaligned(object):
                         flag = False
                     elif key == 'l':
                         if practice:
+                            print('correct')
                             correct.draw()
                             win.flip()
                             core.wait(2)
