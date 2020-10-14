@@ -64,7 +64,8 @@ class Congruent_Misaligned(object):
 
         flag = True
         while flag:
-            keys = event.getKeys(keyList=['a', 'l'])
+            # keys = event.getKeys(keyList=['a', 'l'])
+            keys = event.waitKeys(keyList=['a', 'l'], maxWait=1.5)
             if keys:
                 for key in keys:
                     if key == 'a':
@@ -121,7 +122,8 @@ class Congruent_Misaligned(object):
 
         flag = True
         while flag:
-            keys = event.getKeys(keyList=['a', 'l'])
+            # keys = event.getKeys(keyList=['a', 'l'])
+            keys = event.waitKeys(keyList=['a', 'l'], maxWait=1.5)
             if keys:
                 for key in keys:
                     if key == 'a':
@@ -187,7 +189,8 @@ class Congruent_Misaligned(object):
 
         flag = True
         while flag:
-            keys = event.getKeys(keyList=['a', 'l'])
+            # keys = event.getKeys(keyList=['a', 'l'])
+            keys = event.waitKeys(keyList=['a', 'l'], maxWait=1.5)
             if keys:
                 for key in keys:
                     if key == 'a':
@@ -256,7 +259,8 @@ class Congruent_Misaligned(object):
 
         flag = True
         while flag:
-            keys = event.getKeys(keyList=['a', 'l'])
+            # keys = event.getKeys(keyList=['a', 'l'])
+            keys = event.waitKeys(keyList=['a', 'l'], maxWait=1.5)
             if keys:
                 for key in keys:
                     if key == 'a':

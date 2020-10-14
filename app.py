@@ -28,43 +28,43 @@ typeTwoDone = False
 typeThreeDone = False
 typeFourDone = False
 
-firstInstruction.draw()
-win.flip()
-flag = True
-while flag:
-    keys = event.getKeys(keyList=['m'])
-    for key in keys:
-        if key[0] == 'm':
-            firstInstruction.autoDraw = False
-            practiceInstruction.draw()
-            win.flip()
-            flag = False
-
-flag = True
-while flag:
-    keys = event.getKeys(keyList=['m'])
-    for key in keys:
-        if key[0] == 'm':
-            practiceInstruction.autoDraw = False
-            win.flip()
-            flag = False
-
-PracticeTrials().Practice_Trials()
-
-secondInstruction.draw()
-win.flip()
-flag = True
-while flag:
-    keys = event.getKeys(keyList=['m'])
-    for key in keys:
-        if key[0] == 'm':
-            secondInstruction.autoDraw = False
-            win.flip()
-            flag = False
+# firstInstruction.draw()
+# win.flip()
+# flag = True
+# while flag:
+#     keys = event.getKeys(keyList=['m'])
+#     for key in keys:
+#         if key[0] == 'm':
+#             firstInstruction.autoDraw = False
+#             practiceInstruction.draw()
+#             win.flip()
+#             flag = False
+#
+# flag = True
+# while flag:
+#     keys = event.getKeys(keyList=['m'])
+#     for key in keys:
+#         if key[0] == 'm':
+#             practiceInstruction.autoDraw = False
+#             win.flip()
+#             flag = False
+#
+# PracticeTrials().Practice_Trials()
+#
+# secondInstruction.draw()
+# win.flip()
+# flag = True
+# while flag:
+#     keys = event.getKeys(keyList=['m'])
+#     for key in keys:
+#         if key[0] == 'm':
+#             secondInstruction.autoDraw = False
+#             win.flip()
+#             flag = False
 
 while True:
-    mainrandom = random.randint(1, 4)
-    # mainrandom = 1
+    # mainrandom = random.randint(1, 4)
+    mainrandom = 2
     print('main random: ' + str(mainrandom))
 
     if mainrandom == 1 and typeOneDone:
