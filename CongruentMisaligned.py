@@ -32,7 +32,7 @@ questionMark = image.questionMark
 win = window.win
 
 class Congruent_Misaligned(object):
-    def CongruentSameMisalignedMale(self, practice):
+    def CongruentMisaligned(self, practice, same, gender):
         fixationPoint.draw()
         win.flip()
         core.wait(0.2)
@@ -40,26 +40,77 @@ class Congruent_Misaligned(object):
         fixationPoint.autoDraw = False
         win.flip()
         core.wait(0.15)
-        print('con-same-mis-m')
+        if same:
+            if gender:
+                print('con-same-mis-m')
+            else:
+                print('con-same-mis-f')
+        else:
+            if gender:
+                print('con-diff-mis-m')
+            else:
+                print('con-diff-mis-f')
 
         rand1 = random.randint(0, 19)
-        men_align_images[rand1].draw()
-        print(men_align_images[rand1].image)
-        win.flip()
-        core.wait(0.2)
+        if gender:
+            men_align_images[rand1].draw()
+            print(men_align_images[rand1].image)
+            win.flip()
+            core.wait(0.2)
+        else:
+            women_align_images[rand1].draw()
+            print(women_align_images[rand1].image)
+            win.flip()
+            core.wait(0.2)
 
         men_align_images[rand1].autoDraw = False
+        women_align_images[rand1].autoDraw = False
         win.flip()
         core.wait(0.4)
 
-        men_misalign_images[rand1].draw()
-        print(men_misalign_images[rand1].image)
-        win.flip()
-        core.wait(0.5)
+        if gender:
+            images = men_misalign_images
+            locations = men_misalign_locations
+        else:
+            images = women_misalign_images
+            locations = women_misalign_locations
 
-        men_misalign_images[rand1].autoDraw = False
-        questionMark.draw()
-        win.flip()
+        if same:
+            if gender:
+                men_misalign_images[rand1].draw()
+                print(men_misalign_images[rand1].image)
+                win.flip()
+                core.wait(0.5)
+            else:
+                women_misalign_images[rand1].draw()
+                print(women_misalign_images[rand1].image)
+                win.flip()
+                core.wait(0.5)
+
+            men_misalign_images[rand1].autoDraw = False
+            women_misalign_images[rand1].autoDraw = False
+            questionMark.draw()
+            win.flip()
+
+        else:
+            newLocations = differentLocationsList.different_total_locations_list(
+                locations, images[rand1].image)
+
+            newLocRand = random.randint(0, len(newLocations) - 1)
+
+            list = []
+            for item in images:
+                if item.image == newLocations[newLocRand]:
+                    item.draw()
+                    win.flip()
+                    list.append(item)
+                    print(item.image)
+                    break
+            core.wait(0.5)
+            list[0].autoDraw = False
+            questionMark.draw()
+            win.flip()
+
         countdown = core.CountdownTimer(1.5)
 
         flag = True
@@ -89,203 +140,6 @@ class Congruent_Misaligned(object):
                 #   print late
                 flag = False
 
-    def CongruentSameMisalignedFemale(self, practice):
-        fixationPoint.draw()
-        win.flip()
-        core.wait(0.2)
-
-        fixationPoint.autoDraw = False
-        win.flip()
-        core.wait(0.15)
-        print('con-same-mis-f')
-
-        rand1 = random.randint(0, 19)
-        women_align_images[rand1].draw()
-        print(women_align_images[rand1].image)
-        win.flip()
-        core.wait(0.2)
-
-        women_align_images[rand1].autoDraw = False
-        win.flip()
-        core.wait(0.4)
-
-        women_misalign_images[rand1].draw()
-        print(women_misalign_images[rand1].image)
-        win.flip()
-        core.wait(0.5)
-
-        women_misalign_images[rand1].autoDraw = False
-        questionMark.draw()
-        win.flip()
-        countdown = core.CountdownTimer(1.5)
-
-
-        flag = True
-        while flag:
-            # keys = event.getKeys(keyList=['a', 'l'])
-            keys = event.waitKeys(keyList=['a', 'l'], maxWait=1.5)
-            if keys:
-                for key in keys:
-                    if key == 'a':
-                        if practice:
-                            correct.draw()
-                            win.flip()
-                            core.wait(2)
-                        else:
-                            print('correct')
-                        flag = False
-
-                    elif key == 'l':
-                        if practice:
-                            wrong.draw()
-                            win.flip()
-                            core.wait(2)
-                        else:
-                            print('wrong')
-                        flag = False
-            elif countdown.getTime() <= 0:
-                #print late
-                flag = False
-
-    def CongruentDifferentMisalignedMale(name, practice):
-        print('con-diff-mis-m')
-        fixationPoint.draw()
-        win.flip()
-        core.wait(0.2)
-
-        fixationPoint.autoDraw = False
-        win.flip()
-        core.wait(0.15)
-
-        rand1 = random.randint(0, 19)
-        men_align_images[rand1].draw()
-        print(men_align_images[rand1].image)
-        win.flip()
-        core.wait(0.2)
-
-        men_align_images[rand1].autoDraw = False
-        win.flip()
-        core.wait(0.4)
-
-        newLocations = differentLocationsList.different_total_locations_list(
-            men_misalign_locations, men_align_images[rand1].image)
-
-        newLocRand = random.randint(0, len(newLocations) - 1)
-
-        list = []
-        for item in men_misalign_images:
-            if item.image == newLocations[newLocRand]:
-                item.draw()
-                win.flip()
-                list.append(item)
-                print(item.image)
-                break
-        core.wait(0.5)
-
-        list[0].autoDraw = False
-        questionMark.draw()
-        win.flip()
-        countdown = core.CountdownTimer(1.5)
-
-        flag = True
-        while flag:
-            # keys = event.getKeys(keyList=['a', 'l'])
-            keys = event.waitKeys(keyList=['a', 'l'], maxWait=1.5)
-            if keys:
-                for key in keys:
-                    if key == 'a':
-                        if practice:
-                            wrong.draw()
-                            win.flip()
-                            core.wait(2)
-                        else:
-                            print('a')
-                            # write to table
-                            # print('a')
-                        flag = False
-                    elif key == 'l':
-                        if practice:
-                            correct.draw()
-                            win.flip()
-                            core.wait(2)
-                        else:
-                            print('l')
-                            # write to table
-                            # print('l')
-                        flag = False
-            elif countdown.getTime() <= 0:
-                #late
-                flag = False
-
-    def CongruentDifferentMisalignedFemale(self, practice):
-        print('con-dif-mis-f')
-        fixationPoint.draw()
-        win.flip()
-        core.wait(0.2)
-
-        fixationPoint.autoDraw = False
-        win.flip()
-        core.wait(0.15)
-        rand1 = random.randint(0, 19)
-        women_align_images[rand1].draw()
-        print(women_align_images[rand1].image)
-        win.flip()
-        core.wait(0.2)
-
-        women_align_images[rand1].autoDraw = False
-        win.flip()
-        core.wait(0.4)
-
-        newLocations = differentLocationsList.different_total_locations_list(
-            women_misalign_locations, women_align_images[rand1].image)
-
-
-        newLocRand = random.randint(0, len(newLocations) - 1)
-
-        list = []
-        for item in women_misalign_images:
-            if item.image == newLocations[newLocRand]:
-                item.draw()
-                win.flip()
-                list.append(item)
-                print(item.image)
-                break
-        core.wait(0.5)
-
-        list[0].autoDraw = False
-        questionMark.draw()
-        win.flip()
-        countdown = core.CountdownTimer(1.5)
-
-        flag = True
-        while flag:
-            # keys = event.getKeys(keyList=['a', 'l'])
-            keys = event.waitKeys(keyList=['a', 'l'], maxWait=1.5)
-            if keys:
-                for key in keys:
-                    if key == 'a':
-                        if practice:
-                            wrong.draw()
-                            win.flip()
-                            core.wait(2)
-                        else:
-                            print('a')
-                            # write to table
-                            # print('a')
-                        flag = False
-                    elif key == 'l':
-                        if practice:
-                            correct.draw()
-                            win.flip()
-                            core.wait(2)
-                        else:
-                            print('l')
-                            # write to table
-                            # print('l')
-                        flag = False
-            elif countdown.getTime() <= 0:
-                #late
-                flag = False
 
 
 
