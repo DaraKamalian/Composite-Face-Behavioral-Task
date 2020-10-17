@@ -146,5 +146,3 @@ class Incongruent_Misaligned(object):
             elif countdown.getTime() <= 0:
                 #late
                 flag = False
-
-

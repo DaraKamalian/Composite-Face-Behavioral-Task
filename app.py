@@ -5,7 +5,7 @@ from IncongruentMisaligned import Incongruent_Misaligned
 from PracticeTrials import PracticeTrials
 from MainAssets import MainAssets
 from psychopy import event
-from Data import Data
+
 from DialogueBox import dialoguebox
 import os
 
@@ -19,12 +19,7 @@ secondInstruction = images.secondInstructionImage
 practiceInstruction = images.practiceSecondInstructionImage
 
 
-obj2 = Data()
 subjectInfoList = dialoguebox().showDialogBox()
-
-
-workbook = Data.setupExcelFile(obj2, subjectInfoList)[0]
-worksheet = Data.setupExcelFile(obj2, subjectInfoList)[1]
 
 event.globalKeys.clear()
 event.globalKeys.add(key='q', func=os._exit, func_args=[1], func_kwargs=None)
@@ -37,43 +32,43 @@ typeTwoDone = False
 typeThreeDone = False
 typeFourDone = False
 
-firstInstruction.draw()
-win.flip()
-flag = True
-while flag:
-    keys = event.getKeys(keyList=['m'])
-    for key in keys:
-        if key[0] == 'm':
-            firstInstruction.autoDraw = False
-            practiceInstruction.draw()
-            win.flip()
-            flag = False
-
-flag = True
-while flag:
-    keys = event.getKeys(keyList=['m'])
-    for key in keys:
-        if key[0] == 'm':
-            practiceInstruction.autoDraw = False
-            win.flip()
-            flag = False
-
-PracticeTrials().Practice_Trials()
-
-secondInstruction.draw()
-win.flip()
-flag = True
-while flag:
-    keys = event.getKeys(keyList=['m'])
-    for key in keys:
-        if key[0] == 'm':
-            secondInstruction.autoDraw = False
-            win.flip()
-            flag = False
+# firstInstruction.draw()
+# win.flip()
+# flag = True
+# while flag:
+#     keys = event.getKeys(keyList=['m'])
+#     for key in keys:
+#         if key[0] == 'm':
+#             firstInstruction.autoDraw = False
+#             practiceInstruction.draw()
+#             win.flip()
+#             flag = False
+#
+# flag = True
+# while flag:
+#     keys = event.getKeys(keyList=['m'])
+#     for key in keys:
+#         if key[0] == 'm':
+#             practiceInstruction.autoDraw = False
+#             win.flip()
+#             flag = False
+#
+# PracticeTrials().Practice_Trials()
+#
+# secondInstruction.draw()
+# win.flip()
+# flag = True
+# while flag:
+#     keys = event.getKeys(keyList=['m'])
+#     for key in keys:
+#         if key[0] == 'm':
+#             secondInstruction.autoDraw = False
+#             win.flip()
+#             flag = False
 
 while True:
-    mainrandom = random.randint(1, 4)
-    # mainrandom = 1
+    # mainrandom = random.randint(1, 4)
+    mainrandom = 1
     print('main random: ' + str(mainrandom))
 
     if mainrandom == 1 and typeOneDone:
@@ -108,48 +103,64 @@ while True:
 
             gender_random = random.randint(0, 100) % 2
             # 0 -> female, 1 -> male
-            # samerandom = random.randint(0, 100) % 2
-            samerandom = 1
+            samerandom = random.randint(0, 100) % 2
+            # samerandom = 1
 
-            # if samerandom == 0 and diff_counter == 5:
-            #     samerandom = 1
-            # if samerandom == 1 and same_counter == 5:
-            #     samerandom = 0
-            #
-            # if gender_random == 0 and f_counter == 5:
-            #     gender_random = 1
-            # if gender_random == 1 and m_counter == 5:
-            #     gender_random = 0
+            if samerandom == 0 and diff_counter == 5:
+                samerandom = 1
+            if samerandom == 1 and same_counter == 5:
+                samerandom = 0
+
+            if gender_random == 0 and f_counter == 5:
+                gender_random = 1
+            if gender_random == 1 and m_counter == 5:
+                gender_random = 0
 
             if samerandom == 1 and gender_random == 1:
+                print('here1')
                 same_counter += 1
                 m_counter += 1
                 globalcounter += 1
-                Congruent_Aligned().CongruentAligned(practice=0, index=i+9+globalcounter,
+                datadict = Congruent_Aligned().CongruentAligned(practice=0, index=i+9,
                                                              subjectInfoList=subjectInfoList, same=1, gender=1)
 
             if samerandom == 1 and gender_random == 0:
+                print('here2')
                 same_counter += 1
                 f_counter += 1
                 globalcounter += 1
-                Congruent_Aligned().CongruentAligned(practice=0, index=i+9+globalcounter,
-                                                               subjectInfoList=subjectInfoList,same=1, gender=0)
+                datadict = Congruent_Aligned().CongruentAligned(practice=0, index=i+9,
+                                                               subjectInfoList=subjectInfoList, same=1, gender=0)
+                # data.get_data()[0].close()
 
             if samerandom == 0 and gender_random == 1:
+                print('here3')
                 diff_counter += 1
                 m_counter += 1
                 globalcounter += 1
-                Congruent_Aligned().CongruentAligned(practice=0, index=i+9+globalcounter,
+                datadict = Congruent_Aligned().CongruentAligned(practice=0, index=i+9,
                                                      subjectInfoList=subjectInfoList, same=0, gender=1)
+                # data.get_data()[0].close()
 
             if samerandom == 0 and gender_random == 0:
+                print('here4')
                 diff_counter += 1
                 f_counter += 1
                 globalcounter += 1
-                Congruent_Aligned().CongruentAligned(practice=0, index=i+9+globalcounter,
-                                                    subjectInfoList=subjectInfoList, same=0, gender=0)
+                datadict = Congruent_Aligned().CongruentAligned(practice=0, index=i+9, subjectInfoList=subjectInfoList,
+                                                     same=0, gender=0)
+                # data.get_data()[0].close()
         typeOneDone = True
-    workbook.close()
+        with open('mycsv.csv', 'w', newline='') as file:
+            Headers = ['Face_1', 'Face_2', 'Face_Gender', 'Congruency', 'Block', 'Trial', 'Alignment', 'Condition',
+                       'Type', 'Key-Resp', 'Cor-Ans', 'Accuracy', 'R-time', 'Trial-Start', 'Key-Resp-Start']
+
+            writer = csv.DictWriter(file, fieldnames=Headers)
+            writer.writeheader()
+
+            for item in vars(datadict):
+                writer.writerow(item)
+    break
 
 
 
