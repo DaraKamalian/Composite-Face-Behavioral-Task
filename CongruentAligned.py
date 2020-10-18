@@ -24,17 +24,20 @@ fixationPoint = image.fixationPoint
 questionMark = image.questionMark
 win = window.win
 
+
+
+
 class Congruent_Aligned(object):
+    duration = 0
     def CongruentAligned(self, practice, index, gender, same, practiceDuration):
 
+        # duration += timing
         generalTimer = core.getTime()
-
 
         fixationPoint.draw()
         win.flip()
 
         core.wait(0.2)
-
         fixationPoint.autoDraw = False
         win.flip()
         localtimer = core.getTime()
@@ -80,7 +83,6 @@ class Congruent_Aligned(object):
                 men_align_images[rand1].draw()
                 print(men_align_images[rand1].image)
 
-
                 win.flip()
                 core.wait(0.5)
                 men_align_images[rand1].autoDraw = False
@@ -117,7 +119,6 @@ class Congruent_Aligned(object):
         countdown = core.CountdownTimer(1.5)
 
         anslist = []
-        isLate = False
         isCorrectAns = False
         flag = True
         while flag:
@@ -126,29 +127,33 @@ class Congruent_Aligned(object):
             if keys:
                 for key in keys:
                     if key == 'a':
-                        isCorrectAns = True
                         if practice:
                             correct.draw()
                             win.flip()
                             core.wait(2)
                         else:
                             anslist.append('A')
-
+                        isCorrectAns = True if same else False
                         flag = False
                     elif key == 'l':
-                        isCorrectAns = False
                         if practice:
                             wrong.draw()
                             win.flip()
                             core.wait(2)
                         else:
                             anslist.append('L')
-
+                        isCorrectAns = False if same else True
                         flag = False
             elif countdown.getTime() <= 0:
                 isLate = True
                 flag = False
 
+        accuracy = '1' if isCorrectAns else '0'
+        ans = anslist[0].upper() if anslist else 'None'
+        genders = 'Male' if gender else 'Female'
+        condition = 'Top Same + Bottom Same' if same else 'Top Different + Bottom Different'
+        images = men_align_images if gender else women_align_images
+        cor_ans = 'A' if same else 'L'
 
         with open('CongruentAligned' + str(index) + '.csv', 'w', newline='') as file:
             Headers = ['Face_1', 'Face_2', 'Face_Gender', 'Congruency', 'Block', 'Trial', 'Alignment', 'Condition',
@@ -157,77 +162,19 @@ class Congruent_Aligned(object):
             writer = csv.DictWriter(file, fieldnames=Headers)
             writer.writeheader()
 
-            if same and gender and anslist:
-                writer.writerow({'Alignment': '1', 'Condition': 'Top Same + Bottom Same', 'Cor-Ans': 'A',
-                                  'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),
-                                 'Face_Gender': 'Male', 'Face_1': men_align_images[rand1].image[-13:-4],
-                                        'Face_2': men_align_images[rand1].image[-13:-4],
-                                 'Trial-Start': str(localtimer - generalTimer + practiceDuration), 'Congruency': '1',
-                                     'Type': 'Aligned Congruent'})
-
-            if same and not gender and anslist:
-                    writer.writerow({'Alignment': '1', 'Condition': 'Top Same + Bottom Same', 'Cor-Ans': 'A',
-                                  'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),
-                                     'Face_Gender': 'Female', 'Face_1': women_align_images[rand1].image[-13:-4],
-                                      'Face_2': women_align_images[rand1].image[-13:-4], 'Trial': str(index),
-                                     'Trial-Start': str(localtimer - generalTimer + practiceDuration), 'Congruency': '1',
-                                     'Type': 'Aligned Congruent'})
-            if not same and gender and anslist:
-                writer.writerow({'Alignment': '1', 'Condition': 'Top Different + Bottom Different', 'Cor-Ans': 'L',
-                                  'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),
-                                 'Face_Gender': 'Male', 'Face_1': men_align_images[rand1].image[-13:-4],
-                                      'Face_2': secondfacelist[0].image[-13:-4],
-                                 'Trial-Start': str(localtimer - generalTimer + practiceDuration), 'Congruency': '1',
-                                     'Type': 'Aligned Congruent'})
-
-            if not same and not gender and anslist:
-                    writer.writerow({'Alignment': '1', 'Condition': 'Top Different + Bottom Different', 'Cor-Ans': 'L',
-                                  'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),
-                                     'Face_Gender': 'Female', 'Face_1': women_align_images[rand1].image[-13:-4],
-                                      'Face_2': secondfacelist[0].image[-13:-4],
-                                     'Trial-Start': str(localtimer - generalTimer + practiceDuration), 'Congruency': '1',
-                                     'Type': 'Aligned Congruent'})
-
-            if same and gender and not anslist:
-                writer.writerow({'Alignment': '1', 'Condition': 'Top Same + Bottom Same', 'Cor-Ans': 'A',
-                                  'Key-Resp': 'None', 'R-time': 'None',
-                                 'Face_Gender': 'Male', 'Face_1': men_align_images[rand1].image[-13:-4],
-                                        'Face_2': men_align_images[rand1].image[-13:-4],
-                                 'Trial-Start': str(localtimer - generalTimer + practiceDuration), 'Congruency': '1',
-                                     'Type': 'Aligned Congruent', 'Key-Resp-Start': 'None', 'Accuracy': 'None'})
-
-            if same and not gender and not anslist:
-                    writer.writerow({'Alignment': '1', 'Condition': 'Top Same + Bottom Same', 'Cor-Ans': 'A',
-                                  'Key-Resp': 'None', 'R-time': 'None',
-                                     'Face_Gender': 'Female', 'Face_1': women_align_images[rand1].image[-13:-4],
-                                      'Face_2': women_align_images[rand1].image[-13:-4], 'Trial': str(index),
-                                     'Trial-Start': str(localtimer - generalTimer + practiceDuration), 'Congruency': '1',
-                                     'Type': 'Aligned Congruent', 'Key-Resp-Start': 'None', 'Accuracy': 'None'})
-            if not same and gender and not anslist:
-                writer.writerow({'Alignment': '1', 'Condition': 'Top Different + Bottom Different', 'Cor-Ans': 'L',
-                                  'Key-Resp': 'None', 'R-time': 'None',
-                                 'Face_Gender': 'Male', 'Face_1': men_align_images[rand1].image[-13:-4],
-                                      'Face_2': secondfacelist[0].image[-13:-4],
-                                 'Trial-Start': str(localtimer - generalTimer + practiceDuration), 'Congruency': '1',
-                                     'Type': 'Aligned Congruent', 'Key-Resp-Start': 'None', 'Accuracy': 'None'})
-
-            if not same and not gender and not anslist:
-                    writer.writerow({'Alignment': '1', 'Condition': 'Top Different + Bottom Different', 'Cor-Ans': 'L',
-                                  'Key-Resp': 'None', 'R-time': 'None',
-                                     'Face_Gender': 'Female', 'Face_1': women_align_images[rand1].image[-13:-4],
-                                      'Face_2': secondfacelist[0].image[-13:-4],
-                                     'Trial-Start': str(localtimer - generalTimer + practiceDuration), 'Congruency': '1',
-                                     'Type': 'Aligned Congruent', 'Key-Resp-Start': 'None', 'Accuracy': 'None'})
+            writer.writerow({'Alignment': '1', 'Condition': condition, 'Cor-Ans': cor_ans,
+                             'Key-Resp': ans, 'R-time': str(1.5 - countdown.getTime()),
+                             'Face_Gender': genders, 'Face_1': images[rand1].image[-13:-4],
+                             'Face_2': images[rand1].image[-13:-4],
+                             'Trial-Start': str(localtimer - generalTimer + practiceDuration), 'Congruency': '1',
+                             'Type': 'Aligned Congruent', 'Accuracy': accuracy})
 
 
-            with open('CongruentAligned' + str(index) + '.csv', 'r') as csvfile:
-                csvreader = csv.reader(csvfile)
 
-                for line in csvreader:
-                    if line[9] == line[10]:
-                        line[11] = '1'
-                    else:
-                        line[11] = '0'
+
+
+
+
 
 
 
