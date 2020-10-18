@@ -4,10 +4,11 @@ from IncongruentAligned import Incongruent_Aligned
 from IncongruentMisaligned import Incongruent_Misaligned
 from PracticeTrials import PracticeTrials
 from MainAssets import MainAssets
-from psychopy import event
+from psychopy import event, core
 
 from DialogueBox import dialoguebox
-import os
+import os, csv, glob
+import pandas as pd
 
 from Window import window
 import random
@@ -17,6 +18,8 @@ images = MainAssets()
 firstInstruction = images.firstInstructionImage
 secondInstruction = images.secondInstructionImage
 practiceInstruction = images.practiceSecondInstructionImage
+
+
 
 
 subjectInfoList = dialoguebox().showDialogBox()
@@ -32,6 +35,7 @@ typeTwoDone = False
 typeThreeDone = False
 typeFourDone = False
 
+firstTimer = core.getTime()
 # firstInstruction.draw()
 # win.flip()
 # flag = True
@@ -65,10 +69,12 @@ typeFourDone = False
 #             secondInstruction.autoDraw = False
 #             win.flip()
 #             flag = False
+secondTimer = core.getTime()
+practiceDuration = secondTimer - firstTimer
 
 while True:
-    # mainrandom = random.randint(1, 4)
-    mainrandom = 1
+    mainrandom = random.randint(1, 4)
+    # mainrandom = 3
     print('main random: ' + str(mainrandom))
 
     if mainrandom == 1 and typeOneDone:
@@ -117,52 +123,40 @@ while True:
                 gender_random = 0
 
             if samerandom == 1 and gender_random == 1:
-                print('here1')
+
                 same_counter += 1
                 m_counter += 1
                 globalcounter += 1
-                datadict = Congruent_Aligned().CongruentAligned(practice=0, index=i+9,
-                                                             subjectInfoList=subjectInfoList, same=1, gender=1)
+                Congruent_Aligned().CongruentAligned(practice=0, index=i,
+                                                             practiceDuration=practiceDuration, same=1, gender=1)
 
             if samerandom == 1 and gender_random == 0:
-                print('here2')
+
                 same_counter += 1
                 f_counter += 1
                 globalcounter += 1
-                datadict = Congruent_Aligned().CongruentAligned(practice=0, index=i+9,
-                                                               subjectInfoList=subjectInfoList, same=1, gender=0)
+                datadict = Congruent_Aligned().CongruentAligned(practice=0, index=i,
+                                                               practiceDuration=practiceDuration, same=1, gender=0)
                 # data.get_data()[0].close()
 
             if samerandom == 0 and gender_random == 1:
-                print('here3')
+
                 diff_counter += 1
                 m_counter += 1
                 globalcounter += 1
-                datadict = Congruent_Aligned().CongruentAligned(practice=0, index=i+9,
-                                                     subjectInfoList=subjectInfoList, same=0, gender=1)
+                datadict = Congruent_Aligned().CongruentAligned(practice=0, index=i,
+                                                     practiceDuration=practiceDuration, same=0, gender=1)
                 # data.get_data()[0].close()
 
             if samerandom == 0 and gender_random == 0:
-                print('here4')
+
                 diff_counter += 1
                 f_counter += 1
                 globalcounter += 1
-                datadict = Congruent_Aligned().CongruentAligned(practice=0, index=i+9, subjectInfoList=subjectInfoList,
-                                                     same=0, gender=0)
-                # data.get_data()[0].close()
+                datadict = Congruent_Aligned().CongruentAligned(practice=0, index=i,
+                                                    practiceDuration=practiceDuration,same=0, gender=0)
+
         typeOneDone = True
-        with open('mycsv.csv', 'w', newline='') as file:
-            Headers = ['Face_1', 'Face_2', 'Face_Gender', 'Congruency', 'Block', 'Trial', 'Alignment', 'Condition',
-                       'Type', 'Key-Resp', 'Cor-Ans', 'Accuracy', 'R-time', 'Trial-Start', 'Key-Resp-Start']
-
-            writer = csv.DictWriter(file, fieldnames=Headers)
-            writer.writeheader()
-
-            for item in vars(datadict):
-                writer.writerow(item)
-    break
-
-
 
     # Congruent Misaligned
     if mainrandom == 2:
@@ -189,22 +183,22 @@ while True:
             if samerandom == 1 and gender_random == 1:
                 same_counter += 1
                 m_counter += 1
-                Congruent_Misaligned().CongruentMisaligned(practice=0, same=1, gender=1)
+                Congruent_Misaligned().CongruentMisaligned(practice=0, same=1, gender=1, index=i)
 
             if samerandom == 1 and gender_random == 0:
                 same_counter += 1
                 f_counter += 1
-                Congruent_Misaligned().CongruentMisaligned(practice=0, same=1, gender=0)
+                Congruent_Misaligned().CongruentMisaligned(practice=0, same=1, gender=0, index=i)
 
             if samerandom == 0 and gender_random == 1:
                 diff_counter += 1
                 m_counter += 1
-                Congruent_Misaligned().CongruentMisaligned(practice=0, same=0, gender=1)
+                Congruent_Misaligned().CongruentMisaligned(practice=0, same=0, gender=1, index=i)
 
             if samerandom == 0 and gender_random == 0:
                 diff_counter += 1
                 f_counter += 1
-                Congruent_Misaligned().CongruentMisaligned(practice=0, same=0, gender=0)
+                Congruent_Misaligned().CongruentMisaligned(practice=0, same=0, gender=0, index=i)
         typeTwoDone = True
 
     # Incongruent Aligned
@@ -232,22 +226,22 @@ while True:
             if samerandom == 1 and gender_random == 1:
                 same_counter += 1
                 m_counter += 1
-                Incongruent_Aligned().IncongruentAligned(practice=0, same=1, gender=1)
+                Incongruent_Aligned().IncongruentAligned(practice=0, same=1, gender=1, index=i)
 
             if samerandom == 1 and gender_random == 0:
                 same_counter += 1
                 f_counter += 1
-                Incongruent_Aligned().IncongruentAligned(practice=0, same=1, gender=0)
+                Incongruent_Aligned().IncongruentAligned(practice=0, same=1, gender=0, index=i)
 
             if samerandom == 0 and gender_random == 1:
                 diff_counter += 1
                 m_counter += 1
-                Incongruent_Aligned().IncongruentAligned(practice=0, same=0, gender=1)
+                Incongruent_Aligned().IncongruentAligned(practice=0, same=0, gender=1, index=i)
 
             if samerandom == 0 and gender_random == 0:
                 diff_counter += 1
                 f_counter += 1
-                Incongruent_Aligned().IncongruentAligned(practice=0, same=0, gender=0)
+                Incongruent_Aligned().IncongruentAligned(practice=0, same=0, gender=0, index=i)
         typeThreeDone = True
 
     #Incongruent Misaligned
@@ -275,23 +269,30 @@ while True:
             if samerandom == 1 and gender_random == 1:
                 same_counter += 1
                 m_counter += 1
-                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=1, gender=1)
+                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=1, gender=1, index=i)
 
             if samerandom == 1 and gender_random == 0:
                 same_counter += 1
                 f_counter += 1
-                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=1, gender=0)
+                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=1, gender=0, index=i)
 
             if samerandom == 0 and gender_random == 1:
                 diff_counter += 1
                 m_counter += 1
-                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=0, gender=1)
+                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=0, gender=1, index=i)
 
             if samerandom == 0 and gender_random == 0:
                 diff_counter += 1
                 f_counter += 1
-                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=0, gender=0)
+                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=0, gender=0, index=i)
         typeFourDone = True
+
+
+
+    extension = 'csv'
+    all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
+    combined_csv = pd.concat([pd.read_csv(f) for f in all_filenames])
+    combined_csv.to_csv(str(subjectInfoList[0]) + ".csv", index=False, encoding='utf-8-sig')
 
 
 

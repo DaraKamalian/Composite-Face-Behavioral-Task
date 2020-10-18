@@ -1,8 +1,6 @@
 import random
-import xlsxwriter
-import datetime
-import csv
 
+import csv
 from psychopy import core, event
 from Window import window
 from MainAssets import MainAssets
@@ -10,7 +8,7 @@ from MainAssets import MainAssets
 from MenAlign import Men_Align
 from WomenAlign import Women_Align
 from DifferentTotalLocationsList import DifferentTotalLocationsList
-from Data import ExcelFile
+
 
 
 
@@ -27,56 +25,14 @@ questionMark = image.questionMark
 win = window.win
 
 class Congruent_Aligned(object):
-    def CongruentAligned(self, practice, index, gender, same, subjectInfoList):
+    def CongruentAligned(self, practice, index, gender, same, practiceDuration):
+
+        generalTimer = core.getTime()
 
 
-        print('index is : ' + str(index))
-        # Headers = ['Face_1', 'Face_2', 'Face_Gender', 'Congruency', 'Block', 'Trial', 'Alignment', 'Condition', 'Type',
-        #            'Key-Resp', 'Cor-Ans', 'Accuracy', 'R-time', 'Trial-Start', 'Key-Resp-Start']
 
-        # Cells = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O']
-        #
-        # workbook = xlsxwriter.Workbook(
-        #     str(subjectInfoList[0] + subjectInfoList[1]) + '-' + 'D' + str(subjectInfoList[2]) + '.xlsx')
-        #
-        # worksheet = workbook.add_worksheet()
-        #
-        # HeaderFormat = workbook.add_format({
-        #     'bold': True,
-        #     'text_wrap': False,
-        #     'valign': 'top',
-        #     'fg_color': '#D7E4BC',
-        #     'border': 1})
 
-        mydict = {
-            "0": "Name",
-            "1": "Number",
-            "2": "Age",
-            "3": "Gender",
-            "4": "Handedness",
-            "5": "Experiment Day",
-            "6": "Stimulation Site",
-            "7": "Resp Version",
-            "8": "Datetime"
-        }
 
-        data = {
-            "A": None,
-            "B": None,
-            "C": None,
-            "D": None,
-            "E": None,
-            "F": None,
-            "G": None,
-            "H": None,
-            "I": None,
-            "J": None,
-            "K": None,
-            "L": None,
-            "M": None,
-            "N": None,
-            "O": None
-        }
 
         # for i in range(0, 6):
         #     worksheet.write('A' + str(i + 1), 'Subject ' + mydict[str(i)], HeaderFormat)
@@ -107,10 +63,12 @@ class Congruent_Aligned(object):
 
         fixationPoint.draw()
         win.flip()
+
         core.wait(0.2)
 
         fixationPoint.autoDraw = False
         win.flip()
+        localtimer = core.getTime()
         core.wait(0.15)
         if same:
             if gender:
@@ -158,7 +116,7 @@ class Congruent_Aligned(object):
                 men_align_images[rand1].draw()
                 print(men_align_images[rand1].image)
                 # worksheet.write('B' + str(index), men_align_images[rand1].image[-13:-4])
-                data["B"] = men_align_images[rand1].image[-13:-4]
+
                 win.flip()
                 core.wait(0.5)
                 men_align_images[rand1].autoDraw = False
@@ -168,7 +126,7 @@ class Congruent_Aligned(object):
                 women_align_images[rand1].draw()
                 print(women_align_images[rand1].image)
                 # worksheet.write('B' + str(index), women_align_images[rand1].image[-13:-4])
-                data["B"] = women_align_images[rand1].image[-13:-4]
+
                 win.flip()
                 core.wait(0.5)
                 women_align_images[rand1].autoDraw = False
@@ -187,7 +145,7 @@ class Congruent_Aligned(object):
                     secondfacelist.append(item)
                     print(item.image)
                     # worksheet.write('B' + str(index), item.image[-13:-4])
-                    data["B"] = item.image[-13:-4]
+
                     break
             core.wait(0.5)
             secondfacelist[0].autoDraw = False
@@ -210,13 +168,13 @@ class Congruent_Aligned(object):
                             win.flip()
                             core.wait(2)
                         else:
-                            anslist.append(key)
+                            anslist.append('A')
 
                             # worksheet.write('J' + str(index), 'A')
-                            data["J"] = 'A'
+
                             # worksheet.write('L' + str(index), '=IF(K' + str(index) + '= J' +
                             #                 str(index) + ',1,0)')
-                            data["L"] = 'accuracy'
+
                             # worksheet.write('M' + str(index), str(1.5 - countdown.getTime()))
                             # data["M"] = str(1.5 - countdown.getTime())
                         flag = False
@@ -226,14 +184,14 @@ class Congruent_Aligned(object):
                             win.flip()
                             core.wait(2)
                         else:
-                            anslist.append(key)
+                            anslist.append('L')
                             # worksheet.write('J' + str(index), 'L')
-                            data["J"] = 'L'
+
                             # worksheet.write('L' + str(index), '=IF(K' + str(index) + '= J' +
                             #                 str(index) + ',1,0)')
-                            data["L"] = 'accuracy'
+
                             # worksheet.write('M' + str(index), str(1.5 - countdown.getTime()))
-                            data["M"] = str(1.5 - countdown.getTime())
+
                         flag = False
             elif countdown.getTime() <= 0:
                 lateflag = True
@@ -241,9 +199,7 @@ class Congruent_Aligned(object):
                 # worksheet.write('L' + str(index), 'None')
                 # worksheet.write('M' + str(index), 'None')
                 # worksheet.write('O' + str(index), 'None')
-                data["J"] = 'None'
-                data["L"] = 'None'
-                data["M"] = 'None'
+
                 flag = False
 
         datadict = {
@@ -281,40 +237,43 @@ class Congruent_Aligned(object):
         #         datadict["Face_2"] = secondfacelist[0].image[-13:-4]
 
 
-        with open(str(1) + '.csv', 'w', newline='') as file:
+        with open('CongruentAligned' + str(index) + '.csv', 'w', newline='') as file:
             Headers = ['Face_1', 'Face_2', 'Face_Gender', 'Congruency', 'Block', 'Trial', 'Alignment', 'Condition',
-                       'Type','Key-Resp', 'Cor-Ans', 'Accuracy', 'R-time', 'Trial-Start', 'Key-Resp-Start']
+                       'Type', 'Key-Resp', 'Cor-Ans', 'Accuracy', 'R-time', 'Trial-Start', 'Key-Resp-Start']
 
             writer = csv.DictWriter(file, fieldnames=Headers)
             writer.writeheader()
 
-            if same:
+            if same and gender:
                 writer.writerow({'Alignment': '1', 'Condition': 'Top Same + Bottom Same', 'Cor-Ans': 'A',
-                                  'Key-Resp': str(anslist[0]), 'R-time': str(1.5 - countdown.getTime())})
+                                  'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),
+                                 'Face_Gender': 'Male', 'Face_1': men_align_images[rand1].image[-13:-4],
+                                        'Face_2': men_align_images[rand1].image[-13:-4], 'Trial': str(index),
+                                 'Trial-Start': str(localtimer - generalTimer + practiceDuration)})
 
-                if gender:
-                    writer.writerow({'Face_Gender': 'Male', 'Face_1': men_align_images[rand1].image[-13:-4],
-                                        'Face_2': men_align_images[rand1].image[-13:-4]} )
-
-                else:
-                    writer.writerow({'Face_Gender': 'Female', 'Face_1': women_align_images[rand1].image[-13:-4],
-                                      'Face_2': women_align_images[rand1].image[-13:-4]})
-            else:
+            if same and not gender:
+                    writer.writerow({'Alignment': '1', 'Condition': 'Top Same + Bottom Same', 'Cor-Ans': 'A',
+                                  'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),
+                                     'Face_Gender': 'Female', 'Face_1': women_align_images[rand1].image[-13:-4],
+                                      'Face_2': women_align_images[rand1].image[-13:-4], 'Trial': str(index),
+                                     'Trial-Start': str(localtimer - generalTimer + practiceDuration)})
+            if not same and gender:
                 writer.writerow({'Alignment': '1', 'Condition': 'Top Different + Bottom Different', 'Cor-Ans': 'L',
-                                  'Key-Resp': str(anslist[0]), 'R-time': str(1.5 - countdown.getTime())})
+                                  'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),'Face_Gender': 'Male', 'Face_1': men_align_images[rand1].image[-13:-4],
+                                      'Face_2': secondfacelist[0].image[-13:-4], 'Trial': str(index),
+                                 'Trial-Start': str(localtimer - generalTimer + practiceDuration)})
 
-                if gender:
-                    writer.writerow({'Face_Gender': 'Male', 'Face_1': men_align_images[rand1].image[-13:-4],
-                                      'Face_2': secondfacelist[0].image[-13:-4]})
+            if not same and not gender:
+                    writer.writerow({'Alignment': '1', 'Condition': 'Top Different + Bottom Different', 'Cor-Ans': 'L',
+                                  'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),'Face_Gender': 'Female', 'Face_1': women_align_images[rand1].image[-13:-4],
+                                      'Face_2': secondfacelist[0].image[-13:-4], 'Trial': str(index),
+                                     'Trial-Start': str(localtimer - generalTimer + practiceDuration)})
 
-                else:
-                    writer.writerow({'Face_Gender': 'Female', 'Face_1': women_align_images[rand1].image[-13:-4],
-                                      'Face_2': secondfacelist[0].image[-13:-4]})
 
-        datalist = []
-        datalist.append(writer)
 
-        return datalist
+
+
+
 
 
 

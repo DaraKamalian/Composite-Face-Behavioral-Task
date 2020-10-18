@@ -1,4 +1,4 @@
-import random
+import random, csv
 
 from psychopy import core, event
 from Window import window
@@ -31,7 +31,7 @@ win = window.win
 
 
 class Incongruent_Misaligned(object):
-    def IncongruentMisaligned(self, practice, same, gender):
+    def IncongruentMisaligned(self, practice, same, gender, index):
         fixationPoint.draw()
         win.flip()
         core.wait(0.2)
@@ -80,18 +80,21 @@ class Incongruent_Misaligned(object):
             newLocations = SameUpperLocationsList.SameUpperLocationsList(obj,
                 locations, images[rand1].image)
 
-            newLocRand = random.randint(0, len(newLocations) - 1)
-            list = []
+            if len(newLocations) == 1:
+                newLocRand = 0
+            else:
+                newLocRand = random.randint(0, (len(newLocations) - 1))
+            secondfacesamelist = []
             for item in images:
                 if item.image == newLocations[newLocRand]:
                     item.draw()
                     win.flip()
-                    list.append(item)
-                    print(item.image)
+                    secondfacesamelist.append(item)
+                    # print(item.image)
                     break
 
             core.wait(0.5)
-            list[0].autoDraw = False
+            secondfacesamelist[0].autoDraw = False
             questionMark.draw()
             win.flip()
 
@@ -100,25 +103,28 @@ class Incongruent_Misaligned(object):
             newLocations = SameLowerLocationsList.SameLowerLocationsList(obj,
                                                                          locations,
                                                                          images[rand1].image)
+            if len(newLocations) == 1:
+                newLocRand = 0
+            else:
+                newLocRand = random.randint(0, (len(newLocations) - 1))
 
-            newLocRand = random.randint(0, (len(newLocations) - 1))
-
-            list = []
+            secondfacedifflist = []
             for item in images:
                 if item.image == newLocations[newLocRand]:
                     item.draw()
-                    list.append(item)
+                    secondfacedifflist.append(item)
                     win.flip()
                     print(item.image)
                     break
 
             core.wait(0.5)
-            list[0].autoDraw = False
+            secondfacedifflist[0].autoDraw = False
             questionMark.draw()
             win.flip()
 
 
         countdown = core.CountdownTimer(1.5)
+        anslist = []
         flag = True
         while flag:
             # keys = event.getKeys(keyList=['a', 'l'])
@@ -131,7 +137,7 @@ class Incongruent_Misaligned(object):
                             win.flip()
                             core.wait(2)
                         else:
-                            print('a')
+                            anslist.append('A')
                             # print('correct')
                         flag = False
                     elif key == 'l':
@@ -141,8 +147,38 @@ class Incongruent_Misaligned(object):
                             core.wait(2)
                             # print('wrong')
                         else:
-                            print('l')
+                            anslist.append('L')
                         flag = False
             elif countdown.getTime() <= 0:
                 #late
                 flag = False
+
+        with open('CongruentAligned' + str(index) + '.csv', 'w', newline='') as file:
+            Headers = ['Face_1', 'Face_2', 'Face_Gender', 'Congruency', 'Block', 'Trial', 'Alignment', 'Condition',
+                       'Type', 'Key-Resp', 'Cor-Ans', 'Accuracy', 'R-time', 'Trial-Start', 'Key-Resp-Start']
+
+            writer = csv.DictWriter(file, fieldnames=Headers)
+            writer.writeheader()
+
+            if same and gender:
+                writer.writerow({'Alignment': '0', 'Condition': 'Top Same + Bottom Different', 'Cor-Ans': 'A',
+                                 'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),
+                                 'Face_Gender': 'Male', 'Face_1': men_align_images[rand1].image[-13:-4],
+                                 'Face_2': secondfacesamelist[0], 'Trial': str(index)})
+
+            if same and not gender:
+                writer.writerow({'Alignment': '0', 'Condition': 'Top Same + Bottom Different', 'Cor-Ans': 'A',
+                                 'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),
+                                 'Face_Gender': 'Female', 'Face_1': women_align_images[rand1].image[-13:-4],
+                                 'Face_2': secondfacesamelist[0].image[-13:-4], 'Trial': str(index)})
+            if not same and gender:
+                writer.writerow({'Alignment': '0', 'Condition': 'Top Different + Bottom Same', 'Cor-Ans': 'L',
+                                 'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),
+                                 'Face_Gender': 'Male', 'Face_1': men_align_images[rand1].image[-13:-4],
+                                 'Face_2': secondfacedifflist[0].image[-13:-4], 'Trial': str(index)})
+
+            if not same and not gender:
+                writer.writerow({'Alignment': '0', 'Condition': 'Top Different + Bottom Same', 'Cor-Ans': 'L',
+                                 'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),
+                                 'Face_Gender': 'Female', 'Face_1': women_align_images[rand1].image[-13:-4],
+                                 'Face_2': secondfacedifflist[0].image[-13:-4], 'Trial': str(index)})

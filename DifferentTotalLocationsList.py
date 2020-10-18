@@ -6,12 +6,7 @@ class DifferentTotalLocationsList(object):
         list = []
 
         for item in mylist:
-            if item[-11:-9] == leftIndex:
+            if item[-11:-9] != leftIndex and item[-8:-6] != rightIndex:
+                print('added : ' + str(item))
                 list.append(item)
-        for item in mylist:
-            if item[-8:-6] == rightIndex:
-                list.append(item)
-        for member in list:
-            if member in mylist:
-                mylist.remove(member)
-        return mylist
+        return list
