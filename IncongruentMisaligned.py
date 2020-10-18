@@ -124,7 +124,7 @@ class Incongruent_Misaligned(object):
 
 
         countdown = core.CountdownTimer(1.5)
-        lateflag = False
+        isLate = False
         anslist = []
         flag = True
         while flag:
@@ -151,7 +151,7 @@ class Incongruent_Misaligned(object):
                             anslist.append('L')
                         flag = False
             elif countdown.getTime() <= 0:
-                lateflag = True
+                isLate = True
                 flag = False
 
         with open('CongruentAligned' + str(index) + '.csv', 'w', newline='') as file:
@@ -161,27 +161,27 @@ class Incongruent_Misaligned(object):
             writer = csv.DictWriter(file, fieldnames=Headers)
             writer.writeheader()
 
-            if same and gender and not lateflag:
+            if same and gender and anslist:
                 writer.writerow({'Alignment': '0', 'Condition': 'Top Same + Bottom Different', 'Cor-Ans': 'A',
                                  'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),
                                  'Face_Gender': 'Male', 'Face_1': men_align_images[rand1].image[-13:-4],
                                  'Face_2': secondfacesamelist[0].image[-13:-4], 'Congruency': '0',
                                      'Type': 'Misaligned Icongruent'})
 
-            if same and not gender and not lateflag:
+            if same and not gender and anslist:
                 writer.writerow({'Alignment': '0', 'Condition': 'Top Same + Bottom Different', 'Cor-Ans': 'A',
                                  'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),
                                  'Face_Gender': 'Female', 'Face_1': women_align_images[rand1].image[-13:-4],
                                  'Face_2': secondfacesamelist[0].image[-13:-4], 'Congruency': '0',
                                      'Type': 'Misaligned Icongruent'})
-            if not same and gender and not lateflag:
+            if not same and gender and anslist:
                 writer.writerow({'Alignment': '0', 'Condition': 'Top Different + Bottom Same', 'Cor-Ans': 'L',
                                  'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),
                                  'Face_Gender': 'Male', 'Face_1': men_align_images[rand1].image[-13:-4],
                                  'Face_2': secondfacedifflist[0].image[-13:-4], 'Congruency': '0',
                                      'Type': 'Misaligned Icongruent'})
 
-            if not same and not gender and not lateflag:
+            if not same and not gender and anslist:
                 writer.writerow({'Alignment': '0', 'Condition': 'Top Different + Bottom Same', 'Cor-Ans': 'L',
                                  'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),
                                  'Face_Gender': 'Female', 'Face_1': women_align_images[rand1].image[-13:-4],
@@ -189,29 +189,38 @@ class Incongruent_Misaligned(object):
                                      'Type': 'Misaligned Icongruent'})
 
 
-            if same and gender and lateflag:
+            if same and gender and not anslist:
                 writer.writerow({'Alignment': '0', 'Condition': 'Top Same + Bottom Different', 'Cor-Ans': 'A',
                                  'Key-Resp': 'None', 'R-time': 'None',
                                  'Face_Gender': 'Male', 'Face_1': men_align_images[rand1].image[-13:-4],
                                  'Face_2': secondfacesamelist[0].image[-13:-4], 'Congruency': '0',
-                                     'Type': 'Misaligned Icongruent'})
+                                     'Type': 'Misaligned Icongruent', 'Key-Resp-Start': 'None', 'Accuracy': 'None'})
 
-            if same and not gender and lateflag:
+            if same and not gender and not anslist:
                 writer.writerow({'Alignment': '0', 'Condition': 'Top Same + Bottom Different', 'Cor-Ans': 'A',
                                  'Key-Resp': 'None', 'R-time': 'None',
                                  'Face_Gender': 'Female', 'Face_1': women_align_images[rand1].image[-13:-4],
                                  'Face_2': secondfacesamelist[0].image[-13:-4], 'Congruency': '0',
-                                     'Type': 'Misaligned Icongruent'})
-            if not same and gender and lateflag:
+                                     'Type': 'Misaligned Icongruent', 'Key-Resp-Start': 'None', 'Accuracy': 'None'})
+            if not same and gender and not anslist:
                 writer.writerow({'Alignment': '0', 'Condition': 'Top Different + Bottom Same', 'Cor-Ans': 'L',
                                  'Key-Resp': 'None', 'R-time': 'None',
                                  'Face_Gender': 'Male', 'Face_1': men_align_images[rand1].image[-13:-4],
                                  'Face_2': secondfacedifflist[0].image[-13:-4], 'Congruency': '0',
-                                     'Type': 'Misaligned Icongruent'})
+                                     'Type': 'Misaligned Icongruent', 'Key-Resp-Start': 'None', 'Accuracy': 'None'})
 
-            if not same and not gender and lateflag:
+            if not same and not gender and not anslist:
                 writer.writerow({'Alignment': '0', 'Condition': 'Top Different + Bottom Same', 'Cor-Ans': 'L',
                                  'Key-Resp': 'None', 'R-time': 'None',
                                  'Face_Gender': 'Female', 'Face_1': women_align_images[rand1].image[-13:-4],
                                  'Face_2': secondfacedifflist[0].image[-13:-4], 'Congruency': '0',
-                                     'Type': 'Misaligned Icongruent'})
+                                     'Type': 'Misaligned Icongruent', 'Key-Resp-Start': 'None', 'Accuracy': 'None'})
+
+            with open('CongruentAligned' + str(index) + '.csv', 'r') as csvfile:
+                csvreader = csv.reader(csvfile)
+
+                for line in csvreader:
+                    if line[9] == line[10]:
+                        line[11] = '1'
+                    else:
+                        line[11] = '0'
