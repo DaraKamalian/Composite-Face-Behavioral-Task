@@ -6,6 +6,7 @@ from PracticeTrials import PracticeTrials
 from MainAssets import MainAssets
 from psychopy import event, core
 
+
 from DialogueBox import dialoguebox
 import os, csv, glob
 import pandas as pd
@@ -286,6 +287,7 @@ while True:
                 f_counter += 1
                 Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=0, gender=0, index=i)
         typeFourDone = True
+
 
 
 

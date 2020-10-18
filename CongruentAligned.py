@@ -30,37 +30,6 @@ class Congruent_Aligned(object):
         generalTimer = core.getTime()
 
 
-
-
-
-
-        # for i in range(0, 6):
-        #     worksheet.write('A' + str(i + 1), 'Subject ' + mydict[str(i)], HeaderFormat)
-        #     worksheet.write('B' + str(i + 1), subjectInfoList[i])
-        #
-        # for i in range(6, 8):
-        #     worksheet.write('A' + str(i + 1), mydict[str(i)], HeaderFormat)
-        #     worksheet.write('B' + str(i + 1), subjectInfoList[i])
-        #
-        # worksheet.write('A8', 'Datetime', HeaderFormat)
-        # worksheet.write('B8', str(datetime.datetime.today()))
-        #
-        # for i in range(0, len(Cells)):
-        #     worksheet.write(Cells[i] + '9', Headers[i], HeaderFormat)
-
-        # if gender:
-        #     worksheet.write('C' + str(index), 'Male')
-        #     data["C"] = 'Male'
-        # else:
-        #     worksheet.write('C' + str(index), 'Female')
-        #     data["C"] = 'Female'
-        # worksheet.write('G' + str(index), '1')
-        # data["G"] = '1'
-        # worksheet.write('H' + str(index), 'Top Same + Bottom Same')
-        # data["H"] = 'Top Same + Bottom Same'
-        # worksheet.write('K' + str(index), 'A')
-        # data["K"] = 'A'
-
         fixationPoint.draw()
         win.flip()
 
@@ -92,12 +61,7 @@ class Congruent_Aligned(object):
             core.wait(0.2)
             print(women_align_images[rand1].image)
 
-        # if gender:
-        #     worksheet.write('A' + str(index), men_align_images[rand1].image[-13:-4])
-        #     data["A"] = men_align_images[rand1].image[-13:-4]
-        # else:
-        #     data["A"] = women_align_images[rand1].image[-13:-4]
-        #     worksheet.write('A' + str(index), women_align_images[rand1].image[-13:-4])
+
 
         men_align_images[rand1].autoDraw = False
         women_align_images[rand1].autoDraw = False
@@ -115,7 +79,7 @@ class Congruent_Aligned(object):
             if gender:
                 men_align_images[rand1].draw()
                 print(men_align_images[rand1].image)
-                # worksheet.write('B' + str(index), men_align_images[rand1].image[-13:-4])
+
 
                 win.flip()
                 core.wait(0.5)
@@ -125,7 +89,7 @@ class Congruent_Aligned(object):
             else:
                 women_align_images[rand1].draw()
                 print(women_align_images[rand1].image)
-                # worksheet.write('B' + str(index), women_align_images[rand1].image[-13:-4])
+
 
                 win.flip()
                 core.wait(0.5)
@@ -144,8 +108,6 @@ class Congruent_Aligned(object):
                     win.flip()
                     secondfacelist.append(item)
                     print(item.image)
-                    # worksheet.write('B' + str(index), item.image[-13:-4])
-
                     break
             core.wait(0.5)
             secondfacelist[0].autoDraw = False
@@ -156,13 +118,15 @@ class Congruent_Aligned(object):
 
         anslist = []
         lateflag = False
+        isCorrectAns = False
         flag = True
         while flag:
-            # keys = event.getKeys(keyList=['a', 'l'])
+
             keys = event.waitKeys(keyList=['a', 'l'], maxWait=1.5)
             if keys:
                 for key in keys:
                     if key == 'a':
+                        isCorrectAns = True
                         if practice:
                             correct.draw()
                             win.flip()
@@ -170,71 +134,20 @@ class Congruent_Aligned(object):
                         else:
                             anslist.append('A')
 
-                            # worksheet.write('J' + str(index), 'A')
-
-                            # worksheet.write('L' + str(index), '=IF(K' + str(index) + '= J' +
-                            #                 str(index) + ',1,0)')
-
-                            # worksheet.write('M' + str(index), str(1.5 - countdown.getTime()))
-                            # data["M"] = str(1.5 - countdown.getTime())
                         flag = False
                     elif key == 'l':
+                        isCorrectAns = False
                         if practice:
                             wrong.draw()
                             win.flip()
                             core.wait(2)
                         else:
                             anslist.append('L')
-                            # worksheet.write('J' + str(index), 'L')
-
-                            # worksheet.write('L' + str(index), '=IF(K' + str(index) + '= J' +
-                            #                 str(index) + ',1,0)')
-
-                            # worksheet.write('M' + str(index), str(1.5 - countdown.getTime()))
 
                         flag = False
             elif countdown.getTime() <= 0:
                 lateflag = True
-                # worksheet.write('J' + str(index), 'None')
-                # worksheet.write('L' + str(index), 'None')
-                # worksheet.write('M' + str(index), 'None')
-                # worksheet.write('O' + str(index), 'None')
-
                 flag = False
-
-        datadict = {
-            "Alignment": '1',
-            "Condition": None,
-            "Cor-Ans": None,
-            "Key-Resp": str(anslist[0]),
-            "R-time": str(1.5 - countdown.getTime()),
-            "Face_Gender": None,
-            "Face_1": None,
-            "Face_2": None,
-        }
-        #
-        # if same:
-        #     datadict["Condition"] = "Top Same + Bottom Same"
-        #     datadict["Cor-Ans"] = "A"
-        #     if gender:
-        #         datadict["Face_Gender"] = 'Male'
-        #         datadict["Face_1"] = men_align_images[rand1].image[-13:-4]
-        #         datadict["Face_2"] = men_align_images[rand1].image[-13:-4]
-        #     else:
-        #         datadict["Face_Gender"] = 'Female'
-        #         datadict["Face_1"] = women_align_images[rand1].image[-13:-4]
-        #         datadict["Face_2"] = women_align_images[rand1].image[-13:-4]
-        # else:
-        #     datadict["Condition"] = "Top Different + Bottom Different"
-        #     datadict["Cor-Ans"] = "L"
-        #     if gender:
-        #         datadict["Face_Gender"] = 'Male'
-        #         datadict["Face_1"] = men_align_images[rand1].image[-13:-4]
-        #         datadict["Face_2"] = secondfacelist[0].image[-13:-4]
-        #     else:
-        #         datadict["Face_Gender"] = 'Female'
-        #         datadict["Face_1"] = women_align_images[rand1].image[-13:-4]
-        #         datadict["Face_2"] = secondfacelist[0].image[-13:-4]
 
 
         with open('CongruentAligned' + str(index) + '.csv', 'w', newline='') as file:
@@ -244,32 +157,67 @@ class Congruent_Aligned(object):
             writer = csv.DictWriter(file, fieldnames=Headers)
             writer.writeheader()
 
-            if same and gender:
+            if same and gender and not lateflag:
                 writer.writerow({'Alignment': '1', 'Condition': 'Top Same + Bottom Same', 'Cor-Ans': 'A',
                                   'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),
                                  'Face_Gender': 'Male', 'Face_1': men_align_images[rand1].image[-13:-4],
-                                        'Face_2': men_align_images[rand1].image[-13:-4], 'Trial': str(index),
-                                 'Trial-Start': str(localtimer - generalTimer + practiceDuration)})
+                                        'Face_2': men_align_images[rand1].image[-13:-4],
+                                 'Trial-Start': str(localtimer - generalTimer + practiceDuration), 'Congruency': '1',
+                                     'Type': 'Aligned Congruent'})
 
-            if same and not gender:
+            if same and not gender and not lateflag:
                     writer.writerow({'Alignment': '1', 'Condition': 'Top Same + Bottom Same', 'Cor-Ans': 'A',
                                   'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),
                                      'Face_Gender': 'Female', 'Face_1': women_align_images[rand1].image[-13:-4],
                                       'Face_2': women_align_images[rand1].image[-13:-4], 'Trial': str(index),
-                                     'Trial-Start': str(localtimer - generalTimer + practiceDuration)})
-            if not same and gender:
+                                     'Trial-Start': str(localtimer - generalTimer + practiceDuration), 'Congruency': '1',
+                                     'Type': 'Aligned Congruent'})
+            if not same and gender and not lateflag:
                 writer.writerow({'Alignment': '1', 'Condition': 'Top Different + Bottom Different', 'Cor-Ans': 'L',
-                                  'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),'Face_Gender': 'Male', 'Face_1': men_align_images[rand1].image[-13:-4],
-                                      'Face_2': secondfacelist[0].image[-13:-4], 'Trial': str(index),
-                                 'Trial-Start': str(localtimer - generalTimer + practiceDuration)})
+                                  'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),
+                                 'Face_Gender': 'Male', 'Face_1': men_align_images[rand1].image[-13:-4],
+                                      'Face_2': secondfacelist[0].image[-13:-4],
+                                 'Trial-Start': str(localtimer - generalTimer + practiceDuration), 'Congruency': '1',
+                                     'Type': 'Aligned Congruent'})
 
-            if not same and not gender:
+            if not same and not gender and not lateflag:
                     writer.writerow({'Alignment': '1', 'Condition': 'Top Different + Bottom Different', 'Cor-Ans': 'L',
-                                  'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),'Face_Gender': 'Female', 'Face_1': women_align_images[rand1].image[-13:-4],
-                                      'Face_2': secondfacelist[0].image[-13:-4], 'Trial': str(index),
-                                     'Trial-Start': str(localtimer - generalTimer + practiceDuration)})
+                                  'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),
+                                     'Face_Gender': 'Female', 'Face_1': women_align_images[rand1].image[-13:-4],
+                                      'Face_2': secondfacelist[0].image[-13:-4],
+                                     'Trial-Start': str(localtimer - generalTimer + practiceDuration), 'Congruency': '1',
+                                     'Type': 'Aligned Congruent'})
 
+            if same and gender and lateflag:
+                writer.writerow({'Alignment': '1', 'Condition': 'Top Same + Bottom Same', 'Cor-Ans': 'A',
+                                  'Key-Resp': 'None', 'R-time': 'None',
+                                 'Face_Gender': 'Male', 'Face_1': men_align_images[rand1].image[-13:-4],
+                                        'Face_2': men_align_images[rand1].image[-13:-4],
+                                 'Trial-Start': str(localtimer - generalTimer + practiceDuration), 'Congruency': '1',
+                                     'Type': 'Aligned Congruent'})
 
+            if same and not gender and lateflag:
+                    writer.writerow({'Alignment': '1', 'Condition': 'Top Same + Bottom Same', 'Cor-Ans': 'A',
+                                  'Key-Resp': 'None', 'R-time': 'None',
+                                     'Face_Gender': 'Female', 'Face_1': women_align_images[rand1].image[-13:-4],
+                                      'Face_2': women_align_images[rand1].image[-13:-4], 'Trial': str(index),
+                                     'Trial-Start': str(localtimer - generalTimer + practiceDuration), 'Congruency': '1',
+                                     'Type': 'Aligned Congruent'})
+            if not same and gender and lateflag:
+                writer.writerow({'Alignment': '1', 'Condition': 'Top Different + Bottom Different', 'Cor-Ans': 'L',
+                                  'Key-Resp': 'None', 'R-time': 'None',
+                                 'Face_Gender': 'Male', 'Face_1': men_align_images[rand1].image[-13:-4],
+                                      'Face_2': secondfacelist[0].image[-13:-4],
+                                 'Trial-Start': str(localtimer - generalTimer + practiceDuration), 'Congruency': '1',
+                                     'Type': 'Aligned Congruent'})
+
+            if not same and not gender and lateflag:
+                    writer.writerow({'Alignment': '1', 'Condition': 'Top Different + Bottom Different', 'Cor-Ans': 'L',
+                                  'Key-Resp': 'None', 'R-time': 'None',
+                                     'Face_Gender': 'Female', 'Face_1': women_align_images[rand1].image[-13:-4],
+                                      'Face_2': secondfacelist[0].image[-13:-4],
+                                     'Trial-Start': str(localtimer - generalTimer + practiceDuration), 'Congruency': '1',
+                                     'Type': 'Aligned Congruent'})
 
 
 

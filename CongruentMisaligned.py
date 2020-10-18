@@ -113,6 +113,7 @@ class Congruent_Misaligned(object):
 
         countdown = core.CountdownTimer(1.5)
 
+        lateflag = False
         anslist = []
         flag = True
         while flag:
@@ -138,7 +139,7 @@ class Congruent_Misaligned(object):
                             anslist.append('L')
                         flag = False
             elif countdown.getTime() <= 0:
-                #   print late
+                lateflag = True
                 flag = False
 
 
@@ -149,27 +150,56 @@ class Congruent_Misaligned(object):
             writer = csv.DictWriter(file, fieldnames=Headers)
             writer.writeheader()
 
-            if same and gender:
+            if same and gender and not lateflag:
                 writer.writerow({'Alignment': '0', 'Condition': 'Top Same + Bottom Same', 'Cor-Ans': 'A',
                                   'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),
                                  'Face_Gender': 'Male', 'Face_1': men_align_images[rand1].image[-13:-4],
-                                        'Face_2': men_align_images[rand1].image[-13:-4], 'Trial': str(index)})
+                                        'Face_2': men_align_images[rand1].image[-13:-4], 'Congruency': '1',
+                                     'Type': 'Misaligned Congruent'})
 
-            if same and not gender:
+            if same and not gender and not lateflag:
                     writer.writerow({'Alignment': '0', 'Condition': 'Top Same + Bottom Same', 'Cor-Ans': 'A',
                                   'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),
                                      'Face_Gender': 'Female', 'Face_1': women_align_images[rand1].image[-13:-4],
-                                      'Face_2': women_align_images[rand1].image[-13:-4], 'Trial': str(index)})
-            if not same and gender:
+                                      'Face_2': women_align_images[rand1].image[-13:-4], 'Congruency': '1',
+                                     'Type': 'Misaligned Congruent'})
+            if not same and gender and not lateflag:
                 writer.writerow({'Alignment': '0', 'Condition': 'Top Different + Bottom Different', 'Cor-Ans': 'L',
                                   'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),'Face_Gender': 'Male', 'Face_1': men_align_images[rand1].image[-13:-4],
-                                      'Face_2': secondfacelist[0].image[-13:-4], 'Trial': str(index)})
+                                      'Face_2': secondfacelist[0].image[-13:-4], 'Congruency': '1',
+                                     'Type': 'Misaligned Congruent'})
 
-            if not same and not gender:
+            if not same and not gender and not lateflag:
                     writer.writerow({'Alignment': '0', 'Condition': 'Top Different + Bottom Different', 'Cor-Ans': 'L',
                                   'Key-Resp': str(anslist[0]).upper(), 'R-time': str(1.5 - countdown.getTime()),'Face_Gender': 'Female', 'Face_1': women_align_images[rand1].image[-13:-4],
-                                      'Face_2': secondfacelist[0].image[-13:-4], 'Trial': str(index)})
+                                      'Face_2': secondfacelist[0].image[-13:-4], 'Congruency': '1',
+                                     'Type': 'Misaligned Congruent'})
 
+
+            if same and gender and lateflag:
+                writer.writerow({'Alignment': '0', 'Condition': 'Top Same + Bottom Same', 'Cor-Ans': 'A',
+                                  'Key-Resp': 'None', 'R-time': 'None',
+                                 'Face_Gender': 'Male', 'Face_1': men_align_images[rand1].image[-13:-4],
+                                        'Face_2': men_align_images[rand1].image[-13:-4], 'Congruency': '1',
+                                     'Type': 'Misaligned Congruent'})
+
+            if same and not gender and lateflag:
+                    writer.writerow({'Alignment': '0', 'Condition': 'Top Same + Bottom Same', 'Cor-Ans': 'A',
+                                  'Key-Resp': 'None', 'R-time': 'None',
+                                     'Face_Gender': 'Female', 'Face_1': women_align_images[rand1].image[-13:-4],
+                                      'Face_2': women_align_images[rand1].image[-13:-4], 'Congruency': '1',
+                                     'Type': 'Misaligned Congruent'})
+            if not same and gender and lateflag:
+                writer.writerow({'Alignment': '0', 'Condition': 'Top Different + Bottom Different', 'Cor-Ans': 'L',
+                                  'Key-Resp': 'None', 'R-time': 'None','Face_Gender': 'Male', 'Face_1': men_align_images[rand1].image[-13:-4],
+                                      'Face_2': secondfacelist[0].image[-13:-4], 'Congruency': '1',
+                                     'Type': 'Misaligned Congruent'})
+
+            if not same and not gender and lateflag:
+                    writer.writerow({'Alignment': '0', 'Condition': 'Top Different + Bottom Different', 'Cor-Ans': 'L',
+                                  'Key-Resp': 'None', 'R-time': 'None','Face_Gender': 'Female', 'Face_1': women_align_images[rand1].image[-13:-4],
+                                      'Face_2': secondfacelist[0].image[-13:-4], 'Congruency': '1',
+                                     'Type': 'Misaligned Congruent'})
 
 
 
