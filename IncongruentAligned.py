@@ -174,7 +174,7 @@ class Incongruent_Aligned(object):
                 face2 = seconddifffacelist[0].image[-13:-4]
 
 
-            with open('IncongruentAligned' + str(index) + '.csv', 'w', newline='') as file:
+            with open('CongruentAligned' + str(index) + '.csv', 'w', newline='') as file:
                 Headers = ['Face_1', 'Face_2', 'Face_Gender', 'Congruency', 'Block', 'Trial', 'Alignment', 'Condition',
                            'Type', 'Key-Resp', 'Cor-Ans', 'Accuracy', 'R-time', 'Trial-Start', 'Key-Resp-Start']
 
