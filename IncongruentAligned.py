@@ -135,7 +135,7 @@ class Incongruent_Aligned(object):
         isCorrectAns = False
         flag = True
         while flag:
-            # keys = event.getKeys(keyList=['a', 'l'])
+
             keys = event.waitKeys(keyList=['a', 'l'], maxWait=1.5)
             if keys:
                 for key in keys:

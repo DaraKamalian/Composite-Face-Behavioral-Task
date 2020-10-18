@@ -170,6 +170,7 @@ class Congruent_Aligned(object):
             Headers = ['Face_1', 'Face_2', 'Face_Gender', 'Congruency', 'Block', 'Trial', 'Alignment', 'Condition',
                        'Type', 'Key-Resp', 'Cor-Ans', 'Accuracy', 'R-time', 'Trial-Start', 'Key-Resp-Start']
 
+
             writer = csv.DictWriter(file, fieldnames=Headers)
             writer.writeheader()
 
