@@ -31,7 +31,7 @@ win = window.win
 
 
 class Incongruent_Misaligned(object):
-    def IncongruentMisaligned(self, practice, same, gender, index):
+    def IncongruentMisaligned(self, practice, same, gender):
         fixationPoint.draw()
         win.flip()
         core.wait(0.2)
@@ -135,19 +135,28 @@ class Incongruent_Misaligned(object):
                 for key in keys:
                     if key == 'a':
                         if practice:
-                            correct.draw()
-                            win.flip()
-                            core.wait(2)
+                            if same:
+                                correct.draw()
+                                win.flip()
+                                core.wait(2)
+                            else:
+                                wrong.draw()
+                                win.flip()
+                                core.wait(2)
                         else:
                             anslist.append('A')
                         isCorrectAns = True if same else False
                         flag = False
                     elif key == 'l':
                         if practice:
-                            wrong.draw()
-                            win.flip()
-                            core.wait(2)
-
+                            if same:
+                                wrong.draw()
+                                win.flip()
+                                core.wait(2)
+                            else:
+                                correct.draw()
+                                win.flip()
+                                core.wait(2)
                         else:
                             anslist.append('L')
                         isCorrectAns = False if same else True
@@ -169,7 +178,8 @@ class Incongruent_Misaligned(object):
         else:
             face2 = secondfacedifflist[0].image[-13:-4]
 
-        with open('CongruentAligned' + str(index) + '.csv', 'w', newline='') as file:
+        ran = random.randint(1, 10)
+        with open('CongruentAligned' + str(ran) + '.csv', 'w', newline='') as file:
             Headers = ['Face_1', 'Face_2', 'Face_Gender', 'Congruency', 'Block', 'Trial', 'Alignment', 'Condition',
                        'Type', 'Key-Resp', 'Cor-Ans', 'Accuracy', 'R-time', 'Trial-Start', 'Key-Resp-Start']
 

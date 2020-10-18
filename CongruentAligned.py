@@ -29,7 +29,7 @@ win = window.win
 
 class Congruent_Aligned(object):
     duration = 0
-    def CongruentAligned(self, practice, index, gender, same, practiceDuration):
+    def CongruentAligned(self, practice, gender, same):
 
         # duration += timing
         generalTimer = core.getTime()
@@ -128,18 +128,28 @@ class Congruent_Aligned(object):
                 for key in keys:
                     if key == 'a':
                         if practice:
-                            correct.draw()
-                            win.flip()
-                            core.wait(2)
+                            if same:
+                                correct.draw()
+                                win.flip()
+                                core.wait(2)
+                            else:
+                                wrong.draw()
+                                win.flip()
+                                core.wait(2)
                         else:
                             anslist.append('A')
                         isCorrectAns = True if same else False
                         flag = False
                     elif key == 'l':
                         if practice:
-                            wrong.draw()
-                            win.flip()
-                            core.wait(2)
+                            if same:
+                                wrong.draw()
+                                win.flip()
+                                core.wait(2)
+                            else:
+                                correct.draw()
+                                win.flip()
+                                core.wait(2)
                         else:
                             anslist.append('L')
                         isCorrectAns = False if same else True
@@ -155,7 +165,8 @@ class Congruent_Aligned(object):
         images = men_align_images if gender else women_align_images
         cor_ans = 'A' if same else 'L'
 
-        with open('CongruentAligned' + str(index) + '.csv', 'w', newline='') as file:
+        ran = random.randint(1, 10)
+        with open('CongruentAligned' + str(ran) + '.csv', 'w', newline='') as file:
             Headers = ['Face_1', 'Face_2', 'Face_Gender', 'Congruency', 'Block', 'Trial', 'Alignment', 'Condition',
                        'Type', 'Key-Resp', 'Cor-Ans', 'Accuracy', 'R-time', 'Trial-Start', 'Key-Resp-Start']
 
@@ -166,7 +177,7 @@ class Congruent_Aligned(object):
                              'Key-Resp': ans, 'R-time': str(1.5 - countdown.getTime()),
                              'Face_Gender': genders, 'Face_1': images[rand1].image[-13:-4],
                              'Face_2': images[rand1].image[-13:-4],
-                             'Trial-Start': str(localtimer - generalTimer + practiceDuration), 'Congruency': '1',
+                             'Trial-Start': "", 'Congruency': '1',
                              'Type': 'Aligned Congruent', 'Accuracy': accuracy})
 
 
