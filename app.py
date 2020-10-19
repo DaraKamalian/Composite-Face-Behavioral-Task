@@ -34,6 +34,9 @@ typeTwoDone = False
 typeThreeDone = False
 typeFourDone = False
 
+for filename in glob.glob('./*.csv'):
+    os.remove(filename)
+
 timer1 = core.getTime()
 firstInstruction.draw()
 win.flip()
@@ -74,7 +77,8 @@ for filename in glob.glob("./*.csv"):
 timer2 = core.getTime()
 Config.time += timer2 - timer1
 
-
+Config.filename = subjectInfoList[0] + '-' + 'D' + subjectInfoList[5] + '.csv'
+Config.createFile(Config.filename)
 while True:
     mainrandom = random.randint(1, 4)
     # mainrandom = 1
@@ -291,16 +295,16 @@ while True:
     #      'Resp-Version: Same A_Different L','Stimulation Site: ' + str(subjectInfoList[6]),
     #      'Datetime: ' + str(datetime.datetime.today())])
 
-extension = 'csv'
-all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
-combined_csv = pd.concat([pd.read_csv(f) for f in all_filenames])
-combined_csv.to_csv(str(subjectInfoList[0]) + 'D' + str(subjectInfoList[5]) + ".csv", index=False,
-                    encoding='utf-8-sig')
-
-for filename in glob.glob('./Congruent*.csv'):
-    os.remove(filename)
-for filename in glob.glob('./Incongruent*.csv'):
-    os.remove(filename)
+# extension = 'csv'
+# all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
+# combined_csv = pd.concat([pd.read_csv(f) for f in all_filenames])
+# combined_csv.to_csv(str(subjectInfoList[0]) + 'D' + str(subjectInfoList[5]) + ".csv", index=False,
+#                     encoding='utf-8-sig')
+# #
+# for filename in glob.glob('./Congruent*.csv'):
+#     os.remove(filename)
+# for filename in glob.glob('./Incongruent*.csv'):
+#     os.remove(filename)
 
 
 

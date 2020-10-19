@@ -178,22 +178,17 @@ class Congruent_Misaligned(object):
             else:
                 face2 = secondfaces[0].image[-13:-4]
 
-
-            with open('CongruentMisaligned' + str(index) + '.csv', 'w', newline='') as file:
-                Headers = ['Face_1', 'Face_2', 'Face_Gender', 'Congruency', 'Block', 'Trial', 'Alignment', 'Condition',
+            Headers = ['Face_1', 'Face_2', 'Face_Gender', 'Congruency', 'Block', 'Trial', 'Alignment', 'Condition',
                            'Type', 'Key-Resp', 'Cor-Ans', 'Accuracy', 'R-time', 'Trial-Start', 'Key-Resp-Start']
 
+            toWrite = {'Alignment': '0', 'Condition': condition, 'Cor-Ans': cor_ans,
+                       'Key-Resp': ans, 'R-time': rtime,
+                       'Face_Gender': genders, 'Face_1': face1,
+                       'Face_2': face2,
+                       'Trial-Start': str(Config.time), 'Congruency': '1',
+                       'Type': 'Misaligned Congruent', 'Accuracy': accuracy}
 
-                writer = csv.DictWriter(file, fieldnames=Headers)
-                writer.writeheader()
-
-                writer.writerow({'Alignment': '0', 'Condition': condition, 'Cor-Ans': cor_ans,
-                                 'Key-Resp': ans, 'R-time': rtime,
-                                 'Face_Gender': genders, 'Face_1': face1,
-                                 'Face_2': face2,'Trial-Start': str(Config.time), 'Congruency': '1',
-                                 'Type': 'Misaligned Congruent', 'Accuracy': accuracy})
-
-
+            Config.append_dict_as_row(Config.filename, dict_of_elem=toWrite, headers=Headers)
 
 
 
