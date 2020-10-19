@@ -154,6 +154,10 @@ class Congruent_Misaligned(object):
                         isCorrectAns = False if same else True
                         flag = False
             elif countdown.getTime() <= 0:
+                if practice:
+                    wrong.draw()
+                    win.flip()
+                    core.wait(2)
                 lateflag = True
                 flag = False
 
@@ -186,7 +190,7 @@ class Congruent_Misaligned(object):
                 writer.writerow({'Alignment': '0', 'Condition': condition, 'Cor-Ans': cor_ans,
                                  'Key-Resp': ans, 'R-time': rtime,
                                  'Face_Gender': genders, 'Face_1': face1,
-                                 'Face_2': face2,'Trial-Start': "", 'Congruency': '1',
+                                 'Face_2': face2,'Trial-Start': str(Config.time), 'Congruency': '1',
                                  'Type': 'Misaligned Congruent', 'Accuracy': accuracy})
 
 

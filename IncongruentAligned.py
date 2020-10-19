@@ -171,6 +171,10 @@ class Incongruent_Aligned(object):
                         isCorrectAns = False if same else True
                         flag = False
             elif countdown.getTime() <= 0:
+                if practice:
+                    wrong.draw()
+                    win.flip()
+                    core.wait(2)
                 flag = False
 
         if not practice:
@@ -199,5 +203,5 @@ class Incongruent_Aligned(object):
                 writer.writerow({'Alignment': '1', 'Condition': condition, 'Cor-Ans': cor_ans,
                                  'Key-Resp': ans, 'R-time': rtime,
                                  'Face_Gender': genders, 'Face_1': face1,
-                                 'Face_2': face2,'Trial-Start': "", 'Congruency': '0',
+                                 'Face_2': face2,'Trial-Start': str(Config.time), 'Congruency': '0',
                                  'Type': 'Aligned Incongruent', 'Accuracy': accuracy})
