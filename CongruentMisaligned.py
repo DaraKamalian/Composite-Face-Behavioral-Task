@@ -32,7 +32,7 @@ questionMark = image.questionMark
 win = window.win
 
 class Congruent_Misaligned(object):
-    def CongruentMisaligned(self, practice, same, gender):
+    def CongruentMisaligned(self, practice, same, gender, index):
         fixationPoint.draw()
         win.flip()
         core.wait(0.2)
@@ -157,35 +157,37 @@ class Congruent_Misaligned(object):
                 lateflag = True
                 flag = False
 
-        accuracy = '1' if isCorrectAns else '0'
-        ans = anslist[0].upper() if anslist else 'None'
-        genders = 'Male' if gender else 'Female'
-        condition = 'Top Same + Bottom Same' if same else 'Top Different + Bottom Different'
-        cor_ans = 'A' if same else 'L'
+        if not practice:
+            accuracy = '1' if isCorrectAns else '0'
+            ans = anslist[0].upper() if anslist else 'None'
+            rtime = str(1.5 - countdown.getTime()) if anslist else 'None'
+            genders = 'Male' if gender else 'Female'
+            condition = 'Top Same + Bottom Same' if same else 'Top Different + Bottom Different'
+            cor_ans = 'A' if same else 'L'
 
-        face1 = men_align_images[rand1].image[-13:-4] if gender else women_align_images[rand1].image[-13:-4]
-        if same:
-            if gender:
-                face2 = men_misalign_images[rand1].image[-13:-4]
+            face1 = men_align_images[rand1].image[-13:-4] if gender else women_align_images[rand1].image[-13:-4]
+            if same:
+                if gender:
+                    face2 = men_misalign_images[rand1].image[-13:-4]
+                else:
+                    face2 = women_misalign_images[rand1].image[-13:-4]
             else:
-                face2 = women_misalign_images[rand1].image[-13:-4]
-        else:
-            face2 = secondfaces[0].image[-13:-4]
-
-        ran = random.randint(1, 10)
-        with open('CongruentAligned' + str(ran) + '.csv', 'w', newline='') as file:
-            Headers = ['Face_1', 'Face_2', 'Face_Gender', 'Congruency', 'Block', 'Trial', 'Alignment', 'Condition',
-                       'Type', 'Key-Resp', 'Cor-Ans', 'Accuracy', 'R-time', 'Trial-Start', 'Key-Resp-Start']
+                face2 = secondfaces[0].image[-13:-4]
 
 
-            writer = csv.DictWriter(file, fieldnames=Headers)
-            writer.writeheader()
+            with open('CongruentMisaligned' + str(index) + '.csv', 'w', newline='') as file:
+                Headers = ['Face_1', 'Face_2', 'Face_Gender', 'Congruency', 'Block', 'Trial', 'Alignment', 'Condition',
+                           'Type', 'Key-Resp', 'Cor-Ans', 'Accuracy', 'R-time', 'Trial-Start', 'Key-Resp-Start']
 
-            writer.writerow({'Alignment': '0', 'Condition': condition, 'Cor-Ans': cor_ans,
-                             'Key-Resp': ans, 'R-time': str(1.5 - countdown.getTime()),
-                             'Face_Gender': genders, 'Face_1': face1,
-                             'Face_2': face2,'Trial-Start': "", 'Congruency': '1',
-                             'Type': 'Misaligned Congruent', 'Accuracy': accuracy})
+
+                writer = csv.DictWriter(file, fieldnames=Headers)
+                writer.writeheader()
+
+                writer.writerow({'Alignment': '0', 'Condition': condition, 'Cor-Ans': cor_ans,
+                                 'Key-Resp': ans, 'R-time': rtime,
+                                 'Face_Gender': genders, 'Face_1': face1,
+                                 'Face_2': face2,'Trial-Start': "", 'Congruency': '1',
+                                 'Type': 'Misaligned Congruent', 'Accuracy': accuracy})
 
 
 

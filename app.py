@@ -21,8 +21,6 @@ secondInstruction = images.secondInstructionImage
 practiceInstruction = images.practiceSecondInstructionImage
 
 
-
-
 subjectInfoList = dialoguebox().showDialogBox()
 
 event.globalKeys.clear()
@@ -70,12 +68,16 @@ while flag:
             secondInstruction.autoDraw = False
             win.flip()
             flag = False
+
+for filename in glob.glob("./*.csv"):
+    os.remove(filename)
 timer2 = core.getTime()
 Config.time += timer2 - timer1
 
+
 while True:
-    # mainrandom = random.randint(1, 4)
-    mainrandom = 1
+    mainrandom = random.randint(1, 4)
+    # mainrandom = 1
     print('main random: ' + str(mainrandom))
 
     if mainrandom == 1 and typeOneDone:
@@ -128,41 +130,30 @@ while True:
                 same_counter += 1
                 m_counter += 1
                 globalcounter += 1
-                Congruent_Aligned().CongruentAligned(practice=0, same=1, gender=1)
+                Congruent_Aligned().CongruentAligned(practice=0, same=1, gender=1, index=i)
 
             if samerandom == 1 and gender_random == 0:
 
                 same_counter += 1
                 f_counter += 1
                 globalcounter += 1
-                datadict = Congruent_Aligned().CongruentAligned(practice=0, same=1, gender=0)
-
+                datadict = Congruent_Aligned().CongruentAligned(practice=0, same=1, gender=0, index=i)
 
             if samerandom == 0 and gender_random == 1:
 
                 diff_counter += 1
                 m_counter += 1
                 globalcounter += 1
-                datadict = Congruent_Aligned().CongruentAligned(practice=0, same=0, gender=1)
-
+                datadict = Congruent_Aligned().CongruentAligned(practice=0, same=0, gender=1, index=i)
 
             if samerandom == 0 and gender_random == 0:
 
                 diff_counter += 1
                 f_counter += 1
                 globalcounter += 1
-                datadict = Congruent_Aligned().CongruentAligned(practice=0,same=0, gender=0)
+                datadict = Congruent_Aligned().CongruentAligned(practice=0,same=0, gender=0, index=i)
 
         typeOneDone = True
-    extension = 'csv'
-    all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
-    combined_csv = pd.concat([pd.read_csv(f) for f in all_filenames])
-    combined_csv.to_csv(str(subjectInfoList[0]) + 'D' + str(subjectInfoList[5]) + ".csv", index=False,
-                        encoding='utf-8-sig')
-
-    for filename in glob.glob("./Congruent*.csv"):
-        os.remove(filename)
-    break
 
     # Congruent Misaligned
     if mainrandom == 2:
@@ -189,22 +180,22 @@ while True:
             if samerandom == 1 and gender_random == 1:
                 same_counter += 1
                 m_counter += 1
-                Congruent_Misaligned().CongruentMisaligned(practice=0, same=1, gender=1)
+                Congruent_Misaligned().CongruentMisaligned(practice=0, same=1, gender=1, index=i)
 
             if samerandom == 1 and gender_random == 0:
                 same_counter += 1
                 f_counter += 1
-                Congruent_Misaligned().CongruentMisaligned(practice=0, same=1, gender=0)
+                Congruent_Misaligned().CongruentMisaligned(practice=0, same=1, gender=0, index=i)
 
             if samerandom == 0 and gender_random == 1:
                 diff_counter += 1
                 m_counter += 1
-                Congruent_Misaligned().CongruentMisaligned(practice=0, same=0, gender=1)
+                Congruent_Misaligned().CongruentMisaligned(practice=0, same=0, gender=1, index=i)
 
             if samerandom == 0 and gender_random == 0:
                 diff_counter += 1
                 f_counter += 1
-                Congruent_Misaligned().CongruentMisaligned(practice=0, same=0, gender=0)
+                Congruent_Misaligned().CongruentMisaligned(practice=0, same=0, gender=0, index=i)
         typeTwoDone = True
 
     # Incongruent Aligned
@@ -232,22 +223,22 @@ while True:
             if samerandom == 1 and gender_random == 1:
                 same_counter += 1
                 m_counter += 1
-                Incongruent_Aligned().IncongruentAligned(practice=0, same=1, gender=1)
+                Incongruent_Aligned().IncongruentAligned(practice=0, same=1, gender=1, index=i)
 
             if samerandom == 1 and gender_random == 0:
                 same_counter += 1
                 f_counter += 1
-                Incongruent_Aligned().IncongruentAligned(practice=0, same=1, gender=0)
+                Incongruent_Aligned().IncongruentAligned(practice=0, same=1, gender=0, index=i)
 
             if samerandom == 0 and gender_random == 1:
                 diff_counter += 1
                 m_counter += 1
-                Incongruent_Aligned().IncongruentAligned(practice=0, same=0, gender=1)
+                Incongruent_Aligned().IncongruentAligned(practice=0, same=0, gender=1, index=i)
 
             if samerandom == 0 and gender_random == 0:
                 diff_counter += 1
                 f_counter += 1
-                Incongruent_Aligned().IncongruentAligned(practice=0, same=0, gender=0)
+                Incongruent_Aligned().IncongruentAligned(practice=0, same=0, gender=0, index=i)
         typeThreeDone = True
 
     #Incongruent Misaligned
@@ -275,22 +266,22 @@ while True:
             if samerandom == 1 and gender_random == 1:
                 same_counter += 1
                 m_counter += 1
-                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=1, gender=1)
+                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=1, gender=1, index=i)
 
             if samerandom == 1 and gender_random == 0:
                 same_counter += 1
                 f_counter += 1
-                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=1, gender=0)
+                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=1, gender=0, index=i)
 
             if samerandom == 0 and gender_random == 1:
                 diff_counter += 1
                 m_counter += 1
-                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=0, gender=1)
+                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=0, gender=1, index=i)
 
             if samerandom == 0 and gender_random == 0:
                 diff_counter += 1
                 f_counter += 1
-                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=0, gender=0)
+                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=0, gender=0, index=i)
         typeFourDone = True
 
     # with open('CongruentAligned' + str(55) + '.csv', 'w', newline='') as file:
@@ -299,6 +290,17 @@ while True:
     #      'Gender: ' + str(subjectInfoList[3]), 'Handedness: ' + str(subjectInfoList[4]),
     #      'Resp-Version: Same A_Different L','Stimulation Site: ' + str(subjectInfoList[6]),
     #      'Datetime: ' + str(datetime.datetime.today())])
+
+extension = 'csv'
+all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
+combined_csv = pd.concat([pd.read_csv(f) for f in all_filenames])
+combined_csv.to_csv(str(subjectInfoList[0]) + 'D' + str(subjectInfoList[5]) + ".csv", index=False,
+                    encoding='utf-8-sig')
+
+for filename in glob.glob('./Congruent*.csv'):
+    os.remove(filename)
+for filename in glob.glob('./Incongruent*.csv'):
+    os.remove(filename)
 
 
 

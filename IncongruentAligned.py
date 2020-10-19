@@ -30,7 +30,7 @@ questionMark = image.questionMark
 win = window.win
 
 class Incongruent_Aligned(object):
-    def IncongruentAligned(self, practice, same, gender):
+    def IncongruentAligned(self, practice, same, gender, index):
         generaltimer = core.getTime()
         fixationPoint.draw()
         win.flip()
@@ -173,8 +173,10 @@ class Incongruent_Aligned(object):
             elif countdown.getTime() <= 0:
                 flag = False
 
+        if not practice:
             accuracy = '1' if isCorrectAns else '0'
             ans = anslist[0].upper() if anslist else 'None'
+            rtime = str(1.5 - countdown.getTime()) if anslist else 'None'
             genders = 'Male' if gender else 'Female'
             condition = 'Top Same + Bottom Different' if same else 'Top Different + Bottom Same'
             images = men_align_images if gender else women_align_images
@@ -186,8 +188,8 @@ class Incongruent_Aligned(object):
             else:
                 face2 = seconddifffacelist[0].image[-13:-4]
 
-            ran = random.randint(1, 10)
-            with open('CongruentAligned' + str(ran) + '.csv', 'w', newline='') as file:
+
+            with open('IncongruentAligned' + str(index) + '.csv', 'w', newline='') as file:
                 Headers = ['Face_1', 'Face_2', 'Face_Gender', 'Congruency', 'Block', 'Trial', 'Alignment', 'Condition',
                            'Type', 'Key-Resp', 'Cor-Ans', 'Accuracy', 'R-time', 'Trial-Start', 'Key-Resp-Start']
 
@@ -195,7 +197,7 @@ class Incongruent_Aligned(object):
                 writer.writeheader()
 
                 writer.writerow({'Alignment': '1', 'Condition': condition, 'Cor-Ans': cor_ans,
-                                 'Key-Resp': ans, 'R-time': str(1.5 - countdown.getTime()),
+                                 'Key-Resp': ans, 'R-time': rtime,
                                  'Face_Gender': genders, 'Face_1': face1,
                                  'Face_2': face2,'Trial-Start': "", 'Congruency': '0',
                                  'Type': 'Aligned Incongruent', 'Accuracy': accuracy})

@@ -40,7 +40,6 @@ class PracticeTrials(object):
             gender_random = random.randint(0, 100) % 2
             typerandom = random.randint(1, 4)
 
-
             if not same_random and diff_counter == 8:
                 same_random = 1
             if same_random and same_counter == 8:
@@ -57,25 +56,25 @@ class PracticeTrials(object):
                     f_counter += 1
                     diff_counter += 1
                     for i in range(0, 2):
-                        Congruent_Aligned().CongruentAligned(practice=1,same=0,gender=0)
+                        Congruent_Aligned().CongruentAligned(practice=1,same=0,gender=0, index=i)
 
                 if not same_random and gender_random:
                     m_counter += 1
                     diff_counter += 1
                     for i in range(0, 2):
-                        Congruent_Aligned().CongruentAligned(practice=1,same=0,gender=1)
+                        Congruent_Aligned().CongruentAligned(practice=1,same=0,gender=1, index=i)
 
                 if same_random and not gender_random:
                     f_counter += 1
                     same_counter += 1
                     for i in range(0, 2):
-                        Congruent_Aligned().CongruentAligned(practice=1,same=1,gender=0)
+                        Congruent_Aligned().CongruentAligned(practice=1,same=1,gender=0, index=i)
 
                 if same_random and gender_random:
                     m_counter += 1
                     same_counter += 1
                     for i in range(0, 2):
-                        Congruent_Aligned().CongruentAligned(practice=1,same=1,gender=1)
+                        Congruent_Aligned().CongruentAligned(practice=1,same=1,gender=1, index=i)
 
             #Congruent Misaligned
             if typerandom == 2:
@@ -83,25 +82,25 @@ class PracticeTrials(object):
                     f_counter += 1
                     diff_counter += 1
                     for i in range(0, 2):
-                        Congruent_Misaligned().CongruentMisaligned(practice=1,same=0,gender=0)
+                        Congruent_Misaligned().CongruentMisaligned(practice=1,same=0,gender=0, index=i)
 
                 if not same_random and gender_random:
                     m_counter += 1
                     diff_counter += 1
                     for i in range(0, 2):
-                        Congruent_Misaligned().CongruentMisaligned(practice=1,same=0,gender=1)
+                        Congruent_Misaligned().CongruentMisaligned(practice=1,same=0,gender=1, index=i)
 
                 if same_random and not gender_random:
                     f_counter += 1
                     same_counter += 1
                     for i in range(0, 2):
-                        Congruent_Misaligned().CongruentMisaligned(practice=1,same=1,gender=0)
+                        Congruent_Misaligned().CongruentMisaligned(practice=1,same=1,gender=0, index=i)
 
                 if same_random and gender_random:
                     m_counter += 1
                     same_counter += 1
                     for i in range(0, 2):
-                        Congruent_Misaligned().CongruentMisaligned(practice=1,same=1,gender=1)
+                        Congruent_Misaligned().CongruentMisaligned(practice=1,same=1,gender=1, index=i)
 
             #Incongruent Misaligned
             if typerandom == 3:
@@ -109,25 +108,25 @@ class PracticeTrials(object):
                     f_counter += 1
                     diff_counter += 1
                     for i in range(0, 2):
-                        Incongruent_Misaligned().IncongruentMisaligned(practice=1,same=0,gender=0)
+                        Incongruent_Misaligned().IncongruentMisaligned(practice=1,same=0,gender=0, index=i)
 
                 if not same_random and gender_random:
                     m_counter += 1
                     diff_counter += 1
                     for i in range(0, 2):
-                        Incongruent_Misaligned().IncongruentMisaligned(practice=1,same=0,gender=1)
+                        Incongruent_Misaligned().IncongruentMisaligned(practice=1,same=0,gender=1, index=i)
 
                 if same_random and not gender_random:
                     f_counter += 1
                     same_counter += 1
                     for i in range(0, 2):
-                        Incongruent_Misaligned().IncongruentMisaligned(practice=1,same=1,gender=0)
+                        Incongruent_Misaligned().IncongruentMisaligned(practice=1,same=1,gender=0, index=i)
 
                 if same_random and gender_random:
                     m_counter += 1
                     same_counter += 1
                     for i in range(0, 2):
-                        Incongruent_Misaligned().IncongruentMisaligned(practice=1,same=1,gender=1)
+                        Incongruent_Misaligned().IncongruentMisaligned(practice=1,same=1,gender=1, index=i)
 
             #Incongruent Aligned
             if typerandom == 4:
@@ -135,25 +134,25 @@ class PracticeTrials(object):
                     f_counter += 1
                     diff_counter += 1
                     for i in range(0, 2):
-                        Incongruent_Aligned().IncongruentAligned(practice=1,same=0,gender=0)
+                        Incongruent_Aligned().IncongruentAligned(practice=1,same=0,gender=0, index=i)
 
                 if not same_random and gender_random:
                     m_counter += 1
                     diff_counter += 1
                     for i in range(0, 2):
-                        Incongruent_Aligned().IncongruentAligned(practice=1,same=0,gender=1)
+                        Incongruent_Aligned().IncongruentAligned(practice=1,same=0,gender=1, index=i)
 
                 if same_random and not gender_random:
                     f_counter += 1
                     same_counter += 1
                     for i in range(0, 2):
-                        Incongruent_Aligned().IncongruentAligned(practice=1,same=1,gender=0)
+                        Incongruent_Aligned().IncongruentAligned(practice=1,same=1,gender=0, index=i)
 
                 if same_random and gender_random:
                     m_counter += 1
                     same_counter += 1
                     for i in range(0, 2):
-                        Incongruent_Aligned().IncongruentAligned(practice=1,same=1,gender=1)
+                        Incongruent_Aligned().IncongruentAligned(practice=1,same=1,gender=1, index=i)
 
 
 
