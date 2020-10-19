@@ -8,7 +8,7 @@ from MenMisalign import Men_Misalign
 from WomenMisalign import Women_Misalign
 from MenAlign import Men_Align
 from WomenAlign import Women_Align
-
+import Config
 image = MainAssets()
 correct = image.correct
 wrong = image.wrong

@@ -11,7 +11,7 @@ from MenAlign import Men_Align
 from WomenAlign import Women_Align
 from DifferentTotalLocationsList import DifferentTotalLocationsList
 from DialogueBox import dialoguebox
-
+import Config
 image = MainAssets()
 correct = image.correct
 wrong = image.wrong

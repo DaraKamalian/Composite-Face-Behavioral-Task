@@ -10,6 +10,7 @@ from MenMisalign import Men_Misalign
 from WomenMisalign import Women_Misalign
 from SameUpperLocationsList import SameUpperLocationsList
 from SameLowerLocationsList import SameLowerLocationsList
+import Config
 import Timing
 
 image = MainAssets()
@@ -30,6 +31,7 @@ win = window.win
 
 class Incongruent_Aligned(object):
     def IncongruentAligned(self, practice, same, gender):
+        generaltimer = core.getTime()
         fixationPoint.draw()
         win.flip()
         core.wait(0.2)
@@ -37,7 +39,8 @@ class Incongruent_Aligned(object):
         fixationPoint.autoDraw = False
         win.flip()
         core.wait(0.15)
-
+        localtimer = core.getTime()
+        Config.time += localtimer - generaltimer
         if same:
             if gender:
                 print('inc-same-al-m')

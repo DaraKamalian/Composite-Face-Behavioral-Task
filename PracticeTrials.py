@@ -1,7 +1,6 @@
 import random
-import xlsxwriter
-
-from psychopy import core, event
+import Config
+from psychopy import core
 from Window import window
 from MainAssets import MainAssets
 
@@ -155,6 +154,7 @@ class PracticeTrials(object):
                     same_counter += 1
                     for i in range(0, 2):
                         Incongruent_Aligned().IncongruentAligned(practice=1,same=1,gender=1)
+
 
 
 

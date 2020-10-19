@@ -8,7 +8,7 @@ from psychopy import event, core
 
 
 from DialogueBox import dialoguebox
-import os, csv, glob
+import os, csv, glob, datetime, Config
 import pandas as pd
 
 from Window import window
@@ -36,46 +36,46 @@ typeTwoDone = False
 typeThreeDone = False
 typeFourDone = False
 
-firstTimer = core.getTime()
-# firstInstruction.draw()
-# win.flip()
-# flag = True
-# while flag:
-#     keys = event.getKeys(keyList=['m'])
-#     for key in keys:
-#         if key[0] == 'm':
-#             firstInstruction.autoDraw = False
-#             practiceInstruction.draw()
-#             win.flip()
-#             flag = False
-#
-# flag = True
-# while flag:
-#     keys = event.getKeys(keyList=['m'])
-#     for key in keys:
-#         if key[0] == 'm':
-#             practiceInstruction.autoDraw = False
-#             win.flip()
-#             flag = False
-#
-# PracticeTrials().Practice_Trials()
-#
-# secondInstruction.draw()
-# win.flip()
-# flag = True
-# while flag:
-#     keys = event.getKeys(keyList=['m'])
-#     for key in keys:
-#         if key[0] == 'm':
-#             secondInstruction.autoDraw = False
-#             win.flip()
-#             flag = False
-secondTimer = core.getTime()
-practiceDuration = secondTimer - firstTimer
+timer1 = core.getTime()
+firstInstruction.draw()
+win.flip()
+flag = True
+while flag:
+    keys = event.getKeys(keyList=['m'])
+    for key in keys:
+        if key[0] == 'm':
+            firstInstruction.autoDraw = False
+            practiceInstruction.draw()
+            win.flip()
+            flag = False
+
+flag = True
+while flag:
+    keys = event.getKeys(keyList=['m'])
+    for key in keys:
+        if key[0] == 'm':
+            practiceInstruction.autoDraw = False
+            win.flip()
+            flag = False
+
+PracticeTrials().Practice_Trials()
+
+secondInstruction.draw()
+win.flip()
+flag = True
+while flag:
+    keys = event.getKeys(keyList=['m'])
+    for key in keys:
+        if key[0] == 'm':
+            secondInstruction.autoDraw = False
+            win.flip()
+            flag = False
+timer2 = core.getTime()
+Config.time += timer2 - timer1
 
 while True:
-    mainrandom = random.randint(1, 4)
-    # mainrandom = 3
+    # mainrandom = random.randint(1, 4)
+    mainrandom = 1
     print('main random: ' + str(mainrandom))
 
     if mainrandom == 1 and typeOneDone:
@@ -128,36 +128,41 @@ while True:
                 same_counter += 1
                 m_counter += 1
                 globalcounter += 1
-                Congruent_Aligned().CongruentAligned(practice=0, index=i,
-                                                             practiceDuration=practiceDuration, same=1, gender=1)
+                Congruent_Aligned().CongruentAligned(practice=0, same=1, gender=1)
 
             if samerandom == 1 and gender_random == 0:
 
                 same_counter += 1
                 f_counter += 1
                 globalcounter += 1
-                datadict = Congruent_Aligned().CongruentAligned(practice=0, index=i,
-                                                               practiceDuration=practiceDuration, same=1, gender=0)
-                # data.get_data()[0].close()
+                datadict = Congruent_Aligned().CongruentAligned(practice=0, same=1, gender=0)
+
 
             if samerandom == 0 and gender_random == 1:
 
                 diff_counter += 1
                 m_counter += 1
                 globalcounter += 1
-                datadict = Congruent_Aligned().CongruentAligned(practice=0, index=i,
-                                                     practiceDuration=practiceDuration, same=0, gender=1)
-                # data.get_data()[0].close()
+                datadict = Congruent_Aligned().CongruentAligned(practice=0, same=0, gender=1)
+
 
             if samerandom == 0 and gender_random == 0:
 
                 diff_counter += 1
                 f_counter += 1
                 globalcounter += 1
-                datadict = Congruent_Aligned().CongruentAligned(practice=0, index=i,
-                                                    practiceDuration=practiceDuration,same=0, gender=0)
+                datadict = Congruent_Aligned().CongruentAligned(practice=0,same=0, gender=0)
 
         typeOneDone = True
+    extension = 'csv'
+    all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
+    combined_csv = pd.concat([pd.read_csv(f) for f in all_filenames])
+    combined_csv.to_csv(str(subjectInfoList[0]) + 'D' + str(subjectInfoList[5]) + ".csv", index=False,
+                        encoding='utf-8-sig')
+
+    for filename in glob.glob("./Congruent*.csv"):
+        os.remove(filename)
+    break
 
     # Congruent Misaligned
     if mainrandom == 2:
@@ -184,22 +189,22 @@ while True:
             if samerandom == 1 and gender_random == 1:
                 same_counter += 1
                 m_counter += 1
-                Congruent_Misaligned().CongruentMisaligned(practice=0, same=1, gender=1, index=i)
+                Congruent_Misaligned().CongruentMisaligned(practice=0, same=1, gender=1)
 
             if samerandom == 1 and gender_random == 0:
                 same_counter += 1
                 f_counter += 1
-                Congruent_Misaligned().CongruentMisaligned(practice=0, same=1, gender=0, index=i)
+                Congruent_Misaligned().CongruentMisaligned(practice=0, same=1, gender=0)
 
             if samerandom == 0 and gender_random == 1:
                 diff_counter += 1
                 m_counter += 1
-                Congruent_Misaligned().CongruentMisaligned(practice=0, same=0, gender=1, index=i)
+                Congruent_Misaligned().CongruentMisaligned(practice=0, same=0, gender=1)
 
             if samerandom == 0 and gender_random == 0:
                 diff_counter += 1
                 f_counter += 1
-                Congruent_Misaligned().CongruentMisaligned(practice=0, same=0, gender=0, index=i)
+                Congruent_Misaligned().CongruentMisaligned(practice=0, same=0, gender=0)
         typeTwoDone = True
 
     # Incongruent Aligned
@@ -227,22 +232,22 @@ while True:
             if samerandom == 1 and gender_random == 1:
                 same_counter += 1
                 m_counter += 1
-                Incongruent_Aligned().IncongruentAligned(practice=0, same=1, gender=1, index=i)
+                Incongruent_Aligned().IncongruentAligned(practice=0, same=1, gender=1)
 
             if samerandom == 1 and gender_random == 0:
                 same_counter += 1
                 f_counter += 1
-                Incongruent_Aligned().IncongruentAligned(practice=0, same=1, gender=0, index=i)
+                Incongruent_Aligned().IncongruentAligned(practice=0, same=1, gender=0)
 
             if samerandom == 0 and gender_random == 1:
                 diff_counter += 1
                 m_counter += 1
-                Incongruent_Aligned().IncongruentAligned(practice=0, same=0, gender=1, index=i)
+                Incongruent_Aligned().IncongruentAligned(practice=0, same=0, gender=1)
 
             if samerandom == 0 and gender_random == 0:
                 diff_counter += 1
                 f_counter += 1
-                Incongruent_Aligned().IncongruentAligned(practice=0, same=0, gender=0, index=i)
+                Incongruent_Aligned().IncongruentAligned(practice=0, same=0, gender=0)
         typeThreeDone = True
 
     #Incongruent Misaligned
@@ -270,31 +275,39 @@ while True:
             if samerandom == 1 and gender_random == 1:
                 same_counter += 1
                 m_counter += 1
-                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=1, gender=1, index=i)
+                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=1, gender=1)
 
             if samerandom == 1 and gender_random == 0:
                 same_counter += 1
                 f_counter += 1
-                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=1, gender=0, index=i)
+                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=1, gender=0)
 
             if samerandom == 0 and gender_random == 1:
                 diff_counter += 1
                 m_counter += 1
-                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=0, gender=1, index=i)
+                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=0, gender=1)
 
             if samerandom == 0 and gender_random == 0:
                 diff_counter += 1
                 f_counter += 1
-                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=0, gender=0, index=i)
+                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=0, gender=0)
         typeFourDone = True
 
+    # with open('CongruentAligned' + str(55) + '.csv', 'w', newline='') as file:
+    #     writer = csv.writer(file)
+    #     writer.writerow(['Name: ' + str(subjectInfoList[0]), 'Age: ' + str(subjectInfoList[2]),
+    #      'Gender: ' + str(subjectInfoList[3]), 'Handedness: ' + str(subjectInfoList[4]),
+    #      'Resp-Version: Same A_Different L','Stimulation Site: ' + str(subjectInfoList[6]),
+    #      'Datetime: ' + str(datetime.datetime.today())])
 
 
 
-    extension = 'csv'
-    all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
-    combined_csv = pd.concat([pd.read_csv(f) for f in all_filenames])
-    combined_csv.to_csv(str(subjectInfoList[0]) + ".csv", index=False, encoding='utf-8-sig')
+
+
+
+
+
+
 
 
 

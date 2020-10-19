@@ -1,5 +1,5 @@
 import random
-
+import Config
 import csv
 from psychopy import core, event
 from Window import window
@@ -31,9 +31,7 @@ class Congruent_Aligned(object):
     duration = 0
     def CongruentAligned(self, practice, gender, same):
 
-        # duration += timing
         generalTimer = core.getTime()
-
         fixationPoint.draw()
         win.flip()
 
@@ -41,6 +39,7 @@ class Congruent_Aligned(object):
         fixationPoint.autoDraw = False
         win.flip()
         localtimer = core.getTime()
+        Config.time += localtimer - generalTimer
         core.wait(0.15)
         if same:
             if gender:
@@ -178,7 +177,7 @@ class Congruent_Aligned(object):
                              'Key-Resp': ans, 'R-time': str(1.5 - countdown.getTime()),
                              'Face_Gender': genders, 'Face_1': images[rand1].image[-13:-4],
                              'Face_2': images[rand1].image[-13:-4],
-                             'Trial-Start': "", 'Congruency': '1',
+                             'Trial-Start': Config.time, 'Congruency': '1',
                              'Type': 'Aligned Congruent', 'Accuracy': accuracy})
 
 
