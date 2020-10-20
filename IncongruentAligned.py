@@ -182,8 +182,8 @@ class Incongruent_Aligned(object):
             ans = anslist[0].upper() if anslist else 'None'
             rtime = str(1.5 - countdown.getTime()) if anslist else 'None'
             genders = 'Male' if gender else 'Female'
-            condition = 'Top Same + Bottom Different' if same else 'Top Different + Bottom Same'
-            images = men_align_images if gender else women_align_images
+            condition = '2' if same else '3'
+            key_resp_started = '' if anslist else 'None'
             cor_ans = 'A' if same else 'L'
             face1 = men_align_images[rand1].image[-13:-4] if gender else women_align_images[rand1].image[-13:-4]
 
@@ -198,8 +198,8 @@ class Incongruent_Aligned(object):
             toWrite = {'Alignment': '1', 'Condition': condition, 'Cor-Ans': cor_ans,
                        'Key-Resp': ans, 'R-time': rtime,
                        'Face_Gender': genders, 'Face_1': face1,
-                       'Face_2': face2,
+                       'Face_2': face2,'Trial': index,
                        'Trial-Start': str(Config.time), 'Congruency': '0',
-                       'Type': 'Aligned Incongruent', 'Accuracy': accuracy}
+                       'Type': 'Aligned Incongruent', 'Accuracy': accuracy, 'Key-Resp-Start':key_resp_started}
 
             Config.append_dict_as_row(Config.filename, dict_of_elem=toWrite, headers=Headers)

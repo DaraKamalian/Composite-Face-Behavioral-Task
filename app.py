@@ -34,85 +34,110 @@ typeTwoDone = False
 typeThreeDone = False
 typeFourDone = False
 
+typeonecounter = 0
+typetwocounter = 0
+typethreecounter = 0
+typefourcounter = 0
+
 for filename in glob.glob('./*.csv'):
     os.remove(filename)
 
-timer1 = core.getTime()
-firstInstruction.draw()
-win.flip()
-flag = True
-while flag:
-    keys = event.getKeys(keyList=['m'])
-    for key in keys:
-        if key[0] == 'm':
-            firstInstruction.autoDraw = False
-            practiceInstruction.draw()
-            win.flip()
-            flag = False
-
-flag = True
-while flag:
-    keys = event.getKeys(keyList=['m'])
-    for key in keys:
-        if key[0] == 'm':
-            practiceInstruction.autoDraw = False
-            win.flip()
-            flag = False
-
-PracticeTrials().Practice_Trials()
-
-secondInstruction.draw()
-win.flip()
-flag = True
-while flag:
-    keys = event.getKeys(keyList=['m'])
-    for key in keys:
-        if key[0] == 'm':
-            secondInstruction.autoDraw = False
-            win.flip()
-            flag = False
-
-for filename in glob.glob("./*.csv"):
-    os.remove(filename)
-timer2 = core.getTime()
-Config.time += timer2 - timer1
+# timer1 = core.getTime()
+# firstInstruction.draw()
+# win.flip()
+# flag = True
+# while flag:
+#     keys = event.getKeys(keyList=['m'])
+#     for key in keys:
+#         if key[0] == 'm':
+#             firstInstruction.autoDraw = False
+#             practiceInstruction.draw()
+#             win.flip()
+#             flag = False
+#
+# flag = True
+# while flag:
+#     keys = event.getKeys(keyList=['m'])
+#     for key in keys:
+#         if key[0] == 'm':
+#             practiceInstruction.autoDraw = False
+#             win.flip()
+#             flag = False
+#
+# PracticeTrials().Practice_Trials()
+#
+# secondInstruction.draw()
+# win.flip()
+# flag = True
+# while flag:
+#     keys = event.getKeys(keyList=['m'])
+#     for key in keys:
+#         if key[0] == 'm':
+#             secondInstruction.autoDraw = False
+#             win.flip()
+#             flag = False
+#
+# for filename in glob.glob("./*.csv"):
+#     os.remove(filename)
+# timer2 = core.getTime()
+# Config.time += timer2 - timer1
 
 Config.filename = subjectInfoList[0] + '-' + 'D' + subjectInfoList[5] + '.csv'
 Config.createFile(Config.filename)
-while True:
-    mainrandom = random.randint(1, 4)
-    # mainrandom = 1
-    print('main random: ' + str(mainrandom))
 
-    if mainrandom == 1 and typeOneDone:
-        mainrandom = 2
-    if mainrandom == 2 and typeTwoDone:
-        mainrandom = 3
-    if mainrandom == 3 and typeThreeDone:
-        mainrandom = 4
-    if mainrandom == 4 and typeFourDone:
+# Block counter
+for i in range(1, 5):
 
-        if not typeOneDone:
-            mainrandom = 1
-        elif not typeTwoDone:
+    typeonecounter = 0
+    typetwocounter = 0
+    typethreecounter = 0
+    typefourcounter = 0
+
+    for i in range(1, 41):
+        mainrandom = random.randint(1, 4)
+        # mainrandom = 1
+        print('main random: ' + str(mainrandom))
+
+        if typeonecounter == 10:
+            typeOneDone = True
+
+        if typetwocounter == 10:
+            typeTwoDone = True
+
+        if typethreecounter == 10:
+            typeThreeDone = True
+
+        if typefourcounter == 10:
+            typeFourDone = True
+
+        if mainrandom == 1 and typeOneDone:
             mainrandom = 2
-        elif not typeThreeDone:
+        if mainrandom == 2 and typeTwoDone:
             mainrandom = 3
-        else:
-            break
+        if mainrandom == 3 and typeThreeDone:
+            mainrandom = 4
+        if mainrandom == 4 and typeFourDone:
 
+            if not typeOneDone:
+                mainrandom = 1
+            elif not typeTwoDone:
+                mainrandom = 2
+            elif not typeThreeDone:
+                mainrandom = 3
+            else:
+                break
 
-    # Congruent Aligned
-    if mainrandom == 1:
+        # Congruent Aligned
+        if mainrandom == 1:
 
-        same_counter = 0
-        diff_counter = 0
+            same_counter = 0
+            diff_counter = 0
+            typeonecounter += 1
+            m_counter = 0
+            f_counter = 0
+            globalcounter = 0
 
-        m_counter = 0
-        f_counter = 0
-        globalcounter = 0
-
-        for i in range(1, 11):
+            # for i in range(1, 11):
 
             gender_random = random.randint(0, 100) % 2
             # 0 -> female, 1 -> male
@@ -157,19 +182,20 @@ while True:
                 globalcounter += 1
                 datadict = Congruent_Aligned().CongruentAligned(practice=0,same=0, gender=0, index=i)
 
-        typeOneDone = True
+            # typeOneDone = True
 
-    # Congruent Misaligned
-    if mainrandom == 2:
-        same_counter = 0
-        diff_counter = 0
+        # Congruent Misaligned
+        if mainrandom == 2:
+            same_counter = 0
+            diff_counter = 0
+            typetwocounter += 1
+            m_counter = 0
+            f_counter = 0
 
-        m_counter = 0
-        f_counter = 0
-
-        for i in range(1, 11):
+            # for i in range(1, 11):
             gender_random = random.randint(0, 100) % 2
             # 0 -> female, 1 -> male
+
             samerandom = random.randint(0, 100) % 2
             if samerandom == 0 and diff_counter == 5:
                 samerandom = 1
@@ -200,17 +226,17 @@ while True:
                 diff_counter += 1
                 f_counter += 1
                 Congruent_Misaligned().CongruentMisaligned(practice=0, same=0, gender=0, index=i)
-        typeTwoDone = True
+            # typeTwoDone = True
 
-    # Incongruent Aligned
-    if mainrandom == 3:
-        same_counter = 0
-        diff_counter = 0
+        # Incongruent Aligned
+        if mainrandom == 3:
+            same_counter = 0
+            diff_counter = 0
+            typethreecounter += 1
+            m_counter = 0
+            f_counter = 0
 
-        m_counter = 0
-        f_counter = 0
-
-        for i in range(1, 11):
+            # for i in range(1, 11):
             gender_random = random.randint(0, 100) % 2
             # 0 -> female, 1 -> male
             samerandom = random.randint(0, 100) % 2
@@ -243,17 +269,17 @@ while True:
                 diff_counter += 1
                 f_counter += 1
                 Incongruent_Aligned().IncongruentAligned(practice=0, same=0, gender=0, index=i)
-        typeThreeDone = True
+            # typeThreeDone = True
 
-    #Incongruent Misaligned
-    if mainrandom == 4:
-        same_counter = 0
-        diff_counter = 0
+        # Incongruent Misaligned
+        if mainrandom == 4:
+            same_counter = 0
+            diff_counter = 0
+            typefourcounter += 1
+            m_counter = 0
+            f_counter = 0
 
-        m_counter = 0
-        f_counter = 0
-
-        for i in range(1, 11):
+            # for i in range(1, 11):
             gender_random = random.randint(0, 100) % 2
             # 0 -> female, 1 -> male
             samerandom = random.randint(0, 100) % 2
@@ -286,27 +312,17 @@ while True:
                 diff_counter += 1
                 f_counter += 1
                 Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=0, gender=0, index=i)
-        typeFourDone = True
-
-    # with open('CongruentAligned' + str(55) + '.csv', 'w', newline='') as file:
-    #     writer = csv.writer(file)
-    #     writer.writerow(['Name: ' + str(subjectInfoList[0]), 'Age: ' + str(subjectInfoList[2]),
-    #      'Gender: ' + str(subjectInfoList[3]), 'Handedness: ' + str(subjectInfoList[4]),
-    #      'Resp-Version: Same A_Different L','Stimulation Site: ' + str(subjectInfoList[6]),
-    #      'Datetime: ' + str(datetime.datetime.today())])
-
-# extension = 'csv'
-# all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
-# combined_csv = pd.concat([pd.read_csv(f) for f in all_filenames])
-# combined_csv.to_csv(str(subjectInfoList[0]) + 'D' + str(subjectInfoList[5]) + ".csv", index=False,
-#                     encoding='utf-8-sig')
-# #
-# for filename in glob.glob('./Congruent*.csv'):
-#     os.remove(filename)
-# for filename in glob.glob('./Incongruent*.csv'):
-#     os.remove(filename)
+            # typeFourDone = True
 
 
+for filename in glob.glob('./Congruent*.csv'):
+    os.remove(filename)
+for filename in glob.glob('./Incongruent*.csv'):
+    os.remove(filename)
+
+Config.convertToExcel()
+for filename in glob.glob('./*.csv'):
+    os.remove(filename)
 
 
 
