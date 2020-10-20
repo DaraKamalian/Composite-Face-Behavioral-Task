@@ -4,7 +4,7 @@ from xlsxwriter.workbook import Workbook
 
 time = 0
 filename = ''
-
+practiceDuration = 0
 
 def append_dict_as_row(file_name, dict_of_elem, headers):
     with open(file_name, 'a+', newline='') as write_obj:
@@ -31,3 +31,4 @@ def convertToExcel():
                 for c, col in enumerate(row):
                     worksheet.write(r, c, col)
         workbook.close()
+

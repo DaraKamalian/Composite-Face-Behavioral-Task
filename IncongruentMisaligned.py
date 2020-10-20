@@ -1,4 +1,4 @@
-import random, csv
+import random
 
 from psychopy import core, event
 from Window import window
@@ -32,6 +32,8 @@ win = window.win
 
 class Incongruent_Misaligned(object):
     def IncongruentMisaligned(self, practice, same, gender, index):
+        generalTimer = core.getTime()
+
         fixationPoint.draw()
         win.flip()
         core.wait(0.2)
@@ -52,6 +54,8 @@ class Incongruent_Misaligned(object):
                 print('inc-diff-mis-f')
 
         rand1 = random.randint(0, 19)
+        localtimer = core.getTime()
+        Config.practiceDuration += localtimer - generalTimer
         if gender:
             men_align_images[rand1].draw()
             print(men_align_images[rand1].image)
@@ -127,12 +131,15 @@ class Incongruent_Misaligned(object):
         countdown = core.CountdownTimer(1.5)
         isCorrectAns = False
         anslist = []
+        timerlist = []
         flag = True
         while flag:
             # keys = event.getKeys(keyList=['a', 'l'])
             keys = event.waitKeys(keyList=['a', 'l'], maxWait=1.5)
             if keys:
                 for key in keys:
+                    keytimer = core.getTime()
+                    timerlist.append(keytimer)
                     if key == 'a':
                         if practice:
                             if same:
@@ -169,15 +176,23 @@ class Incongruent_Misaligned(object):
                 isLate = True
                 flag = False
 
+        questionMark.autoDraw = False
+        win.flip()
+        core.wait(1.5)
+
         if not practice:
-            accuracy = '1' if isCorrectAns else '0'
+            if anslist:
+                accuracy = '1' if isCorrectAns else '0'
+            else:
+                accuracy = 'None'
             ans = anslist[0].upper() if anslist else 'None'
             rtime = str(1.5 - countdown.getTime()) if anslist else 'None'
             genders = 'Male' if gender else 'Female'
             condition = '2' if same else '3'
+            trialstart = Config.practiceDuration
             key_resp_started = '' if anslist else 'None'
             cor_ans = 'A' if same else 'L'
-
+            keyrespstart = Config.practiceDuration + timerlist[0] - localtimer if anslist else 'None'
             face1 = men_align_images[rand1].image[-13:-4] if gender else women_align_images[rand1].image[-13:-4]
 
             if same:
@@ -192,7 +207,8 @@ class Incongruent_Misaligned(object):
                        'Key-Resp': ans, 'R-time': rtime,
                        'Face_Gender': genders, 'Face_1': face1,
                        'Face_2': face2,'Trial': index,
-                       'Trial-Start': str(Config.time), 'Congruency': '0',
-                       'Type': 'Misaligned Incongruent', 'Accuracy': accuracy, 'Key-Resp-Start':key_resp_started}
+                       'Trial-Start': str(trialstart), 'Congruency': '0',
+                       'Type': 'Misaligned Incongruent', 'Accuracy': accuracy, 'Key-Resp-Start': keyrespstart}
 
             Config.append_dict_as_row(Config.filename, dict_of_elem=toWrite, headers=Headers)
+            Config.practiceDuration += timerlist[0] - localtimer

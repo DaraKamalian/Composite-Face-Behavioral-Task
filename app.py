@@ -77,16 +77,15 @@ for filename in glob.glob('./*.csv'):
 #             win.flip()
 #             flag = False
 #
-# for filename in glob.glob("./*.csv"):
-#     os.remove(filename)
 # timer2 = core.getTime()
-# Config.time += timer2 - timer1
 
+# Config.practiceDuration = (timer2 - timer1)
+Config.practiceDuration = 60
 Config.filename = subjectInfoList[0] + '-' + 'D' + subjectInfoList[5] + '.csv'
 Config.createFile(Config.filename)
 
 # Block counter
-for i in range(1, 5):
+for index in range(1, 5):
 
     typeonecounter = 0
     typetwocounter = 0
@@ -137,8 +136,6 @@ for i in range(1, 5):
             f_counter = 0
             globalcounter = 0
 
-            # for i in range(1, 11):
-
             gender_random = random.randint(0, 100) % 2
             # 0 -> female, 1 -> male
             samerandom = random.randint(0, 100) % 2
@@ -182,7 +179,6 @@ for i in range(1, 5):
                 globalcounter += 1
                 datadict = Congruent_Aligned().CongruentAligned(practice=0,same=0, gender=0, index=i)
 
-            # typeOneDone = True
 
         # Congruent Misaligned
         if mainrandom == 2:
@@ -226,7 +222,7 @@ for i in range(1, 5):
                 diff_counter += 1
                 f_counter += 1
                 Congruent_Misaligned().CongruentMisaligned(practice=0, same=0, gender=0, index=i)
-            # typeTwoDone = True
+
 
         # Incongruent Aligned
         if mainrandom == 3:
@@ -269,7 +265,7 @@ for i in range(1, 5):
                 diff_counter += 1
                 f_counter += 1
                 Incongruent_Aligned().IncongruentAligned(practice=0, same=0, gender=0, index=i)
-            # typeThreeDone = True
+
 
         # Incongruent Misaligned
         if mainrandom == 4:
@@ -312,7 +308,7 @@ for i in range(1, 5):
                 diff_counter += 1
                 f_counter += 1
                 Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=0, gender=0, index=i)
-            # typeFourDone = True
+
 
 
 for filename in glob.glob('./Congruent*.csv'):

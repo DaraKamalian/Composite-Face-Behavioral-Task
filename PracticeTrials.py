@@ -50,7 +50,7 @@ class PracticeTrials(object):
             if gender_random and m_counter == 8:
                 gender_random = 0
 
-            #Congruent Aligned
+            # Congruent Aligned
             if typerandom == 1:
                 if not same_random and not gender_random:
                     f_counter += 1
@@ -76,7 +76,7 @@ class PracticeTrials(object):
                     for i in range(0, 2):
                         Congruent_Aligned().CongruentAligned(practice=1,same=1,gender=1, index=i)
 
-            #Congruent Misaligned
+            # Congruent Misaligned
             if typerandom == 2:
                 if not same_random and not gender_random:
                     f_counter += 1
@@ -102,7 +102,7 @@ class PracticeTrials(object):
                     for i in range(0, 2):
                         Congruent_Misaligned().CongruentMisaligned(practice=1,same=1,gender=1, index=i)
 
-            #Incongruent Misaligned
+            # Incongruent Misaligned
             if typerandom == 3:
                 if not same_random and not gender_random:
                     f_counter += 1
@@ -128,7 +128,7 @@ class PracticeTrials(object):
                     for i in range(0, 2):
                         Incongruent_Misaligned().IncongruentMisaligned(practice=1,same=1,gender=1, index=i)
 
-            #Incongruent Aligned
+            # Incongruent Aligned
             if typerandom == 4:
                 if not same_random and not gender_random:
                     f_counter += 1
