@@ -31,7 +31,7 @@ questionMark = image.questionMark
 win = window.win
 
 class Congruent_Misaligned(object):
-    def CongruentMisaligned(self, practice, same, gender, index):
+    def CongruentMisaligned(self, practice, same, gender, index, block):
 
         generalTimer = core.getTime()
         fixationPoint.draw()
@@ -197,7 +197,7 @@ class Congruent_Misaligned(object):
                            'Type', 'Key-Resp', 'Cor-Ans', 'Accuracy', 'R-time', 'Trial-Start', 'Key-Resp-Start']
 
             toWrite = {'Alignment': '0', 'Condition': condition, 'Cor-Ans': cor_ans,
-                       'Key-Resp': ans, 'R-time': rtime,
+                       'Key-Resp': ans, 'R-time': rtime, 'Block': block,
                        'Face_Gender': genders, 'Face_1': face1,
                        'Face_2': face2,'Trial': index,
                        'Trial-Start': str(trialstart), 'Congruency': '1',

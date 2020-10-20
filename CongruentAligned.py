@@ -26,7 +26,7 @@ win = window.win
 
 class Congruent_Aligned(object):
 
-    def CongruentAligned(self, practice, gender, same, index):
+    def CongruentAligned(self, practice, gender, same, index, block):
 
         generalTimer = core.getTime()
         fixationPoint.draw()
@@ -190,7 +190,7 @@ class Congruent_Aligned(object):
                            'Type', 'Key-Resp', 'Cor-Ans', 'Accuracy', 'R-time', 'Trial-Start', 'Key-Resp-Start']
 
             toWrite = {'Alignment': '1', 'Condition': condition, 'Cor-Ans': cor_ans,
-                             'Key-Resp': ans, 'R-time': rtime,
+                             'Key-Resp': ans, 'R-time': rtime, 'Block': block,
                              'Face_Gender': genders, 'Face_1': face1,
                              'Face_2': face2, 'Trial': index,
                              'Trial-Start': str(trialstart), 'Congruency': '1',

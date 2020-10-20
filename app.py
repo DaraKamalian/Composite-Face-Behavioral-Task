@@ -156,28 +156,28 @@ for index in range(1, 5):
                 same_counter += 1
                 m_counter += 1
                 globalcounter += 1
-                Congruent_Aligned().CongruentAligned(practice=0, same=1, gender=1, index=i)
+                Congruent_Aligned().CongruentAligned(practice=0, same=1, gender=1, index=i, block=index)
 
             if samerandom == 1 and gender_random == 0:
 
                 same_counter += 1
                 f_counter += 1
                 globalcounter += 1
-                datadict = Congruent_Aligned().CongruentAligned(practice=0, same=1, gender=0, index=i)
+                datadict = Congruent_Aligned().CongruentAligned(practice=0, same=1, gender=0, index=i, block=index)
 
             if samerandom == 0 and gender_random == 1:
 
                 diff_counter += 1
                 m_counter += 1
                 globalcounter += 1
-                datadict = Congruent_Aligned().CongruentAligned(practice=0, same=0, gender=1, index=i)
+                datadict = Congruent_Aligned().CongruentAligned(practice=0, same=0, gender=1, index=i, block=index)
 
             if samerandom == 0 and gender_random == 0:
 
                 diff_counter += 1
                 f_counter += 1
                 globalcounter += 1
-                datadict = Congruent_Aligned().CongruentAligned(practice=0,same=0, gender=0, index=i)
+                datadict = Congruent_Aligned().CongruentAligned(practice=0,same=0, gender=0, index=i, block=index)
 
 
         # Congruent Misaligned
@@ -206,22 +206,22 @@ for index in range(1, 5):
             if samerandom == 1 and gender_random == 1:
                 same_counter += 1
                 m_counter += 1
-                Congruent_Misaligned().CongruentMisaligned(practice=0, same=1, gender=1, index=i)
+                Congruent_Misaligned().CongruentMisaligned(practice=0, same=1, gender=1, index=i, block=index)
 
             if samerandom == 1 and gender_random == 0:
                 same_counter += 1
                 f_counter += 1
-                Congruent_Misaligned().CongruentMisaligned(practice=0, same=1, gender=0, index=i)
+                Congruent_Misaligned().CongruentMisaligned(practice=0, same=1, gender=0, index=i, block=index)
 
             if samerandom == 0 and gender_random == 1:
                 diff_counter += 1
                 m_counter += 1
-                Congruent_Misaligned().CongruentMisaligned(practice=0, same=0, gender=1, index=i)
+                Congruent_Misaligned().CongruentMisaligned(practice=0, same=0, gender=1, index=i, block=index)
 
             if samerandom == 0 and gender_random == 0:
                 diff_counter += 1
                 f_counter += 1
-                Congruent_Misaligned().CongruentMisaligned(practice=0, same=0, gender=0, index=i)
+                Congruent_Misaligned().CongruentMisaligned(practice=0, same=0, gender=0, index=i, block=index)
 
 
         # Incongruent Aligned
@@ -249,22 +249,22 @@ for index in range(1, 5):
             if samerandom == 1 and gender_random == 1:
                 same_counter += 1
                 m_counter += 1
-                Incongruent_Aligned().IncongruentAligned(practice=0, same=1, gender=1, index=i)
+                Incongruent_Aligned().IncongruentAligned(practice=0, same=1, gender=1, index=i, block=index)
 
             if samerandom == 1 and gender_random == 0:
                 same_counter += 1
                 f_counter += 1
-                Incongruent_Aligned().IncongruentAligned(practice=0, same=1, gender=0, index=i)
+                Incongruent_Aligned().IncongruentAligned(practice=0, same=1, gender=0, index=i, block=index)
 
             if samerandom == 0 and gender_random == 1:
                 diff_counter += 1
                 m_counter += 1
-                Incongruent_Aligned().IncongruentAligned(practice=0, same=0, gender=1, index=i)
+                Incongruent_Aligned().IncongruentAligned(practice=0, same=0, gender=1, index=i, block=index)
 
             if samerandom == 0 and gender_random == 0:
                 diff_counter += 1
                 f_counter += 1
-                Incongruent_Aligned().IncongruentAligned(practice=0, same=0, gender=0, index=i)
+                Incongruent_Aligned().IncongruentAligned(practice=0, same=0, gender=0, index=i, block=index)
 
 
         # Incongruent Misaligned
@@ -292,22 +292,22 @@ for index in range(1, 5):
             if samerandom == 1 and gender_random == 1:
                 same_counter += 1
                 m_counter += 1
-                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=1, gender=1, index=i)
+                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=1, gender=1, index=i, block=index)
 
             if samerandom == 1 and gender_random == 0:
                 same_counter += 1
                 f_counter += 1
-                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=1, gender=0, index=i)
+                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=1, gender=0, index=i, block=index)
 
             if samerandom == 0 and gender_random == 1:
                 diff_counter += 1
                 m_counter += 1
-                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=0, gender=1, index=i)
+                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=0, gender=1, index=i, block=index)
 
             if samerandom == 0 and gender_random == 0:
                 diff_counter += 1
                 f_counter += 1
-                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=0, gender=0, index=i)
+                Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=0, gender=0, index=i, block=index)
 
 
 

@@ -30,7 +30,7 @@ questionMark = image.questionMark
 win = window.win
 
 class Incongruent_Aligned(object):
-    def IncongruentAligned(self, practice, same, gender, index):
+    def IncongruentAligned(self, practice, same, gender, index, block):
         generaltimer = core.getTime()
         fixationPoint.draw()
         win.flip()
@@ -210,7 +210,7 @@ class Incongruent_Aligned(object):
                            'Type', 'Key-Resp', 'Cor-Ans', 'Accuracy', 'R-time', 'Trial-Start', 'Key-Resp-Start']
 
             toWrite = {'Alignment': '1', 'Condition': condition, 'Cor-Ans': cor_ans,
-                       'Key-Resp': ans, 'R-time': rtime,
+                       'Key-Resp': ans, 'R-time': rtime, 'Block': block,
                        'Face_Gender': genders, 'Face_1': face1,
                        'Face_2': face2,'Trial': index,
                        'Trial-Start': str(trialstart), 'Congruency': '0',

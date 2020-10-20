@@ -31,7 +31,7 @@ win = window.win
 
 
 class Incongruent_Misaligned(object):
-    def IncongruentMisaligned(self, practice, same, gender, index):
+    def IncongruentMisaligned(self, practice, same, gender, index, block):
         generalTimer = core.getTime()
 
         fixationPoint.draw()
@@ -204,7 +204,7 @@ class Incongruent_Misaligned(object):
                        'Type', 'Key-Resp', 'Cor-Ans', 'Accuracy', 'R-time', 'Trial-Start', 'Key-Resp-Start']
 
             toWrite = {'Alignment': '0', 'Condition': condition, 'Cor-Ans': cor_ans,
-                       'Key-Resp': ans, 'R-time': rtime,
+                       'Key-Resp': ans, 'R-time': rtime, 'Block': block,
                        'Face_Gender': genders, 'Face_1': face1,
                        'Face_2': face2,'Trial': index,
                        'Trial-Start': str(trialstart), 'Congruency': '0',
