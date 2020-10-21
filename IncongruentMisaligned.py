@@ -70,7 +70,7 @@ class Incongruent_Misaligned(object):
         men_align_images[rand1].autoDraw = False
         women_align_images[rand1].autoDraw = False
         win.flip()
-        core.wait(0.4)
+        core.wait(0.5)
 
         if gender:
             images = men_misalign_images
@@ -80,6 +80,7 @@ class Incongruent_Misaligned(object):
             locations = women_misalign_locations
         secondfacedifflist = []
         secondfacesamelist = []
+        timerlist = []
         if same:
             obj = SameUpperLocationsList()
             newLocations = SameUpperLocationsList.SameUpperLocationsList(obj,
@@ -98,7 +99,7 @@ class Incongruent_Misaligned(object):
                     # print(item.image)
                     break
 
-            core.wait(0.5)
+            core.wait(0.2)
             secondfacesamelist[0].autoDraw = False
             questionMark.draw()
             win.flip()
@@ -127,17 +128,16 @@ class Incongruent_Misaligned(object):
             questionMark.draw()
             win.flip()
 
-        countdown = core.CountdownTimer(1.5)
+        # countdown = core.CountdownTimer(1.5)
         isCorrectAns = False
         anslist = []
-        timerlist = []
+        keytimerlist = []
         flag = True
         while flag:
-            keys = event.waitKeys(keyList=['a', 'l'], maxWait=1.5)
+            keys = event.waitKeys(keyList=['a', 'l'], timeStamped=True)
             if keys:
                 for key in keys:
-                    keytimer = core.getTime()
-                    timerlist.append(keytimer)
+                    keytimerlist.append(key[1] + 0.2)
                     if key == 'a':
                         if practice:
                             if same:
@@ -166,17 +166,17 @@ class Incongruent_Misaligned(object):
                             anslist.append('L')
                         isCorrectAns = False if same else True
                         flag = False
-            elif countdown.getTime() <= 0:
-                if practice:
-                    wrong.draw()
-                    win.flip()
-                    core.wait(2)
-                isLate = True
-                flag = False
-
-        questionMark.autoDraw = False
-        win.flip()
-        core.wait(1.5)
+        #     elif countdown.getTime() <= 0:
+        #         if practice:
+        #             wrong.draw()
+        #             win.flip()
+        #             core.wait(2)
+        #         isLate = True
+        #         flag = False
+        #
+        # questionMark.autoDraw = False
+        # win.flip()
+        core.wait(1)
 
         if not practice:
             if anslist:
@@ -184,13 +184,12 @@ class Incongruent_Misaligned(object):
             else:
                 accuracy = 'None'
             ans = anslist[0].upper() if anslist else 'None'
-            rtime = str(1.5 - countdown.getTime()) if anslist else 'None'
+            rtime = keytimerlist[0]
             genders = 'Male' if gender else 'Female'
             condition = '2' if same else '3'
             trialstart = Config.practiceDuration
-            key_resp_started = '' if anslist else 'None'
             cor_ans = 'A' if same else 'L'
-            keyrespstart = Config.practiceDuration + timerlist[0] - localtimer if anslist else 'None'
+            keyrespstart = Config.practiceDuration + keytimerlist[0] - localtimer if anslist else 'None'
             face1 = men_align_images[rand1].image[-13:-4] if gender else women_align_images[rand1].image[-13:-4]
 
             if same:
@@ -210,4 +209,4 @@ class Incongruent_Misaligned(object):
 
             Config.append_dict_as_row(Config.filename, dict_of_elem=toWrite, headers=Headers)
             if anslist:
-                Config.practiceDuration += timerlist[0] - localtimer
+                Config.practiceDuration += keytimerlist[0] - localtimer

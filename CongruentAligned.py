@@ -36,7 +36,6 @@ class Congruent_Aligned(object):
         fixationPoint.autoDraw = False
         win.flip()
 
-
         core.wait(0.15)
         if same:
             if gender:
@@ -68,7 +67,7 @@ class Congruent_Aligned(object):
         men_align_images[rand1].autoDraw = False
         women_align_images[rand1].autoDraw = False
         win.flip()
-        core.wait(0.4)
+        core.wait(0.5)
 
         if gender:
             images = men_align_images
@@ -77,13 +76,14 @@ class Congruent_Aligned(object):
             images = women_align_images
             locations = women_align_locations
         secondfacelist = []
+        timerlist = []
         if same:
             if gender:
                 men_align_images[rand1].draw()
                 print(men_align_images[rand1].image)
 
                 win.flip()
-                core.wait(0.5)
+                core.wait(0.2)
                 men_align_images[rand1].autoDraw = False
                 questionMark.draw()
                 win.flip()
@@ -93,7 +93,7 @@ class Congruent_Aligned(object):
 
 
                 win.flip()
-                core.wait(0.5)
+                core.wait(0.2)
                 women_align_images[rand1].autoDraw = False
                 questionMark.draw()
                 win.flip()
@@ -110,24 +110,27 @@ class Congruent_Aligned(object):
                     secondfacelist.append(item)
                     print(item.image)
                     break
-            core.wait(0.5)
+            thistimer = core.getTime()
+
+            timerlist.append(thistimer)
+            core.wait(0.2)
             secondfacelist[0].autoDraw = False
             questionMark.draw()
             win.flip()
 
-        countdown = core.CountdownTimer(1.5)
+        # countdown = core.CountdownTimer(1.5)
 
         anslist = []
-        timerlist = []
+        keytimerlist = []
         isCorrectAns = False
         flag = True
         while flag:
-            keys = event.waitKeys(keyList=['a', 'l'], maxWait=1.5)
+            keys = event.waitKeys(keyList=['a', 'l'], timeStamped=True)
             if keys:
                 for key in keys:
-                    keytimer = core.getTime()
-                    timerlist.append(keytimer)
-                    if key == 'a':
+                    keytimerlist.append(key[1] + 0.2)
+                    if key[0] == 'a':
+                        keytimerlist.append(key[1])
                         if practice:
                             if same:
                                 correct.draw()
@@ -141,7 +144,7 @@ class Congruent_Aligned(object):
                             anslist.append('A')
                         isCorrectAns = True if same else False
                         flag = False
-                    elif key == 'l':
+                    elif key[0] == 'l':
                         if practice:
                             if same:
                                 wrong.draw()
@@ -155,17 +158,17 @@ class Congruent_Aligned(object):
                             anslist.append('L')
                         isCorrectAns = False if same else True
                         flag = False
-            elif countdown.getTime() <= 0:
-                if practice:
-                    wrong.draw()
-                    win.flip()
-                    core.wait(2)
-                isLate = True
-                flag = False
+            # elif countdown.getTime() <= 0:
+            #     if practice:
+            #         wrong.draw()
+            #         win.flip()
+            #         core.wait(2)
+            #     isLate = True
+            #     flag = False
 
-        questionMark.autoDraw = False
-        win.flip()
-        core.wait(1.5)
+        # questionMark.autoDraw = False
+        # win.flip()
+        core.wait(1)
 
         if not practice:
             if anslist:
@@ -173,12 +176,12 @@ class Congruent_Aligned(object):
             else:
                 accuracy = 'None'
             ans = anslist[0].upper() if anslist else 'None'
-            rtime = str(1.5 - countdown.getTime()) if anslist else 'None'
+            rtime = keytimerlist[0]
             genders = 'Male' if gender else 'Female'
             condition = '1' if same else '4'
             cor_ans = 'A' if same else 'L'
             trialstart = Config.practiceDuration
-            keyrespstart = Config.practiceDuration + timerlist[0] - localtimer if anslist else 'None'
+            keyrespstart = Config.practiceDuration + keytimerlist[0] - localtimer if anslist else 'None'
             face1 = men_align_images[rand1].image[-13:-4] if gender else women_align_images[rand1].image[-13:-4]
 
             if same:
@@ -198,7 +201,7 @@ class Congruent_Aligned(object):
 
             Config.append_dict_as_row(Config.filename, dict_of_elem=toWrite, headers=Headers)
             if anslist:
-                Config.practiceDuration += timerlist[0] - localtimer
+                Config.practiceDuration += keytimerlist[0] - localtimer
 
 
 

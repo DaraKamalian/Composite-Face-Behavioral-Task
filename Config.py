@@ -1,10 +1,11 @@
-from csv import DictWriter
+from csv import DictWriter, writer
 import csv, os, glob
 from xlsxwriter.workbook import Workbook
 
 time = 0
 filename = ''
 practiceDuration = 0
+
 
 def append_dict_as_row(file_name, dict_of_elem, headers):
     with open(file_name, 'a+', newline='') as write_obj:
@@ -32,3 +33,8 @@ def convertToExcel():
                     worksheet.write(r, c, col)
         workbook.close()
 
+
+def append_list_as_row(file_name, list_of_elem):
+    with open(file_name, 'a+', newline='') as write_obj:
+        csv_writer = writer(write_obj)
+        csv_writer.writerow(list_of_elem)
