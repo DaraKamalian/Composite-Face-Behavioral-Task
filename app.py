@@ -42,50 +42,50 @@ typefourcounter = 0
 for filename in glob.glob('./*.csv'):
     os.remove(filename)
 
-# timer1 = core.getTime()
-# firstInstruction.draw()
-# win.flip()
-# flag = True
-# while flag:
-#     keys = event.getKeys(keyList=['m'])
-#     for key in keys:
-#         if key[0] == 'm':
-#             firstInstruction.autoDraw = False
-#             practiceInstruction.draw()
-#             win.flip()
-#             flag = False
-#
-# flag = True
-# while flag:
-#     keys = event.getKeys(keyList=['m'])
-#     for key in keys:
-#         if key[0] == 'm':
-#             practiceInstruction.autoDraw = False
-#             win.flip()
-#             flag = False
-#
-# PracticeTrials().Practice_Trials()
-#
-# secondInstruction.draw()
-# win.flip()
-# flag = True
-# while flag:
-#     keys = event.getKeys(keyList=['m'])
-#     for key in keys:
-#         if key[0] == 'm':
-#             secondInstruction.autoDraw = False
-#             win.flip()
-#             flag = False
-#
-# timer2 = core.getTime()
+timer1 = core.getTime()
+firstInstruction.draw()
+win.flip()
+flag = True
+while flag:
+    keys = event.getKeys(keyList=['m'])
+    for key in keys:
+        if key[0] == 'm':
+            firstInstruction.autoDraw = False
+            practiceInstruction.draw()
+            win.flip()
+            flag = False
 
-# Config.practiceDuration = (timer2 - timer1)
+flag = True
+while flag:
+    keys = event.getKeys(keyList=['m'])
+    for key in keys:
+        if key[0] == 'm':
+            practiceInstruction.autoDraw = False
+            win.flip()
+            flag = False
+
+PracticeTrials().Practice_Trials()
+
+secondInstruction.draw()
+win.flip()
+flag = True
+while flag:
+    keys = event.getKeys(keyList=['m'])
+    for key in keys:
+        if key[0] == 'm':
+            secondInstruction.autoDraw = False
+            win.flip()
+            flag = False
+
+timer2 = core.getTime()
+
+Config.practiceDuration = (timer2 - timer1)
 Config.practiceDuration = 60
 Config.filename = subjectInfoList[0] + '-' + 'D' + subjectInfoList[5] + '.csv'
 Config.createFile(Config.filename)
 
 # Block counter
-for index in range(1, 5):
+for index in range(1, 2):
 
     typeonecounter = 0
     typetwocounter = 0

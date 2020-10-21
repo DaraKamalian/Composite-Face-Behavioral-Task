@@ -124,7 +124,6 @@ class Congruent_Misaligned(object):
         timerlist = []
         flag = True
         while flag:
-            # keys = event.getKeys(keyList=['a', 'l'])
             keys = event.waitKeys(keyList=['a', 'l'], maxWait=1.5)
             if keys:
                 for key in keys:
@@ -204,7 +203,8 @@ class Congruent_Misaligned(object):
                        'Type': 'Misaligned Congruent', 'Accuracy': accuracy, 'Key-Resp-Start': keyrespstart}
 
             Config.append_dict_as_row(Config.filename, dict_of_elem=toWrite, headers=Headers)
-            Config.practiceDuration += timerlist[0] - localtimer
+            if anslist:
+                Config.practiceDuration += timerlist[0] - localtimer
 
 
 

@@ -197,7 +197,8 @@ class Congruent_Aligned(object):
                              'Type': 'Aligned Congruent', 'Accuracy': accuracy, 'Key-Resp-Start': keyrespstart}
 
             Config.append_dict_as_row(Config.filename, dict_of_elem=toWrite, headers=Headers)
-            Config.practiceDuration += timerlist[0] - localtimer
+            if anslist:
+                Config.practiceDuration += timerlist[0] - localtimer
 
 
 
