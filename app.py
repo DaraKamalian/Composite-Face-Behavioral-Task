@@ -80,9 +80,10 @@ while flag:
 timer2 = core.getTime()
 
 Config.practiceDuration = (timer2 - timer1)
-# Config.practiceDuration = 60
+Config.practiceDuration = 60
 Config.filename = subjectInfoList[0] + '-' + 'D' + subjectInfoList[5] + '.csv'
 Config.createFile(Config.filename)
+
 
 # Block counter
 for index in range(1, 2):
@@ -308,12 +309,7 @@ for index in range(1, 2):
                 Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=0, gender=0, index=i, block=index)
 
 
-Config.append_list_as_row(Config.filename, ['Subject Name: ' + str(subjectInfoList[0]),
-                                            'Subject Number: '+ str(subjectInfoList[1]),
-                                            'Age: ' + str(subjectInfoList[2]), 'Gender: ' + str(subjectInfoList[3]),
-                                                    'Handedness: ' + str(subjectInfoList[4]),
-                                            'Stimulation Site: ' + str(subjectInfoList[6]),
-                                            'Resp-Version: ' + str(subjectInfoList[7])])
+
 for filename in glob.glob('./Congruent*.csv'):
     os.remove(filename)
 for filename in glob.glob('./Incongruent*.csv'):

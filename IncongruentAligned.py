@@ -137,7 +137,7 @@ class Incongruent_Aligned(object):
             win.flip()
 
         # countdown = core.CountdownTimer(1.5)
-        time = core.Clock()
+        time = core.getTime()
         anslist = []
         keytimerlist = []
         isCorrectAns = False
@@ -186,7 +186,6 @@ class Incongruent_Aligned(object):
         win.flip()
         core.wait(1)
 
-
         if not practice:
             if anslist:
                 accuracy = '1' if isCorrectAns else '0'
@@ -196,7 +195,7 @@ class Incongruent_Aligned(object):
             rtime = keytimerlist[0]
             genders = 'Male' if gender else 'Female'
             condition = '2' if same else '3'
-            keyrespstart = Config.practiceDuration + keytimerlist[0] - localtimer if anslist else 'None'
+            keyrespstart = Config.practiceDuration + keytimerlist[0] if anslist else 'None'
             trialstart = Config.practiceDuration
             cor_ans = 'A' if same else 'L'
             face1 = men_align_images[rand1].image[-13:-4] if gender else women_align_images[rand1].image[-13:-4]
@@ -218,4 +217,4 @@ class Incongruent_Aligned(object):
 
             Config.append_dict_as_row(Config.filename, dict_of_elem=toWrite, headers=Headers)
             if anslist:
-                Config.practiceDuration += keytimerlist[0] - localtimer
+                Config.practiceDuration += keytimerlist[0]

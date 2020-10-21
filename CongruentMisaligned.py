@@ -177,7 +177,7 @@ class Congruent_Misaligned(object):
             genders = 'Male' if gender else 'Female'
             condition = '1' if same else '4'
             trialstart = Config.practiceDuration
-            keyrespstart = Config.practiceDuration + keytimerlist[0] - localtimer if anslist else 'None'
+            keyrespstart = Config.practiceDuration + keytimerlist[0] if anslist else 'None'
             cor_ans = 'A' if same else 'L'
 
             face1 = men_align_images[rand1].image[-13:-4] if gender else women_align_images[rand1].image[-13:-4]
@@ -201,7 +201,7 @@ class Congruent_Misaligned(object):
 
             Config.append_dict_as_row(Config.filename, dict_of_elem=toWrite, headers=Headers)
             if anslist:
-                Config.practiceDuration += keytimerlist[0] - localtimer
+                Config.practiceDuration += keytimerlist[0]
 
 
 
