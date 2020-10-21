@@ -137,44 +137,44 @@ class Incongruent_Aligned(object):
             win.flip()
 
         # countdown = core.CountdownTimer(1.5)
+        time = core.Clock()
         anslist = []
         keytimerlist = []
         isCorrectAns = False
         flag = True
         while flag:
-
-            keys = event.waitKeys(keyList=['a', 'l'], timeStamped=True)
+            keys = event.waitKeys(keyList=['a', 'l'], timeStamped=time)
             if keys:
-                for key in keys:
-                    keytimerlist.append(key[1] + 0.2)
-                    if key == 'a':
-                        if practice:
-                            if same:
-                                correct.draw()
-                                win.flip()
-                                core.wait(2)
-                            else:
-                                wrong.draw()
-                                win.flip()
-                                core.wait(2)
+                print(keys[0][1])
+                keytimerlist.append(keys[0][1] + 0.2)
+                if keys[0][0] == 'a':
+                    if practice:
+                        if same:
+                            correct.draw()
+                            win.flip()
+                            core.wait(2)
                         else:
-                            anslist.append('A')
-                        isCorrectAns = True if same else False
-                        flag = False
-                    elif key == 'l':
-                        if practice:
-                            if same:
-                                wrong.draw()
-                                win.flip()
-                                core.wait(2)
-                            else:
-                                correct.draw()
-                                win.flip()
-                                core.wait(2)
+                            wrong.draw()
+                            win.flip()
+                            core.wait(2)
+                    else:
+                        anslist.append('A')
+                    isCorrectAns = True if same else False
+                    flag = False
+                elif keys[0][0] == 'l':
+                    if practice:
+                        if same:
+                            wrong.draw()
+                            win.flip()
+                            core.wait(2)
                         else:
-                            anslist.append('L')
-                        isCorrectAns = False if same else True
-                        flag = False
+                            correct.draw()
+                            win.flip()
+                            core.wait(2)
+                    else:
+                        anslist.append('L')
+                    isCorrectAns = False if same else True
+                    flag = False
         #     elif countdown.getTime() <= 0:
         #         if practice:
         #             wrong.draw()
@@ -182,9 +182,9 @@ class Incongruent_Aligned(object):
         #             core.wait(2)
         #         flag = False
         #
-        # questionMark.autoDraw = False
-        # win.flip()
-        core.wait(1.5)
+        questionMark.autoDraw = False
+        win.flip()
+        core.wait(1)
 
 
         if not practice:
