@@ -80,7 +80,7 @@ while flag:
 timer2 = core.getTime()
 
 Config.practiceDuration = (timer2 - timer1)
-Config.practiceDuration = 60
+# Config.practiceDuration = 60
 Config.filename = subjectInfoList[0] + '-' + 'D' + subjectInfoList[5] + '.csv'
 Config.createFile(Config.filename)
 

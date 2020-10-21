@@ -139,7 +139,7 @@ class Incongruent_Misaligned(object):
             if keys:
                 print(keys[0][1])
                 keytimerlist.append(keys[0][1] + 0.2)
-                if keys[0][0] == 'a':
+                if keys[0][0] == 'l':
                     if practice:
                         if same:
                             correct.draw()
@@ -147,24 +147,24 @@ class Incongruent_Misaligned(object):
                             core.wait(2)
                         else:
                             wrong.draw()
-                            win.flip()
-                            core.wait(2)
-                    else:
-                        anslist.append('A')
-                    isCorrectAns = True if same else False
-                    flag = False
-                elif keys[0][0] == 'l':
-                    if practice:
-                        if same:
-                            wrong.draw()
-                            win.flip()
-                            core.wait(2)
-                        else:
-                            correct.draw()
                             win.flip()
                             core.wait(2)
                     else:
                         anslist.append('L')
+                    isCorrectAns = True if same else False
+                    flag = False
+                elif keys[0][0] == 'a':
+                    if practice:
+                        if same:
+                            wrong.draw()
+                            win.flip()
+                            core.wait(2)
+                        else:
+                            correct.draw()
+                            win.flip()
+                            core.wait(2)
+                    else:
+                        anslist.append('A')
                     isCorrectAns = False if same else True
                     flag = False
         #     elif countdown.getTime() <= 0:
@@ -189,7 +189,7 @@ class Incongruent_Misaligned(object):
             genders = 'Male' if gender else 'Female'
             condition = '2' if same else '3'
             trialstart = Config.practiceDuration
-            cor_ans = 'A' if same else 'L'
+            cor_ans = 'L' if same else 'A'
             keyrespstart = Config.practiceDuration + keytimerlist[0]  if anslist else 'None'
             face1 = men_align_images[rand1].image[-13:-4] if gender else women_align_images[rand1].image[-13:-4]
 
