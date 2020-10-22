@@ -33,3 +33,6 @@ class MainAssets(object):
 
     secondversion_SameA_firstInstructionImage = visual.ImageStim(win, image='images/instruction-same A-1-second-version.jpg',
                                                           pos=[-55, 75], units='pix', size=[1200, 720])
+
+    between_block_instruction = visual.ImageStim(win, image='images/instruction-between-block.jpg',
+                                                          pos=[-55, 75], units='pix', size=[1200, 720])

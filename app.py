@@ -24,6 +24,7 @@ secondversion_SameL_firstInstruction = images.secondversion_SameL_firstInstructi
 secondInstruction_SameL = images.secondInstruction_SameL_Image
 secondInstruction_SameA = images.secondInstruction_SameA_Image
 
+betweenblockinstruction = images.between_block_instruction
 practiceInstruction = images.practiceSecondInstructionImage
 
 
@@ -915,6 +916,18 @@ for index in range(1, 2):
                     f_counter += 1
                     Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=0, gender=0, index=i, block=index,
                                                                    appversion=0, respversion=0)
+    betweenblockinstruction.draw()
+    win.flip()
+
+    flag = True
+    while flag:
+        keys = event.getKeys(keyList=['m'])
+        for key in keys:
+            if key[0] == 'm':
+                betweenblockinstruction.autoDraw = False
+                win.flip()
+                flag = False
+
 
 respversion = 'Same-A' if subjectInfoList[7] else 'Same-L'
 appversion = 'Second Face Remains' if subjectInfoList[8] else 'Second Face Disappears'
