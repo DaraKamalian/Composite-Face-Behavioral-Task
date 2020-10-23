@@ -31,526 +31,67 @@ win = window.win
 
 class PracticeTrials(object):
     def Practice_Trials(self):
-        for index in range(1, 9):
-            diff_counter = 0
-            same_counter = 0
-            m_counter = 0
-            f_counter = 0
+        m_counter = 0
+        f_counter = 0
+
+        diff_counter = 0
+        same_counter = 0
+        for index in range(1, 17):
+
+            somenumber = 2
 
             same_random = random.randint(0, 100) % 2
             gender_random = random.randint(0, 100) % 2
-            typerandom = random.randint(1, 4)
+            mainrandom = random.randint(1, 4)
 
             if not same_random and diff_counter == 8:
                 same_random = 1
+                print('Same')
             if same_random and same_counter == 8:
                 same_random = 0
+                print('Different')
+
+            if same_random:
+                same_counter += 1
+            else:
+                diff_counter += 1
 
             if not gender_random and f_counter == 8:
                 gender_random = 1
             if gender_random and m_counter == 8:
                 gender_random = 0
 
-            if Config.respversion and Config.appversion:
-                # Congruent Aligned
-                if typerandom == 1:
-                    if not same_random and not gender_random:
-                        f_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Aligned().CongruentAligned(practice=1, same=0, gender=0, index=i, block=index,
-                                                                 respversion=1, appversion=1)
+            if gender_random:
+                m_counter += 1
+                print('Male')
+            else:
+                f_counter += 1
+                print('Female')
 
-                    if not same_random and gender_random:
-                        m_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Aligned().CongruentAligned(practice=1, same=0, gender=1, index=i, block=index,
-                                                                 respversion=1, appversion=1)
+            respversion = Config.respversion
+            taskversion = Config.appversion
 
-                    if same_random and not gender_random:
-                        f_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Aligned().CongruentAligned(practice=1, same=1, gender=0, index=i, block=index,
-                                                                 respversion=1, appversion=1)
+            # Congruent Aligned
+            if mainrandom == 1:
+                Congruent_Aligned().CongruentAligned(practice=1, same=same_random, gender=gender_random,
+                                                     index=somenumber, block=index,
+                                                     respversion=respversion, appversion=taskversion)
+            # Congruent Misaligned
+            if mainrandom == 2:
+                Congruent_Misaligned().CongruentMisaligned(practice=1, same=same_random, gender=gender_random,
+                                                           index=somenumber,
+                                                           block=index,
+                                                           respversion=1, appversion=1)
 
-                    if same_random and gender_random:
-                        m_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Aligned().CongruentAligned(practice=1, same=1, gender=1, index=i, block=index,
-                                                                 respversion=1, appversion=1)
-
-                # Congruent Misaligned
-                if typerandom == 2:
-                    if not same_random and not gender_random:
-                        f_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Misaligned().CongruentMisaligned(practice=1, same=0, gender=0, index=i,
-                                                                       block=index,
-                                                                       respversion=1, appversion=1)
-
-                    if not same_random and gender_random:
-                        m_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Misaligned().CongruentMisaligned(practice=1, same=0, gender=1, index=i,
-                                                                       block=index,
-                                                                       respversion=1, appversion=1)
-
-                    if same_random and not gender_random:
-                        f_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Misaligned().CongruentMisaligned(practice=1, same=1, gender=0, index=i,
-                                                                       block=index,
-                                                                       respversion=1, appversion=1)
-
-                    if same_random and gender_random:
-                        m_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Misaligned().CongruentMisaligned(practice=1, same=1, gender=1, index=i,
-                                                                       block=index,
-                                                                       respversion=1, appversion=1)
-
-                # Incongruent Misaligned
-                if typerandom == 3:
-                    if not same_random and not gender_random:
-                        f_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Misaligned().IncongruentMisaligned(practice=1, same=0, gender=0, index=i,
-                                                                           block=index,
-                                                                           respversion=1, appversion=1)
-
-                    if not same_random and gender_random:
-                        m_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Misaligned().IncongruentMisaligned(practice=1, same=0, gender=1, index=i,
-                                                                           block=index,
-                                                                           respversion=1, appversion=1)
-
-                    if same_random and not gender_random:
-                        f_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Misaligned().IncongruentMisaligned(practice=1, same=1, gender=0, index=i,
-                                                                           block=index,
-                                                                           respversion=1, appversion=1)
-
-                    if same_random and gender_random:
-                        m_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Misaligned().IncongruentMisaligned(practice=1, same=1, gender=1, index=i,
-                                                                           block=index,
-                                                                           respversion=1, appversion=1)
-
-                # Incongruent Aligned
-                if typerandom == 4:
-                    if not same_random and not gender_random:
-                        f_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Aligned().IncongruentAligned(practice=1, same=0, gender=0, index=i,
-                                                                     block=index,
-                                                                     respversion=1, appversion=1)
-
-                    if not same_random and gender_random:
-                        m_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Aligned().IncongruentAligned(practice=1, same=0, gender=1, index=i,
-                                                                     block=index,
-                                                                     respversion=1, appversion=1)
-
-                    if same_random and not gender_random:
-                        f_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Aligned().IncongruentAligned(practice=1, same=1, gender=0, index=i,
-                                                                     block=index,
-                                                                     respversion=1, appversion=1)
-
-                    if same_random and gender_random:
-                        m_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Aligned().IncongruentAligned(practice=1, same=1, gender=1, index=i,
-                                                                     block=index,
-                                                                     respversion=1, appversion=1)
-
-            if Config.respversion and not Config.appversion:
-                # Congruent Aligned
-                if typerandom == 1:
-                    if not same_random and not gender_random:
-                        f_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Aligned().CongruentAligned(practice=1, same=0, gender=0, index=i,
-                                                                 block=index, respversion=1, appversion=0)
-
-                    if not same_random and gender_random:
-                        m_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Aligned().CongruentAligned(practice=1, same=0, gender=1, index=i,
-                                                                 block=index, respversion=1, appversion=0)
-
-                    if same_random and not gender_random:
-                        f_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Aligned().CongruentAligned(practice=1, same=1, gender=0, index=i,
-                                                                 block=index, respversion=1, appversion=0)
-
-                    if same_random and gender_random:
-                        m_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Aligned().CongruentAligned(practice=1, same=1, gender=1, index=i,
-                                                                 block=index, respversion=1, appversion=0)
-
-                # Congruent Misaligned
-                if typerandom == 2:
-                    if not same_random and not gender_random:
-                        f_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Misaligned().CongruentMisaligned(practice=1, same=0, gender=0, index=i,
-                                                                       block=index, respversion=1, appversion=0)
-
-                    if not same_random and gender_random:
-                        m_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Misaligned().CongruentMisaligned(practice=1, same=0, gender=1, index=i,
-                                                                       block=index, respversion=1, appversion=0)
-
-                    if same_random and not gender_random:
-                        f_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Misaligned().CongruentMisaligned(practice=1, same=1, gender=0, index=i,
-                                                                       block=index, respversion=1, appversion=0)
-
-                    if same_random and gender_random:
-                        m_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Misaligned().CongruentMisaligned(practice=1, same=1, gender=1, index=i,
-                                                                       block=index, respversion=1, appversion=0)
-
-                # Incongruent Misaligned
-                if typerandom == 3:
-                    if not same_random and not gender_random:
-                        f_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Misaligned().IncongruentMisaligned(practice=1, same=0, gender=0, index=i,
-                                                                           block=index, respversion=1, appversion=0)
-
-                    if not same_random and gender_random:
-                        m_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Misaligned().IncongruentMisaligned(practice=1, same=0, gender=1, index=i,
-                                                                           block=index, respversion=1, appversion=0)
-
-                    if same_random and not gender_random:
-                        f_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Misaligned().IncongruentMisaligned(practice=1, same=1, gender=0, index=i,
-                                                                           block=index, respversion=1, appversion=0)
-
-                    if same_random and gender_random:
-                        m_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Misaligned().IncongruentMisaligned(practice=1, same=1, gender=1, index=i,
-                                                                           block=index, respversion=1, appversion=0)
-
-                # Incongruent Aligned
-                if typerandom == 4:
-                    if not same_random and not gender_random:
-                        f_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Aligned().IncongruentAligned(practice=1, same=0, gender=0, index=i,
-                                                                     block=index, respversion=1, appversion=0)
-
-                    if not same_random and gender_random:
-                        m_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Aligned().IncongruentAligned(practice=1, same=0, gender=1, index=i,
-                                                                     block=index, respversion=1, appversion=0)
-
-                    if same_random and not gender_random:
-                        f_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Aligned().IncongruentAligned(practice=1, same=1, gender=0, index=i,
-                                                                     block=index, respversion=1, appversion=0)
-
-                    if same_random and gender_random:
-                        m_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Aligned().IncongruentAligned(practice=1, same=1, gender=1, index=i,
-                                                                     block=index, respversion=1, appversion=0)
-
-            if not Config.respversion and Config.appversion:
-                # Congruent Aligned
-                if typerandom == 1:
-                    if not same_random and not gender_random:
-                        f_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Aligned().CongruentAligned(practice=1, same=0, gender=0, index=i,
-                                                                 block=index, respversion=0, appversion=1)
-
-                    if not same_random and gender_random:
-                        m_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Aligned().CongruentAligned(practice=1, same=0, gender=1, index=i,
-                                                                 block=index, respversion=0, appversion=1)
-
-                    if same_random and not gender_random:
-                        f_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Aligned().CongruentAligned(practice=1, same=1, gender=0, index=i,
-                                                                 block=index, respversion=0, appversion=1)
-
-                    if same_random and gender_random:
-                        m_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Aligned().CongruentAligned(practice=1, same=1, gender=1, index=i,
-                                                                 block=index, respversion=0, appversion=1)
-
-                # Congruent Misaligned
-                if typerandom == 2:
-                    if not same_random and not gender_random:
-                        f_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Misaligned().CongruentMisaligned(practice=1, same=0, gender=0, index=i,
-                                                                       block=index, respversion=0, appversion=1)
-
-                    if not same_random and gender_random:
-                        m_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Misaligned().CongruentMisaligned(practice=1, same=0, gender=1, index=i,
-                                                                       block=index, respversion=0, appversion=1)
-
-                    if same_random and not gender_random:
-                        f_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Misaligned().CongruentMisaligned(practice=1, same=1, gender=0, index=i,
-                                                                       block=index, respversion=0, appversion=1)
-
-                    if same_random and gender_random:
-                        m_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Misaligned().CongruentMisaligned(practice=1, same=1, gender=1, index=i,
-                                                                       block=index, respversion=0, appversion=1)
-
-                # Incongruent Misaligned
-                if typerandom == 3:
-                    if not same_random and not gender_random:
-                        f_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Misaligned().IncongruentMisaligned(practice=1, same=0, gender=0, index=i,
-                                                                           block=index, respversion=0, appversion=1)
-
-                    if not same_random and gender_random:
-                        m_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Misaligned().IncongruentMisaligned(practice=1, same=0, gender=1, index=i,
-                                                                           block=index, respversion=0, appversion=1)
-
-                    if same_random and not gender_random:
-                        f_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Misaligned().IncongruentMisaligned(practice=1, same=1, gender=0, index=i,
-                                                                           block=index, respversion=0, appversion=1)
-
-                    if same_random and gender_random:
-                        m_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Misaligned().IncongruentMisaligned(practice=1, same=1, gender=1, index=i,
-                                                                           block=index, respversion=0, appversion=1)
-
-                # Incongruent Aligned
-                if typerandom == 4:
-                    if not same_random and not gender_random:
-                        f_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Aligned().IncongruentAligned(practice=1, same=0, gender=0, index=i,
-                                                                     block=index, respversion=0, appversion=1)
-
-                    if not same_random and gender_random:
-                        m_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Aligned().IncongruentAligned(practice=1, same=0, gender=1, index=i,
-                                                                     block=index, respversion=0, appversion=1)
-
-                    if same_random and not gender_random:
-                        f_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Aligned().IncongruentAligned(practice=1, same=1, gender=0, index=i,
-                                                                     block=index, respversion=0, appversion=1)
-
-                    if same_random and gender_random:
-                        m_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Aligned().IncongruentAligned(practice=1, same=1, gender=1, index=i,
-                                                                     block=index, respversion=0, appversion=1)
-
-            if not Config.respversion and not Config.appversion:
-                # Congruent Aligned
-                if typerandom == 1:
-                    if not same_random and not gender_random:
-                        f_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Aligned().CongruentAligned(practice=1, same=0, gender=0, index=i,
-                                                                 block=index, respversion=0, appversion=0)
-
-                    if not same_random and gender_random:
-                        m_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Aligned().CongruentAligned(practice=1, same=0, gender=1, index=i,
-                                                                 block=index, respversion=0, appversion=0)
-
-                    if same_random and not gender_random:
-                        f_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Aligned().CongruentAligned(practice=1, same=1, gender=0, index=i,
-                                                                 block=index, respversion=0, appversion=0)
-
-                    if same_random and gender_random:
-                        m_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Aligned().CongruentAligned(practice=1, same=1, gender=1, index=i,
-                                                                 block=index, respversion=0, appversion=0)
-
-                # Congruent Misaligned
-                if typerandom == 2:
-                    if not same_random and not gender_random:
-                        f_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Misaligned().CongruentMisaligned(practice=1, same=0, gender=0,
-                                                                       index=i, block=index, respversion=0,
-                                                                       appversion=0)
-
-                    if not same_random and gender_random:
-                        m_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Misaligned().CongruentMisaligned(practice=1, same=0, gender=1,
-                                                                       index=i, block=index, respversion=0,
-                                                                       appversion=0)
-
-                    if same_random and not gender_random:
-                        f_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Misaligned().CongruentMisaligned(practice=1, same=1, gender=0,
-                                                                       index=i, block=index, respversion=0,
-                                                                       appversion=0)
-
-                    if same_random and gender_random:
-                        m_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Congruent_Misaligned().CongruentMisaligned(practice=1, same=1, gender=1,
-                                                                       index=i, block=index, respversion=0,
-                                                                       appversion=0)
-
-                # Incongruent Misaligned
-                if typerandom == 3:
-                    if not same_random and not gender_random:
-                        f_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Misaligned().IncongruentMisaligned(practice=1, same=0, gender=0,
-                                                                           index=i, block=index, respversion=0,
-                                                                           appversion=0)
-
-                    if not same_random and gender_random:
-                        m_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Misaligned().IncongruentMisaligned(practice=1, same=0, gender=1,
-                                                                           index=i, block=index, respversion=0,
-                                                                           appversion=0)
-
-                    if same_random and not gender_random:
-                        f_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Misaligned().IncongruentMisaligned(practice=1, same=1, gender=0,
-                                                                           index=i, block=index, respversion=0,
-                                                                           appversion=0)
-
-                    if same_random and gender_random:
-                        m_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Misaligned().IncongruentMisaligned(practice=1, same=1, gender=1,
-                                                                           index=i, block=index, respversion=0,
-                                                                           appversion=0)
-
-                # Incongruent Aligned
-                if typerandom == 4:
-                    if not same_random and not gender_random:
-                        f_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Aligned().IncongruentAligned(practice=1, same=0, gender=0,
-                                                                     index=i, block=index, respversion=0, appversion=0)
-
-                    if not same_random and gender_random:
-                        m_counter += 1
-                        diff_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Aligned().IncongruentAligned(practice=1, same=0, gender=1,
-                                                                     index=i, block=index, respversion=0, appversion=0)
-
-                    if same_random and not gender_random:
-                        f_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Aligned().IncongruentAligned(practice=1, same=1, gender=0,
-                                                                     index=i, block=index, respversion=0, appversion=0)
-
-                    if same_random and gender_random:
-                        m_counter += 1
-                        same_counter += 1
-                        for i in range(0, 2):
-                            Incongruent_Aligned().IncongruentAligned(practice=1, same=1, gender=1,
-                                                                     index=i, block=index, respversion=0, appversion=0)
+            # Incongruent Misaligned
+            if mainrandom == 3:
+                Incongruent_Misaligned().IncongruentMisaligned(practice=1, same=same_random, gender=gender_random,
+                                                               index=somenumber,
+                                                               block=index,
+                                                               respversion=1, appversion=1)
+            # Incongruent Aligned
+            if mainrandom == 4:
+                Incongruent_Aligned().IncongruentAligned(practice=1, same=same_random, gender=gender_random,
+                                                         index=somenumber,
+                                                         block=index,
+                                                         respversion=respversion, appversion=taskversion)

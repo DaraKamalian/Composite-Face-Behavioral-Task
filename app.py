@@ -28,12 +28,10 @@ secondInstruction_SameA = images.secondInstruction_SameA_Image
 betweenblockinstruction = images.between_block_instruction
 practiceInstruction = images.practiceSecondInstructionImage
 
-
 subjectInfoList = dialoguebox().showDialogBox()
 
 event.globalKeys.clear()
 event.globalKeys.add(key='q', func=os._exit, func_args=[1], func_kwargs=None)
-
 
 typeonecounter = 0
 typetwocounter = 0
@@ -43,62 +41,62 @@ typefourcounter = 0
 for filename in glob.glob('./*.csv'):
     os.remove(filename)
 
-# drawlist = []
-# timer1 = core.getTime()
-# if Config.appversion and Config.respversion:
-#     secondversion_SameA_firstInstruction.draw()
-#     drawlist.append(secondversion_SameA_firstInstruction)
-# if Config.appversion and not Config.respversion:
-#     secondversion_SameL_firstInstruction.draw()
-#     drawlist.append(secondversion_SameL_firstInstruction)
-# if not Config.appversion and Config.respversion:
-#     firstversion_SameA_firstInstruction.draw()
-#     drawlist.append(firstversion_SameA_firstInstruction)
-# if not Config.appversion and not Config.respversion:
-#     firstversion_SameL_firstInstruction.draw()
-#     drawlist.append(firstversion_SameL_firstInstruction)
-# win.flip()
-# flag = True
-# while flag:
-#     keys = event.getKeys(keyList=['m'])
-#     for key in keys:
-#         if key[0] == 'm':
-#             drawlist[0].autoDraw = False
-#             practiceInstruction.draw()
-#             win.flip()
-#             flag = False
-#
-# flag = True
-# while flag:
-#     keys = event.getKeys(keyList=['m'])
-#     for key in keys:
-#         if key[0] == 'm':
-#             practiceInstruction.autoDraw = False
-#             win.flip()
-#             flag = False
-#
-# PracticeTrials().Practice_Trials()
-# seconddrawlist = []
-# if Config.respversion:
-#     secondInstruction_SameA.draw()
-#     seconddrawlist.append(secondInstruction_SameA)
-# if not Config.respversion:
-#     secondInstruction_SameL.draw()
-#     seconddrawlist.append(secondInstruction_SameL)
-# win.flip()
-# flag = True
-# while flag:
-#     keys = event.getKeys(keyList=['m'])
-#     for key in keys:
-#         if key[0] == 'm':
-#             seconddrawlist[0].autoDraw = False
-#             win.flip()
-#             flag = False
-#
-# timer2 = core.getTime()
-#
-# Config.practiceDuration = (timer2 - timer1)
-Config.practiceDuration = 60
+drawlist = []
+timer1 = core.getTime()
+if Config.appversion and Config.respversion:
+    secondversion_SameA_firstInstruction.draw()
+    drawlist.append(secondversion_SameA_firstInstruction)
+if Config.appversion and not Config.respversion:
+    secondversion_SameL_firstInstruction.draw()
+    drawlist.append(secondversion_SameL_firstInstruction)
+if not Config.appversion and Config.respversion:
+    firstversion_SameA_firstInstruction.draw()
+    drawlist.append(firstversion_SameA_firstInstruction)
+if not Config.appversion and not Config.respversion:
+    firstversion_SameL_firstInstruction.draw()
+    drawlist.append(firstversion_SameL_firstInstruction)
+win.flip()
+flag = True
+while flag:
+    keys = event.getKeys(keyList=['m'])
+    for key in keys:
+        if key[0] == 'm':
+            drawlist[0].autoDraw = False
+            practiceInstruction.draw()
+            win.flip()
+            flag = False
+
+flag = True
+while flag:
+    keys = event.getKeys(keyList=['m'])
+    for key in keys:
+        if key[0] == 'm':
+            practiceInstruction.autoDraw = False
+            win.flip()
+            flag = False
+
+PracticeTrials().Practice_Trials()
+seconddrawlist = []
+if Config.respversion:
+    secondInstruction_SameA.draw()
+    seconddrawlist.append(secondInstruction_SameA)
+if not Config.respversion:
+    secondInstruction_SameL.draw()
+    seconddrawlist.append(secondInstruction_SameL)
+win.flip()
+flag = True
+while flag:
+    keys = event.getKeys(keyList=['m'])
+    for key in keys:
+        if key[0] == 'm':
+            seconddrawlist[0].autoDraw = False
+            win.flip()
+            flag = False
+
+timer2 = core.getTime()
+
+Config.practiceDuration = (timer2 - timer1)
+# Config.practiceDuration = 60
 if Config.appversion:
     Config.filename = subjectInfoList[0] + subjectInfoList[1] + '.' + 'D' + subjectInfoList[5] + '.T2.csv'
 else:
@@ -106,7 +104,7 @@ else:
 Config.createFile(Config.filename)
 
 # Block counter
-for index in range(1, 3):
+for index in range(1, 5):
 
     typeonecounter = 0
     typetwocounter = 0
@@ -190,15 +188,15 @@ for index in range(1, 3):
             else:
                 f_counter += 1
 
-            Congruent_Aligned().CongruentAligned(practice=0, same=samerandom, gender=gender_random, index=i, block=index,
-                                                    appversion=taskversion, respversion=respversion)
+            Congruent_Aligned().CongruentAligned(practice=0, same=samerandom, gender=gender_random, index=i,
+                                                 block=index,
+                                                 appversion=taskversion, respversion=respversion)
 
         # Congruent Misaligned
         if mainrandom == 2:
             same_counter = 0
             diff_counter = 0
             typetwocounter += 1
-
 
             # for i in range(1, 11):
             gender_random = random.randint(0, 100) % 2
@@ -231,7 +229,6 @@ for index in range(1, 3):
             diff_counter = 0
             typethreecounter += 1
 
-
             gender_random = random.randint(0, 100) % 2
             # 0 -> female, 1 -> male
             samerandom = random.randint(0, 100) % 2
@@ -247,7 +244,6 @@ for index in range(1, 3):
             elif not gender_random and f_counter == 5:
                 gender_random = 1
 
-
             if gender_random:
                 m_counter += 1
             else:
@@ -261,7 +257,6 @@ for index in range(1, 3):
             same_counter = 0
             diff_counter = 0
             typefourcounter += 1
-
 
             # for i in range(1, 11):
             gender_random = random.randint(0, 100) % 2
@@ -285,12 +280,11 @@ for index in range(1, 3):
                 f_counter += 1
 
             Incongruent_Misaligned().IncongruentMisaligned(practice=0, same=samerandom, gender=gender_random, index=i,
-                                                           block=index,appversion=taskversion, respversion=respversion)
-
-    betweenblockinstruction.draw()
-    win.flip()
+                                                           block=index, appversion=taskversion, respversion=respversion)
 
     if index < 4:
+        betweenblockinstruction.draw()
+        win.flip()
         flag = True
         while flag:
             keys = event.waitKeys(keyList=['m'])
@@ -299,7 +293,6 @@ for index in range(1, 3):
                     betweenblockinstruction.autoDraw = False
                     win.flip()
                     flag = False
-
 
 respversion = 'Same-A' if subjectInfoList[7] else 'Same-L'
 appversion = 'Second Face Remains' if subjectInfoList[8] else 'Second Face Disappears'
