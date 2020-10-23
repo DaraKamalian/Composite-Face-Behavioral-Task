@@ -258,7 +258,7 @@ class Incongruent_Aligned(object):
             ans = anslist[0] if anslist else 'None'
             rtime = rtimelist[0] if anslist else 'None'
             genders = 'Male' if gender else 'Female'
-            condition = '1' if same else '4'
+            condition = '2' if same else '3'
             cor_ans = ''
             if same and respversion:
                 cor_ans = 'A'
@@ -268,7 +268,10 @@ class Incongruent_Aligned(object):
                 cor_ans = 'L'
             if not same and not respversion:
                 cor_ans = 'A'
-            trialstart = Config.practiceDuration
+            if index == 1:
+                trialstart = Config.practiceDuration
+            else:
+                trialstart = Config.practiceDuration + 1
             keyrespstart = Config.practiceDuration + keytimerlist[0] if anslist else 'None'
             face1 = men_align_images[rand1].image[-13:-4] if gender else women_align_images[rand1].image[-13:-4]
 

@@ -248,8 +248,12 @@ class Congruent_Aligned(object):
             if not same and not respversion:
                 cor_ans = 'A'
 
-            trialstart = Config.practiceDuration
+            if index == 1:
+                trialstart = Config.practiceDuration
+            else:
+                trialstart = Config.practiceDuration + 1
             keyrespstart = Config.practiceDuration + keytimerlist[0] if anslist else 'None'
+            trial = index
             face1 = men_align_images[rand1].image[-13:-4] if gender else women_align_images[rand1].image[-13:-4]
 
             if same:

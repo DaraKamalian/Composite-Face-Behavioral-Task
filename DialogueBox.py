@@ -11,7 +11,7 @@ class dialoguebox(object):
         Dlg.addField('Stimulation Site', choices=['R-PPC', 'L-PPC', 'CZ'])
         Dlg.addField('Handedness', choices=['Right', 'Left'])
         Dlg.addField('Resp Version ', choices=['Same-A', 'Same-L'])
-        Dlg.addField('Application Version', choices=['Second Face Remaining', 'Second Face Disappearing'])
+        Dlg.addField('Task Version', choices=['Second Face Remaining', 'Second Face Disappearing'])
 
 
         ok_data = Dlg.show()

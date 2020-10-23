@@ -228,31 +228,6 @@ class Congruent_Misaligned(object):
                     core.wait(2)
                 flag = False
 
-            #         else:
-            #             anslist.append('L')
-            #         isCorrectAns = True if same else False
-            #         flag = False
-            #     elif keys[0][0] == 'l':
-            #         if practice:
-            #             if same:
-            #                 wrong.draw()
-            #                 win.flip()
-            #                 core.wait(2)
-            #             else:
-            #                 correct.draw()
-            #                 win.flip()
-            #                 core.wait(2)
-            #         else:
-            #             anslist.append('A')
-            #         isCorrectAns = False if same else True
-            #         flag = False
-            # elif countdown.getTime() <= 0:
-            #     if practice:
-            #         wrong.draw()
-            #         win.flip()
-            #         core.wait(2)
-            #     isLate = True
-            #     flag = False
 
         if appversion:
             secondfaces[0].autoDraw = False
@@ -281,7 +256,10 @@ class Congruent_Misaligned(object):
             if not same and not respversion:
                 cor_ans = 'A'
 
-            trialstart = Config.practiceDuration
+            if index == 1:
+                trialstart = Config.practiceDuration
+            else:
+                trialstart = Config.practiceDuration + 1
             keyrespstart = Config.practiceDuration + keytimerlist[0] if anslist else 'None'
             face1 = men_align_images[rand1].image[-13:-4] if gender else women_align_images[rand1].image[-13:-4]
             if same:
