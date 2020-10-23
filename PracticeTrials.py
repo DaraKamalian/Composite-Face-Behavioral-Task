@@ -46,10 +46,9 @@ class PracticeTrials(object):
 
             if not same_random and diff_counter == 8:
                 same_random = 1
-                print('Same')
+
             if same_random and same_counter == 8:
                 same_random = 0
-                print('Different')
 
             if same_random:
                 same_counter += 1
@@ -63,10 +62,9 @@ class PracticeTrials(object):
 
             if gender_random:
                 m_counter += 1
-                print('Male')
+
             else:
                 f_counter += 1
-                print('Female')
 
             respversion = Config.respversion
             taskversion = Config.appversion
