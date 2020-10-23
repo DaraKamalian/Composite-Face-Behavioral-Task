@@ -31,6 +31,7 @@ win = window.win
 
 class Incongruent_Aligned(object):
     def IncongruentAligned(self, practice, same, gender, index, block, appversion, respversion):
+
         generaltimer = core.getTime()
         fixationPoint.draw()
         win.flip()

@@ -33,6 +33,7 @@ win = window.win
 
 class Incongruent_Misaligned(object):
     def IncongruentMisaligned(self, practice, same, gender, index, block, appversion, respversion):
+
         generalTimer = core.getTime()
 
         fixationPoint.draw()

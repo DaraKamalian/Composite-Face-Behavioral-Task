@@ -25,6 +25,7 @@ win = window.win
 class Congruent_Aligned(object):
     def CongruentAligned(self, practice, gender, same, index, block, appversion, respversion):
 
+
         generalTimer = core.getTime()
         fixationPoint.draw()
         win.flip()
