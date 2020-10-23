@@ -98,9 +98,10 @@ timer2 = core.getTime()
 Config.practiceDuration = (timer2 - timer1)
 # Config.practiceDuration = 60
 if Config.appversion:
-    Config.filename = subjectInfoList[0] + subjectInfoList[1] + '.' + 'D' + subjectInfoList[5] + '.T2.csv'
+    Config.filename = subjectInfoList[0] + '.' + subjectInfoList[1] + subjectInfoList[2] + '.' + 'D' + subjectInfoList[5]\
+                                                                                         + '.T2.csv'
 else:
-    Config.filename = subjectInfoList[0] + subjectInfoList[1] + '.' + 'D' + subjectInfoList[5] + '.T1.csv'
+    Config.filename = subjectInfoList[0] + '.' + subjectInfoList[1] + subjectInfoList[2] + '.' + 'D' + subjectInfoList[5] + '.T1.csv'
 Config.createFile(Config.filename)
 
 # Block counter
@@ -154,8 +155,8 @@ for index in range(1, 5):
             else:
                 break
 
-        respversion = subjectInfoList[7]
-        taskversion = subjectInfoList[8]
+        respversion = subjectInfoList[8]
+        taskversion = subjectInfoList[9]
 
         # Congruent Aligned
         if mainrandom == 1:
@@ -294,13 +295,13 @@ for index in range(1, 5):
                     win.flip()
                     flag = False
 
-respversion = 'Same-A' if subjectInfoList[7] else 'Same-L'
-appversion = 'Second Face Remains' if subjectInfoList[8] else 'Second Face Disappears'
+respversion = 'Same-A' if subjectInfoList[8] else 'Same-L'
+appversion = 'Second Face Remains' if subjectInfoList[9] else 'Second Face Disappears'
 Config.append_list_as_row(Config.filename, ['Subject Name: ' + str(subjectInfoList[0]),
-                                            'Subject Number: ' + str(subjectInfoList[1]),
-                                            'Age: ' + str(subjectInfoList[2]), 'Gender: ' + str(subjectInfoList[3]),
-                                            'Handedness: ' + str(subjectInfoList[4]),
-                                            'Stimulation Site: ' + str(subjectInfoList[6]),
+                                            'Subject Number: ' + str(subjectInfoList[2]),
+                                            'Age: ' + str(subjectInfoList[3]), 'Gender: ' + str(subjectInfoList[4]),
+                                            'Handedness: ' + str(subjectInfoList[5]),
+                                            'Stimulation Site: ' + str(subjectInfoList[7]),
                                             'Resp-Version: ' + respversion,
                                             'Task Version: ' + appversion,
                                             'Datetime: ' + str(datetime.datetime.today())])
