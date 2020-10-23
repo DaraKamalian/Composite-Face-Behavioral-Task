@@ -33,7 +33,6 @@ win = window.win
 
 class Congruent_Misaligned(object):
     def CongruentMisaligned(self, practice, same, gender, index, block, appversion, respversion):
-
         generalTimer = core.getTime()
         fixationPoint.draw()
         win.flip()
