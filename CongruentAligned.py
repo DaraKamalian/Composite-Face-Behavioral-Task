@@ -23,7 +23,7 @@ win = window.win
 
 
 class Congruent_Aligned(object):
-    def CongruentAligned(self, practice, gender, same, index, block, appversion, respversion):
+    def CongruentAligned(self, practice, gender, same, index, block):
 
 
         generalTimer = core.getTime()
@@ -71,9 +71,9 @@ class Congruent_Aligned(object):
         else:
             images = women_align_images
             locations = women_align_locations
+
         secondfacelist = []
         timerlist = []
-
         if same:
             if gender:
                 men_align_images[rand1].draw()
@@ -82,7 +82,7 @@ class Congruent_Aligned(object):
                 secondfacelist.append(women_align_images[rand1])
                 thistimer = core.getTime()
                 timerlist.append(thistimer)
-                if not appversion:
+                if not Config.taskversion:
                     core.wait(0.2)
                     men_align_images[rand1].autoDraw = False
                     questionMark.draw()
@@ -94,7 +94,7 @@ class Congruent_Aligned(object):
                 secondfacelist.append(women_align_images[rand1])
                 thistimer = core.getTime()
                 timerlist.append(thistimer)
-                if not appversion:
+                if not Config.taskversion:
                     core.wait(0.2)
                     women_align_images[rand1].autoDraw = False
                     questionMark.draw()
@@ -115,7 +115,7 @@ class Congruent_Aligned(object):
             thistimer = core.getTime()
 
             timerlist.append(thistimer)
-            if not appversion:
+            if not Config.taskversion:
                 core.wait(0.2)
                 secondfacelist[0].autoDraw = False
                 questionMark.draw()
@@ -131,12 +131,12 @@ class Congruent_Aligned(object):
         isCorrectAns = False
         flag = True
         while flag:
-            if appversion:
+            if Config.taskversion:
                 keys = event.waitKeys(keyList=['a', 'l'], maxWait=2)
             else:
                 keys = event.waitKeys(keyList=['a', 'l'], timeStamped=time)
             if keys:
-                if appversion:
+                if Config.taskversion:
                     anstime = 1.5 - countdown.getTime()
                 else:
                     now = core.getTime()
@@ -144,22 +144,22 @@ class Congruent_Aligned(object):
                 keytimerlist.append(anstime)
                 if keys[0][0] == 'a' and practice:
 
-                    if respversion and same:
+                    if Config.respversion and same:
                         correct.draw()
                         win.flip()
                         core.wait(2)
 
-                    if respversion and not same:
+                    if Config.respversion and not same:
                         wrong.draw()
                         win.flip()
                         core.wait(2)
 
-                    if not respversion and same:
+                    if not Config.respversion and same:
                         wrong.draw()
                         win.flip()
                         core.wait(2)
 
-                    if not respversion and not same:
+                    if not Config.respversion and not same:
                         correct.draw()
                         win.flip()
                         core.wait(2)
@@ -168,12 +168,12 @@ class Congruent_Aligned(object):
                 elif keys[0][0] == 'a' and not practice:
                     anslist.append('A')
                     if same:
-                        if respversion:
+                        if Config.respversion:
                             isCorrectAns = True
                         else:
                             isCorrectAns = False
                     elif not same:
-                        if respversion:
+                        if Config.respversion:
                             isCorrectAns = False
                         else:
                             isCorrectAns = True
@@ -181,22 +181,22 @@ class Congruent_Aligned(object):
                     flag = False
 
                 if keys[0][0] == 'l' and practice:
-                    if respversion and same:
+                    if Config.respversion and same:
                         wrong.draw()
                         win.flip()
                         core.wait(2)
 
-                    if respversion and not same:
+                    if Config.respversion and not same:
                         correct.draw()
                         win.flip()
                         core.wait(2)
 
-                    if not respversion and same:
+                    if not Config.respversion and same:
                         correct.draw()
                         win.flip()
                         core.wait(2)
 
-                    if not respversion and not same:
+                    if not Config.respversion and not same:
                         wrong.draw()
                         win.flip()
                         core.wait(2)
@@ -204,12 +204,12 @@ class Congruent_Aligned(object):
                 elif keys[0][0] == 'l' and not practice:
                     anslist.append('L')
                     if same:
-                        if respversion:
+                        if Config.respversion:
                             isCorrectAns = False
                         else:
                             isCorrectAns = True
                     elif not same:
-                        if respversion:
+                        if Config.respversion:
                             isCorrectAns = True
                         else:
                             isCorrectAns = False
@@ -223,10 +223,10 @@ class Congruent_Aligned(object):
                     core.wait(2)
                 flag = False
 
-        if appversion:
+        if Config.taskversion:
             secondfacelist[0].autoDraw = False
             win.flip()
-        elif not appversion:
+        elif not Config.taskversion:
             questionMark.autoDraw = False
             win.flip()
         core.wait(1)
@@ -242,13 +242,13 @@ class Congruent_Aligned(object):
             genders = 'Male' if gender else 'Female'
             condition = '1' if same else '4'
             cor_ans = ''
-            if same and respversion:
+            if same and Config.respversion:
                 cor_ans = 'A'
-            if same and not respversion:
+            if same and not Config.respversion:
                 cor_ans = 'L'
-            if not same and respversion:
+            if not same and Config.respversion:
                 cor_ans = 'L'
-            if not same and not respversion:
+            if not same and not Config.respversion:
                 cor_ans = 'A'
 
             # if index == 1:

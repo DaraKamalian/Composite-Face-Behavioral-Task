@@ -29,23 +29,20 @@ class dialoguebox(object):
                     stimSite = ok_data[6]
                     handedness = ok_data[7]
                     respVersion = ok_data[8]
-                    appVersion = ok_data[9]
+                    taskVersion = ok_data[9]
 
                     if respVersion == 'Same-A':
-                        respVersion = 1
-                    else:
-                        respVersion = 0
+                        Config.respversion = 1
+                    elif respVersion == 'Same-L':
+                        Config.respversion = 0
 
-                    if appVersion == '2':
-                        appVersion = 1
-                    else:
-                        appVersion = 0
-
-                    Config.appversion = appVersion
-                    Config.respversion = respVersion
+                    if taskVersion == '2':
+                        Config.taskversion = 1
+                    elif taskVersion == '1':
+                        Config.taskversion = 0
 
                     subjectInfo = [subjectName, subjectSurname, subjectNumber, subjectAge, subjectGender, handedness, experimentDay,
-                           stimSite, respVersion, appVersion]
+                           stimSite, respVersion, taskVersion]
                     flag = False
         return subjectInfo
 

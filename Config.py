@@ -6,7 +6,7 @@ time = 0
 filename = ''
 practiceDuration = 0
 respversion = 0
-appversion = 0
+taskversion = 0
 
 
 def append_dict_as_row(file_name, dict_of_elem, headers):

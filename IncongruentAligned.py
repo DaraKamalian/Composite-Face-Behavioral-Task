@@ -30,8 +30,9 @@ win = window.win
 
 
 class Incongruent_Aligned(object):
-    def IncongruentAligned(self, practice, same, gender, index, block, appversion, respversion):
-
+    def IncongruentAligned(self, practice, same, gender, index, block):
+        taskversion = Config.taskversion
+        respversion = Config.respversion
         generaltimer = core.getTime()
         fixationPoint.draw()
         win.flip()
@@ -93,8 +94,6 @@ class Incongruent_Aligned(object):
                 newLocRand = random.randint(0, (len(newLocations) - 1))
 
                 print('new loc rand is :' + str(newLocRand))
-            # for item in newLocations:
-            #     print(item)
 
             for item in images:
                 if item.image == newLocations[newLocRand]:
@@ -106,7 +105,8 @@ class Incongruent_Aligned(object):
 
             thistimer = core.getTime()
             timerlist.append(thistimer)
-            if not appversion:
+
+            if not taskversion:
                 core.wait(0.2)
                 secondsamefacelist[0].autoDraw = False
                 questionMark.draw()
@@ -134,7 +134,7 @@ class Incongruent_Aligned(object):
                     break
             thistimer = core.getTime()
             timerlist.append(thistimer)
-            if not appversion:
+            if not taskversion:
                 core.wait(0.2)
                 seconddifffacelist[0].autoDraw = False
                 questionMark.draw()
@@ -149,12 +149,12 @@ class Incongruent_Aligned(object):
         isCorrectAns = False
         flag = True
         while flag:
-            if appversion:
+            if taskversion:
                 keys = event.waitKeys(keyList=['a', 'l'], maxWait=2)
             else:
                 keys = event.waitKeys(keyList=['a', 'l'], timeStamped=time)
             if keys:
-                if appversion:
+                if taskversion:
                     anstime = 1.5 - countdown.getTime()
                 else:
                     now = core.getTime()
@@ -241,7 +241,7 @@ class Incongruent_Aligned(object):
                     core.wait(2)
                 flag = False
 
-        if appversion:
+        if taskversion:
             if secondsamefacelist:
                 secondsamefacelist[0].autoDraw = False
             elif seconddifffacelist:

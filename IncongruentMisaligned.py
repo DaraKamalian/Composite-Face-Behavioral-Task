@@ -32,8 +32,9 @@ win = window.win
 
 
 class Incongruent_Misaligned(object):
-    def IncongruentMisaligned(self, practice, same, gender, index, block, appversion, respversion):
-
+    def IncongruentMisaligned(self, practice, same, gender, index, block):
+        taskversion = Config.taskversion
+        respversion = Config.respversion
         generalTimer = core.getTime()
 
         fixationPoint.draw()
@@ -63,14 +64,14 @@ class Incongruent_Misaligned(object):
             print(men_align_images[rand1].image)
             win.flip()
             core.wait(0.2)
+            men_align_images[rand1].autoDraw = False
         else:
             women_align_images[rand1].draw()
             print(women_align_images[rand1].image)
             win.flip()
             core.wait(0.2)
+            women_align_images[rand1].autoDraw = False
 
-        men_align_images[rand1].autoDraw = False
-        women_align_images[rand1].autoDraw = False
         win.flip()
         core.wait(0.5)
 
@@ -80,33 +81,36 @@ class Incongruent_Misaligned(object):
         else:
             images = women_misalign_images
             locations = women_misalign_locations
-        secondfacedifflist = []
-        secondfacesamelist = []
+        secondsamefacelist = []
+        seconddifffacelist = []
         timerlist = []
         if same:
             obj = SameUpperLocationsList()
             newLocations = SameUpperLocationsList.SameUpperLocationsList(obj,
                                                                          locations, images[rand1].image)
+            print('newlocations length is :' + str(len(newLocations)))
 
             if len(newLocations) == 1:
                 newLocRand = 0
             else:
                 newLocRand = random.randint(0, (len(newLocations) - 1))
 
+                print('new loc rand is :' + str(newLocRand))
+
             for item in images:
                 if item.image == newLocations[newLocRand]:
                     item.draw()
                     win.flip()
-                    secondfacesamelist.append(item)
+                    secondsamefacelist.append(item)
                     # print(item.image)
                     break
 
             thistimer = core.getTime()
             timerlist.append(thistimer)
 
-            if not appversion:
+            if not taskversion:
                 core.wait(0.2)
-                secondfacesamelist[0].autoDraw = False
+                secondsamefacelist[0].autoDraw = False
                 questionMark.draw()
                 win.flip()
 
@@ -115,24 +119,27 @@ class Incongruent_Misaligned(object):
             newLocations = SameLowerLocationsList.SameLowerLocationsList(obj,
                                                                          locations,
                                                                          images[rand1].image)
+            print('newlocations length is :' + str(len(newLocations)))
             if len(newLocations) == 1:
                 newLocRand = 0
             else:
                 newLocRand = random.randint(0, (len(newLocations) - 1))
+                print('new loc rand is :' + str(newLocRand))
+            # for item in newLocations:
+            #     print(item)
 
             for item in images:
                 if item.image == newLocations[newLocRand]:
                     item.draw()
-                    secondfacedifflist.append(item)
                     win.flip()
-                    print(item.image)
+                    seconddifffacelist.append(item)
+                    # print(item.image)
                     break
-
             thistimer = core.getTime()
             timerlist.append(thistimer)
-            if not appversion:
+            if not taskversion:
                 core.wait(0.2)
-                secondfacedifflist[0].autoDraw = False
+                seconddifffacelist[0].autoDraw = False
                 questionMark.draw()
                 win.flip()
 
@@ -145,12 +152,12 @@ class Incongruent_Misaligned(object):
         isCorrectAns = False
         flag = True
         while flag:
-            if appversion:
+            if taskversion:
                 keys = event.waitKeys(keyList=['a', 'l'], maxWait=2)
             else:
                 keys = event.waitKeys(keyList=['a', 'l'], timeStamped=time)
             if keys:
-                if appversion:
+                if taskversion:
                     anstime = 1.5 - countdown.getTime()
                 else:
                     now = core.getTime()
@@ -238,14 +245,14 @@ class Incongruent_Misaligned(object):
                     core.wait(2)
                 flag = False
 
-        if appversion:
-            if secondfacesamelist:
-                secondfacesamelist[0].autoDraw = False
+        if taskversion:
+            if secondsamefacelist:
+                secondsamefacelist[0].autoDraw = False
 
-            elif secondfacedifflist:
-                secondfacedifflist[0].autoDraw = False
+            elif seconddifffacelist:
+                seconddifffacelist[0].autoDraw = False
             win.flip()
-        elif not appversion:
+        elif not taskversion:
             questionMark.autoDraw = False
             win.flip()
         core.wait(1)
@@ -283,9 +290,9 @@ class Incongruent_Misaligned(object):
             face1 = men_align_images[rand1].image[-13:-4] if gender else women_align_images[rand1].image[-13:-4]
 
             if same:
-                face2 = secondfacesamelist[0].image[-13:-4]
+                face2 = secondsamefacelist[0].image[-13:-4]
             else:
-                face2 = secondfacedifflist[0].image[-13:-4]
+                face2 = seconddifffacelist[0].image[-13:-4]
 
             Headers = ['Face_1', 'Face_2', 'Face_Gender', 'Congruency', 'Block', 'Trial', 'Alignment', 'Condition',
                        'Type', 'Key-Resp', 'Cor-Ans', 'Accuracy', 'R-time', 'Trial-Start', 'Key-Resp-Start']

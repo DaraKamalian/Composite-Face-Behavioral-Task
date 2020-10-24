@@ -66,30 +66,23 @@ class PracticeTrials(object):
             else:
                 f_counter += 1
 
-            respversion = Config.respversion
-            taskversion = Config.appversion
-
             # Congruent Aligned
             if mainrandom == 1:
                 Congruent_Aligned().CongruentAligned(practice=1, same=same_random, gender=gender_random,
-                                                     index=somenumber, block=index,
-                                                     respversion=respversion, appversion=taskversion)
+                                                     index=somenumber, block=index)
             # Congruent Misaligned
             if mainrandom == 2:
                 Congruent_Misaligned().CongruentMisaligned(practice=1, same=same_random, gender=gender_random,
                                                            index=somenumber,
-                                                           block=index,
-                                                           respversion=1, appversion=1)
+                                                           block=index)
 
             # Incongruent Misaligned
             if mainrandom == 3:
                 Incongruent_Misaligned().IncongruentMisaligned(practice=1, same=same_random, gender=gender_random,
                                                                index=somenumber,
-                                                               block=index,
-                                                               respversion=1, appversion=1)
+                                                               block=index)
             # Incongruent Aligned
             if mainrandom == 4:
                 Incongruent_Aligned().IncongruentAligned(practice=1, same=same_random, gender=gender_random,
                                                          index=somenumber,
-                                                         block=index,
-                                                         respversion=respversion, appversion=taskversion)
+                                                         block=index)

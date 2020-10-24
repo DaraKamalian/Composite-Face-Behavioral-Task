@@ -32,7 +32,7 @@ win = window.win
 
 
 class Congruent_Misaligned(object):
-    def CongruentMisaligned(self, practice, same, gender, index, block, appversion, respversion):
+    def CongruentMisaligned(self, practice, same, gender, index, block):
 
         generalTimer = core.getTime()
         fixationPoint.draw()
@@ -79,33 +79,31 @@ class Congruent_Misaligned(object):
             images = women_misalign_images
             locations = women_misalign_locations
 
-        secondfaces = []
+        secondfacelist = []
         timerlist = []
         if same:
             if gender:
-                men_misalign_images[rand1].draw()
-                print(men_misalign_images[rand1].image)
+                men_align_images[rand1].draw()
                 win.flip()
-                core.wait(0.2)
+                print(men_align_images[rand1].image)
+                secondfacelist.append(women_align_images[rand1])
                 thistimer = core.getTime()
                 timerlist.append(thistimer)
-                secondfaces.append(men_misalign_images[rand1])
-                if not appversion:
-                    men_misalign_images[rand1].autoDraw = False
+                if not Config.taskversion:
+                    core.wait(0.2)
+                    men_align_images[rand1].autoDraw = False
                     questionMark.draw()
                     win.flip()
-
             else:
-                women_misalign_images[rand1].draw()
-                print(women_misalign_images[rand1].image)
+                women_align_images[rand1].draw()
                 win.flip()
-                core.wait(0.2)
+                print(women_align_images[rand1].image)
+                secondfacelist.append(women_align_images[rand1])
                 thistimer = core.getTime()
                 timerlist.append(thistimer)
-                secondfaces.append(women_misalign_images[rand1])
-
-                if not appversion:
-                    women_misalign_images[rand1].autoDraw = False
+                if not Config.taskversion:
+                    core.wait(0.2)
+                    women_align_images[rand1].autoDraw = False
                     questionMark.draw()
                     win.flip()
 
@@ -115,7 +113,6 @@ class Congruent_Misaligned(object):
 
             newLocRand = random.randint(0, len(newLocations) - 1)
 
-            secondfacelist = []
             for item in images:
                 if item.image == newLocations[newLocRand]:
                     item.draw()
@@ -124,9 +121,9 @@ class Congruent_Misaligned(object):
                     print(item.image)
                     break
             thistimer = core.getTime()
+
             timerlist.append(thistimer)
-            secondfaces.append(secondfacelist[0])
-            if not appversion:
+            if not Config.taskversion:
                 core.wait(0.2)
                 secondfacelist[0].autoDraw = False
                 questionMark.draw()
@@ -142,12 +139,12 @@ class Congruent_Misaligned(object):
         isCorrectAns = False
         flag = True
         while flag:
-            if appversion:
+            if Config.taskversion:
                 keys = event.waitKeys(keyList=['a', 'l'], maxWait=2)
             else:
                 keys = event.waitKeys(keyList=['a', 'l'], timeStamped=time)
             if keys:
-                if appversion:
+                if Config.taskversion:
                     anstime = 1.5 - countdown.getTime()
                 else:
                     now = core.getTime()
@@ -155,22 +152,22 @@ class Congruent_Misaligned(object):
                 keytimerlist.append(anstime)
                 if keys[0][0] == 'a' and practice:
 
-                    if respversion and same:
+                    if Config.respversion and same:
                         correct.draw()
                         win.flip()
                         core.wait(2)
 
-                    if respversion and not same:
+                    if Config.respversion and not same:
                         wrong.draw()
                         win.flip()
                         core.wait(2)
 
-                    if not respversion and same:
+                    if not Config.respversion and same:
                         wrong.draw()
                         win.flip()
                         core.wait(2)
 
-                    if not respversion and not same:
+                    if not Config.respversion and not same:
                         correct.draw()
                         win.flip()
                         core.wait(2)
@@ -179,12 +176,12 @@ class Congruent_Misaligned(object):
                 elif keys[0][0] == 'a' and not practice:
                     anslist.append('A')
                     if same:
-                        if respversion:
+                        if Config.respversion:
                             isCorrectAns = True
                         else:
                             isCorrectAns = False
                     elif not same:
-                        if respversion:
+                        if Config.respversion:
                             isCorrectAns = False
                         else:
                             isCorrectAns = True
@@ -192,22 +189,22 @@ class Congruent_Misaligned(object):
                     flag = False
 
                 if keys[0][0] == 'l' and practice:
-                    if respversion and same:
+                    if Config.respversion and same:
                         wrong.draw()
                         win.flip()
                         core.wait(2)
 
-                    if respversion and not same:
+                    if Config.respversion and not same:
                         correct.draw()
                         win.flip()
                         core.wait(2)
 
-                    if not respversion and same:
+                    if not Config.respversion and same:
                         correct.draw()
                         win.flip()
                         core.wait(2)
 
-                    if not respversion and not same:
+                    if not Config.respversion and not same:
                         wrong.draw()
                         win.flip()
                         core.wait(2)
@@ -215,12 +212,12 @@ class Congruent_Misaligned(object):
                 elif keys[0][0] == 'l' and not practice:
                     anslist.append('L')
                     if same:
-                        if respversion:
+                        if Config.respversion:
                             isCorrectAns = False
                         else:
                             isCorrectAns = True
                     elif not same:
-                        if respversion:
+                        if Config.respversion:
                             isCorrectAns = True
                         else:
                             isCorrectAns = False
@@ -234,10 +231,10 @@ class Congruent_Misaligned(object):
                     core.wait(2)
                 flag = False
 
-        if appversion:
-            secondfaces[0].autoDraw = False
+        if Config.taskversion:
+            secondfacelist[0].autoDraw = False
             win.flip()
-        elif not appversion:
+        elif not Config.taskversion:
             questionMark.autoDraw = False
             win.flip()
         core.wait(1)
@@ -252,13 +249,13 @@ class Congruent_Misaligned(object):
             genders = 'Male' if gender else 'Female'
             condition = '1' if same else '4'
             cor_ans = ''
-            if same and respversion:
+            if same and Config.respversion:
                 cor_ans = 'A'
-            if same and not respversion:
+            if same and not Config.respversion:
                 cor_ans = 'L'
-            if not same and respversion:
+            if not same and Config.respversion:
                 cor_ans = 'L'
-            if not same and not respversion:
+            if not same and not Config.respversion:
                 cor_ans = 'A'
 
             # if index == 1:
@@ -279,7 +276,7 @@ class Congruent_Misaligned(object):
                 else:
                     face2 = women_misalign_images[rand1].image[-13:-4]
             else:
-                face2 = secondfaces[0].image[-13:-4]
+                face2 = secondfacelist[0].image[-13:-4]
 
             Headers = ['Face_1', 'Face_2', 'Face_Gender', 'Congruency', 'Block', 'Trial', 'Alignment', 'Condition',
                        'Type', 'Key-Resp', 'Cor-Ans', 'Accuracy', 'R-time', 'Trial-Start', 'Key-Resp-Start']
