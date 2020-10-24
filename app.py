@@ -110,7 +110,7 @@ else:
 Config.createFile(Config.filename)
 
 # Block counter
-for index in range(1, 2):
+for index in range(1, 5):
 
     typeonecounter = 0
     typetwocounter = 0
