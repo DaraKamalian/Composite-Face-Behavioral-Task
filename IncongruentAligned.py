@@ -279,7 +279,10 @@ class Incongruent_Aligned(object):
             #     keyrespstart = Config.practiceDuration
 
             if anslist:
-                keyrespstart += anstime
+                if Config.taskversion:
+                    keyrespstart += anstime + 1.050
+                else:
+                    keyrespstart += anstime + 1.250
             else:
                 keyrespstart = 'None'
             face1 = men_align_images[rand1].image[-13:-4] if gender else women_align_images[rand1].image[-13:-4]

@@ -283,7 +283,10 @@ class Incongruent_Misaligned(object):
             #     keyrespstart = Config.practiceDuration
 
             if anslist:
-                keyrespstart += anstime
+                if Config.taskversion:
+                    keyrespstart += anstime + 1.050
+                else:
+                    keyrespstart += anstime + 1.250
             else:
                 keyrespstart = 'None'
 
