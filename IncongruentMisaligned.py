@@ -137,24 +137,25 @@ class Incongruent_Misaligned(object):
                 win.flip()
 
         countdown = core.CountdownTimer(1.5)
-        time = core.Clock()
+        time = core.getTime()
         timerlist.append(time)
-        rtimelist = []
+        anstime = 0
         anslist = []
         keytimerlist = []
         isCorrectAns = False
         flag = True
         while flag:
             if appversion:
-                keys = event.waitKeys(keyList=['a', 'l'], timeStamped=timerlist[0], maxWait=2)
+                keys = event.waitKeys(keyList=['a', 'l'], maxWait=2)
             else:
-                keys = event.waitKeys(keyList=['a', 'l'], timeStamped=timerlist[1])
+                keys = event.waitKeys(keyList=['a', 'l'], timeStamped=time)
             if keys:
                 if appversion:
-                    rtimelist.append(1.5 - countdown.getTime())
+                    anstime = 1.5 - countdown.getTime()
                 else:
-                    rtimelist.append(keys[0][1] + 0.2)
-                keytimerlist.append(rtimelist[0])
+                    now = core.getTime()
+                    anstime = keys[0][1] + 0.2
+                keytimerlist.append(anstime)
                 if keys[0][0] == 'a' and practice:
 
                     if respversion and same:
@@ -255,7 +256,7 @@ class Incongruent_Misaligned(object):
             else:
                 accuracy = 'None'
             ans = anslist[0] if anslist else 'None'
-            rtime = rtimelist[0] if anslist else 'None'
+            rtime = anstime if anslist else 'None'
             genders = 'Male' if gender else 'Female'
             condition = '2' if same else '3'
             cor_ans = ''
@@ -267,12 +268,17 @@ class Incongruent_Misaligned(object):
                 cor_ans = 'L'
             if not same and not respversion:
                 cor_ans = 'A'
-            if index == 1:
-                trialstart = Config.practiceDuration
-            else:
-                trialstart = Config.practiceDuration + 1
+            # if index == 1:
+            trialstart = Config.practiceDuration
+            keyrespstart = Config.practiceDuration
+            # else:
+            #     trialstart = Config.practiceDuration + 1
+            #     keyrespstart = Config.practiceDuration
 
-            keyrespstart = Config.practiceDuration + keytimerlist[0] if anslist else 'None'
+            if anslist:
+                keyrespstart += anstime
+            else:
+                keyrespstart = 'None'
 
             face1 = men_align_images[rand1].image[-13:-4] if gender else women_align_images[rand1].image[-13:-4]
 
@@ -293,4 +299,4 @@ class Incongruent_Misaligned(object):
 
             Config.append_dict_as_row(Config.filename, dict_of_elem=toWrite, headers=Headers)
             if anslist:
-                Config.practiceDuration += keytimerlist[0]
+                Config.practiceDuration += anstime + 1

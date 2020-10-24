@@ -12,7 +12,7 @@ class dialoguebox(object):
         Dlg.addField('Stimulation Site', choices=['R-PPC', 'L-PPC', 'CZ'])
         Dlg.addField('Handedness', choices=['Right', 'Left'])
         Dlg.addField('Resp Version ', choices=['Same-A', 'Same-L'])
-        Dlg.addField('Task Version', choices=['Second Face Remaining', 'Second Face Disappearing'])
+        Dlg.addField('Task Version', choices=['1', '2'])
 
 
         ok_data = Dlg.show()
@@ -33,7 +33,7 @@ class dialoguebox(object):
         else:
             respVersion = 0
 
-        if appVersion == 'Second Face Remaining':
+        if appVersion == '2':
             appVersion = 1
         else:
             appVersion = 0
