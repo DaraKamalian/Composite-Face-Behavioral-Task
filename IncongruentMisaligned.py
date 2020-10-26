@@ -33,8 +33,6 @@ win = window.win
 
 class Incongruent_Misaligned(object):
     def IncongruentMisaligned(self, practice, same, gender, index, block):
-        taskversion = Config.taskversion
-        respversion = Config.respversion
         generalTimer = core.getTime()
 
         fixationPoint.draw()
@@ -108,7 +106,7 @@ class Incongruent_Misaligned(object):
             thistimer = core.getTime()
             timerlist.append(thistimer)
 
-            if not taskversion:
+            if not Config.taskversion:
                 core.wait(0.2)
                 secondsamefacelist[0].autoDraw = False
                 questionMark.draw()
@@ -137,7 +135,7 @@ class Incongruent_Misaligned(object):
                     break
             thistimer = core.getTime()
             timerlist.append(thistimer)
-            if not taskversion:
+            if not Config.taskversion:
                 core.wait(0.2)
                 seconddifffacelist[0].autoDraw = False
                 questionMark.draw()
@@ -152,12 +150,12 @@ class Incongruent_Misaligned(object):
         isCorrectAns = False
         flag = True
         while flag:
-            if taskversion:
+            if Config.taskversion:
                 keys = event.waitKeys(keyList=['a', 'l'], maxWait=2)
             else:
                 keys = event.waitKeys(keyList=['a', 'l'], timeStamped=time)
             if keys:
-                if taskversion:
+                if Config.taskversion:
                     anstime = 1.5 - countdown.getTime()
                 else:
                     now = core.getTime()
@@ -165,22 +163,22 @@ class Incongruent_Misaligned(object):
                 keytimerlist.append(anstime)
                 if keys[0][0] == 'a' and practice:
 
-                    if respversion and same:
+                    if Config.respversion and same:
                         correct.draw()
                         win.flip()
                         core.wait(2)
 
-                    if respversion and not same:
+                    if Config.respversion and not same:
                         wrong.draw()
                         win.flip()
                         core.wait(2)
 
-                    if not respversion and same:
+                    if not Config.respversion and same:
                         wrong.draw()
                         win.flip()
                         core.wait(2)
 
-                    if not respversion and not same:
+                    if not Config.respversion and not same:
                         correct.draw()
                         win.flip()
                         core.wait(2)
@@ -189,12 +187,12 @@ class Incongruent_Misaligned(object):
                 elif keys[0][0] == 'a' and not practice:
                     anslist.append('A')
                     if same:
-                        if respversion:
+                        if Config.respversion:
                             isCorrectAns = True
                         else:
                             isCorrectAns = False
                     elif not same:
-                        if respversion:
+                        if Config.respversion:
                             isCorrectAns = False
                         else:
                             isCorrectAns = True
@@ -203,22 +201,22 @@ class Incongruent_Misaligned(object):
 
                 if keys[0][0] == 'l' and practice:
 
-                    if respversion and same:
+                    if Config.respversion and same:
                         wrong.draw()
                         win.flip()
                         core.wait(2)
 
-                    if respversion and not same:
+                    if Config.respversion and not same:
                         correct.draw()
                         win.flip()
                         core.wait(2)
 
-                    if not respversion and same:
+                    if not Config.respversion and same:
                         correct.draw()
                         win.flip()
                         core.wait(2)
 
-                    if not respversion and not same:
+                    if not Config.respversion and not same:
                         wrong.draw()
                         win.flip()
                         core.wait(2)
@@ -226,12 +224,12 @@ class Incongruent_Misaligned(object):
                 elif keys[0][0] == 'l' and not practice:
                     anslist.append('L')
                     if same:
-                        if respversion:
+                        if Config.respversion:
                             isCorrectAns = False
                         else:
                             isCorrectAns = True
                     elif not same:
-                        if respversion:
+                        if Config.respversion:
                             isCorrectAns = True
                         else:
                             isCorrectAns = False
@@ -245,14 +243,14 @@ class Incongruent_Misaligned(object):
                     core.wait(2)
                 flag = False
 
-        if taskversion:
+        if Config.taskversion:
             if secondsamefacelist:
                 secondsamefacelist[0].autoDraw = False
 
             elif seconddifffacelist:
                 seconddifffacelist[0].autoDraw = False
             win.flip()
-        elif not taskversion:
+        elif not Config.taskversion:
             questionMark.autoDraw = False
             win.flip()
         core.wait(1)
@@ -267,13 +265,13 @@ class Incongruent_Misaligned(object):
             genders = 'Male' if gender else 'Female'
             condition = '2' if same else '3'
             cor_ans = ''
-            if same and respversion:
+            if same and Config.respversion:
                 cor_ans = 'A'
-            if same and not respversion:
+            if same and not Config.respversion:
                 cor_ans = 'L'
-            if not same and respversion:
+            if not same and Config.respversion:
                 cor_ans = 'L'
-            if not same and not respversion:
+            if not same and not Config.respversion:
                 cor_ans = 'A'
             # if index == 1:
             trialstart = Config.practiceDuration
