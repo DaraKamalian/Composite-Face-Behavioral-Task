@@ -106,7 +106,7 @@ else:
 Config.createFile(Config.filename)
 
 # Block counter
-for index in range(1, 2):
+for index in range(1, 3):
 
     type1counter = 0
     type2counter = 0
@@ -235,11 +235,10 @@ for index in range(1, 2):
                                                        block=index)
             type4counter += 1
 
-
-
     if index < 4:
         betweenblockinstruction.draw()
         win.flip()
+        t1 = core.getTime()
         flag = True
         while flag:
             keys = event.waitKeys(keyList=['m'])
@@ -247,6 +246,8 @@ for index in range(1, 2):
                 if key[0] == 'm':
                     betweenblockinstruction.autoDraw = False
                     win.flip()
+                    t2 = core.getTime()
+                    Config.practiceDuration += t2 - t1
                     flag = False
 
 respversion = 'Same-A' if subjectInfoList[8] else 'Same-L'
