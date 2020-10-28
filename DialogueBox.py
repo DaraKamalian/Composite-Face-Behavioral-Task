@@ -1,4 +1,4 @@
-from psychopy import gui
+from psychopy import gui, core
 import Config
 class dialoguebox(object):
     def showDialogBox(self):
@@ -44,5 +44,8 @@ class dialoguebox(object):
                     subjectInfo = [subjectName, subjectSurname, subjectNumber, subjectAge, subjectGender, handedness, experimentDay,
                            stimSite, respVersion, taskVersion]
                     flag = False
+            # if Dlg.CANCEL:
+            #     core.quit()
+
         return subjectInfo
 

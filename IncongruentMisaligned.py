@@ -33,9 +33,12 @@ win = window.win
 
 class Incongruent_Misaligned(object):
     def IncongruentMisaligned(self, practice, same, gender, index, block):
-        generalTimer = core.getTime()
 
         fixationPoint.draw()
+        if index == 1:
+            generalTimer = core.getTime()
+            temp = generalTimer - Config.practiceDuration
+            Config.practiceDuration += temp
         win.flip()
         core.wait(0.2)
 
@@ -56,7 +59,7 @@ class Incongruent_Misaligned(object):
 
         rand1 = random.randint(0, 19)
         localtimer = core.getTime()
-        Config.practiceDuration += localtimer - generalTimer
+        # Config.practiceDuration += localtimer - generalTimer
         if gender:
             men_align_images[rand1].draw()
             print(men_align_images[rand1].image)
@@ -273,9 +276,12 @@ class Incongruent_Misaligned(object):
                 cor_ans = 'L'
             if not same and not Config.respversion:
                 cor_ans = 'A'
-            # if index == 1:
+
             trialstart = Config.practiceDuration
             keyrespstart = Config.practiceDuration
+            # if index == 1:
+            #     trialstart = Config.practiceDuration
+            #     keyrespstart = Config.practiceDuration
             # else:
             #     trialstart = Config.practiceDuration + 1
             #     keyrespstart = Config.practiceDuration
@@ -286,6 +292,7 @@ class Incongruent_Misaligned(object):
                 else:
                     keyrespstart += anstime + 1.250
             else:
+                # trialstart += 4.050
                 keyrespstart = 'None'
 
             face1 = men_align_images[rand1].image[-13:-4] if gender else women_align_images[rand1].image[-13:-4]
@@ -302,9 +309,18 @@ class Incongruent_Misaligned(object):
                        'Key-Resp': ans, 'R-time': rtime, 'Block': block,
                        'Face_Gender': genders, 'Face_1': face1,
                        'Face_2': face2, 'Trial': index,
-                       'Trial-Start': str(trialstart), 'Congruency': '0',
+                       'Trial-Start': trialstart, 'Congruency': '0',
                        'Type': 'Misaligned Incongruent', 'Accuracy': accuracy, 'Key-Resp-Start': keyrespstart}
 
             Config.append_dict_as_row(Config.filename, dict_of_elem=toWrite, headers=Headers)
+
+            if keyrespstart == 'None':
+                keyrespstart = 0
+
             if anslist:
-                Config.practiceDuration += anstime + 1
+                Config.practiceDuration = keyrespstart + 1.0
+            # else:
+            #     Config.practiceDuration += 4.050
+            if not anslist:
+                Config.practiceDuration += 4.050
+

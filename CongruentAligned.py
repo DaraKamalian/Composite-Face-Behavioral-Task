@@ -24,9 +24,10 @@ win = window.win
 
 class Congruent_Aligned(object):
     def CongruentAligned(self, practice, gender, same, index, block):
-
-
-        generalTimer = core.getTime()
+        if index == 1:
+            generalTimer = core.getTime()
+            temp = generalTimer - Config.practiceFinished
+            Config.practiceDuration += temp
         fixationPoint.draw()
         win.flip()
 
@@ -47,21 +48,21 @@ class Congruent_Aligned(object):
                 print('con-diff-al-f')
         rand1 = random.randint(0, 19)
         localtimer = core.getTime()
-        Config.practiceDuration += localtimer - generalTimer
+        # Config.practiceDuration += localtimer - generalTimer
 
         if gender:
             men_align_images[rand1].draw()
             win.flip()
             core.wait(0.2)
+            men_align_images[rand1].autoDraw = False
             print(men_align_images[rand1].image)
         else:
             women_align_images[rand1].draw()
             win.flip()
             core.wait(0.2)
+            women_align_images[rand1].autoDraw = False
             print(women_align_images[rand1].image)
 
-        men_align_images[rand1].autoDraw = False
-        women_align_images[rand1].autoDraw = False
         win.flip()
         core.wait(0.5)
 
@@ -139,7 +140,6 @@ class Congruent_Aligned(object):
                 if Config.taskversion:
                     anstime = 1.5 - countdown.getTime()
                 else:
-                    now = core.getTime()
                     anstime = keys[0][1] + 0.2
                 keytimerlist.append(anstime)
                 if keys[0][0] == 'a' and practice:
@@ -251,9 +251,13 @@ class Congruent_Aligned(object):
             if not same and not Config.respversion:
                 cor_ans = 'A'
 
-            # if index == 1:
+
             trialstart = Config.practiceDuration
             keyrespstart = Config.practiceDuration
+
+            # if index == 1:
+            #     trialstart = Config.practiceDuration
+            #     keyrespstart = Config.practiceDuration
             # else:
             #     trialstart = Config.practiceDuration + 1
             #     keyrespstart = Config.practiceDuration
@@ -283,5 +287,14 @@ class Congruent_Aligned(object):
                        'Type': 'Aligned Congruent', 'Accuracy': accuracy, 'Key-Resp-Start': keyrespstart}
 
             Config.append_dict_as_row(Config.filename, dict_of_elem=toWrite, headers=Headers)
+
+            if keyrespstart == 'None':
+                keyrespstart = 0
+
             if anslist:
-                Config.practiceDuration += anstime + 1
+                Config.practiceDuration = keyrespstart + 1.0
+            # else:
+            #     Config.practiceDuration += 4.050
+
+            if not anslist:
+                Config.practiceDuration += 4.050

@@ -33,7 +33,10 @@ class Incongruent_Aligned(object):
     def IncongruentAligned(self, practice, same, gender, index, block):
         taskversion = Config.taskversion
         respversion = Config.respversion
-        generaltimer = core.getTime()
+        if index == 1:
+            generaltimer = core.getTime()
+            temp = generaltimer - Config.practiceFinished
+            Config.practiceDuration += temp
         fixationPoint.draw()
         win.flip()
         core.wait(0.2)
@@ -55,7 +58,7 @@ class Incongruent_Aligned(object):
 
         rand1 = random.randint(0, 19)
         localtimer = core.getTime()
-        Config.practiceDuration += localtimer - generaltimer
+        # Config.practiceDuration += localtimer - generaltimer
         if gender:
             men_align_images[rand1].draw()
             print(men_align_images[rand1].image)
@@ -271,9 +274,12 @@ class Incongruent_Aligned(object):
             if not same and not respversion:
                 cor_ans = 'A'
 
-            # if index == 1:
             trialstart = Config.practiceDuration
             keyrespstart = Config.practiceDuration
+
+            # if index == 1:
+            #     trialstart = Config.practiceDuration
+            #     keyrespstart = Config.practiceDuration
             # else:
             #     trialstart = Config.practiceDuration + 1
             #     keyrespstart = Config.practiceDuration
@@ -284,6 +290,7 @@ class Incongruent_Aligned(object):
                 else:
                     keyrespstart += anstime + 1.250
             else:
+                # trialstart += 4.050
                 keyrespstart = 'None'
             face1 = men_align_images[rand1].image[-13:-4] if gender else women_align_images[rand1].image[-13:-4]
 
@@ -303,5 +310,14 @@ class Incongruent_Aligned(object):
                        'Type': 'Aligned Incongruent', 'Accuracy': accuracy, 'Key-Resp-Start': keyrespstart}
 
             Config.append_dict_as_row(Config.filename, dict_of_elem=toWrite, headers=Headers)
+
+            if keyrespstart == 'None':
+                keyrespstart = 0
+
             if anslist:
-                Config.practiceDuration += anstime + 1
+                Config.practiceDuration = keyrespstart + 1.0
+            # else:
+            #     Config.practiceDuration += 4.050
+
+            if not anslist:
+                Config.practiceDuration += 4.050
