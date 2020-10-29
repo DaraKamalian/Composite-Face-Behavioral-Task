@@ -85,27 +85,27 @@ class Congruent_Misaligned(object):
         timerlist = []
         if same:
             if gender:
-                men_align_images[rand1].draw()
+                men_misalign_images[rand1].draw()
                 win.flip()
                 print(men_align_images[rand1].image)
-                secondfacelist.append(women_align_images[rand1])
+                secondfacelist.append(men_misalign_images[rand1])
                 thistimer = core.getTime()
                 timerlist.append(thistimer)
                 if not Config.taskversion:
                     core.wait(0.2)
-                    men_align_images[rand1].autoDraw = False
+                    men_misalign_images[rand1].autoDraw = False
                     questionMark.draw()
                     win.flip()
             else:
-                women_align_images[rand1].draw()
+                women_misalign_images[rand1].draw()
                 win.flip()
                 print(women_align_images[rand1].image)
-                secondfacelist.append(women_align_images[rand1])
+                secondfacelist.append(women_misalign_images[rand1])
                 thistimer = core.getTime()
                 timerlist.append(thistimer)
                 if not Config.taskversion:
                     core.wait(0.2)
-                    women_align_images[rand1].autoDraw = False
+                    women_misalign_images[rand1].autoDraw = False
                     questionMark.draw()
                     win.flip()
 
