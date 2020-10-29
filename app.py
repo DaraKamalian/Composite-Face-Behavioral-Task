@@ -106,7 +106,7 @@ else:
 Config.createFile(Config.filename)
 
 # Block counter
-for index in range(1, 2):
+for index in range(1, 5):
 
     type1counter = 0
     type2counter = 0
@@ -349,7 +349,7 @@ for index in range(1, 2):
                     Config.practiceDuration += t2 - t1
                     flag = False
 
-respversion = 'Same-A' if subjectInfoList[8] else 'Same-L'
+respversion = 'Same-A' if Config.respversion else 'Same-L'
 taskversion = '2' if Config.taskversion else '1'
 Config.append_list_as_row(Config.filename, ['Subject Name: ' + str(subjectInfoList[0]) + ' ' + str(subjectInfoList[1]),
                                             'Subject Number: ' + str(subjectInfoList[2]),
