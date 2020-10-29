@@ -358,6 +358,7 @@ Config.append_list_as_row(Config.filename, ['Subject Name: ' + str(subjectInfoLi
                                             'Stimulation Site: ' + str(subjectInfoList[7]),
                                             'Resp-Version: ' + respversion,
                                             'Task Version: ' + taskversion,
+                                            'Experiment Day: ' + subjectInfoList[6],
                                             'Datetime: ' + str(datetime.datetime.today())])
 
 for filename in glob.glob('./Congruent*.csv'):
